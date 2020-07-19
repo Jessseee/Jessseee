@@ -1,3 +1,15 @@
-url: "" # the base hostname & protocol for your site, e.g. http://example.com
-baseurl: "" # the subpath of your site, e.g. /blog
-title: "" # the name of your site, e.g. ACME Corp.
+url: ""
+baseurl: ""
+title: "Jesse Visser"
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - README.md
+  - .idea/
+  - assets/bootstrap/js/
+  - assets/bootstrap/scss/
+  - assets/css/.sass-cache/
+ignore_theme_config: true
+collections:
+  projects:
+    output: true

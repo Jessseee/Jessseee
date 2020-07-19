@@ -1,0 +1,19 @@
+---
+layout: index
+title: "Home"
+---
+
+
+
+<h1>You're ready to go!</h1>
+
+<p>Start developing your Jekyll website.</p>
+
+<h1>Projects</h1>
+<div class="grid-col-2">
+    {% for project in site.projects %}
+    <div class="border border-gray-light d-flex align-items-center justify-items-center p-4 card" style="height: 150px">
+        <a class="align-center flex-fill text-center stretched-link" href="{{ project.url }}">{{ project.title }}</a>
+    </div>
+    {% endfor %}
+</div>

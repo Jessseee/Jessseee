@@ -1,12 +1,145 @@
-.grid-col-2 {
+$body-bg: #fafafa;
+$body-color: #444444;
+$link-decoration: none;
+$hr-height: 3px;
+
+html {
+  scroll-behavior: smooth;
+}
+
+.round {
+  border-radius: 100%;
+}
+
+.btn {
+  &#github {
+    background-color: #ffd33d;
+    &:hover {
+      background-color: mix(black, #ffd33d, 10%);
+    }
+  }
+  &#gitlab {
+    background-color: #fc6d26;
+    &:hover {
+      background-color: mix(black, #fc6d26, 10%);
+    }
+  }
+}
+
+.btn:active,
+.btn:focus,
+.btn.active,
+.btn:active:focus {
+  background-image: none !important;
+  outline: 0 !important;
+  -webkit-box-shadow: none !important;
+  -moz-box-shadow: none !important;
+  box-shadow: none !important;
+}
+
+
+.project-card {
+  height: 200px;
+  border: 2px solid #777777;
+  color: #777777;
+  font-weight: 500;
+  border-radius: 5px;
+  display: grid;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+
+  .summary {
+    opacity: 0;
+    display: none;
+    transition: opacity 500ms ease-in-out;
+    -moz-transition: opacity 500ms ease-in-out;
+    -webkit-transition: opacity 500ms ease-in-out;
+  }
+
+  &:hover:not(#more-to-come) {
+    border-color: #333333;
+    color: #333333;
+    font-weight: bold;
+
+    .title {
+      display: none;
+    }
+
+    .summary {
+      opacity: 1;
+      display: unset;
+    }
+  }
+
+  &#more-to-come {
+    border: 2px solid #eeeeee;
+  }
+}
+
+#navbar {
+  @media only screen and (min-width: 900px) {
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    z-index: 1;
+  }
+
+  .nav-link {
+    border: 1px solid transparent;
+
+    &:hover {
+      border: 1px solid #444444;
+    }
+  }
+}
+
+#intro-container {
+  display: grid;
+  grid-template-areas: 'image' 'intro';
+
+  #intro {
+    grid-area: intro;
+    max-width: 400px;
+    margin-top: 2rem;
+  }
+
+  #image {
+    grid-area: image;
+    img {
+      width: 180px;
+      height: 180px;
+    }
+  }
+
+  @media only screen and (min-width: 600px) {
+    grid-template-areas: 'image intro';
+    grid-template-columns: 50% 50%;
+
+    #intro {
+      margin-top: 0;
+    }
+  }
+}
+
+#projects-container {
   width: 100%;
   display: grid;
   grid-template-columns: 100%;
   grid-gap: 20px;
 
   @media only screen and (min-width: 600px) {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  @media only screen and (min-width: 1000px) {
     grid-template-columns: 30% 30%;
   }
+}
+
+#contact-form {
+  max-width: 500px;
 }
 
 @import "../bootstrap/scss/bootstrap";

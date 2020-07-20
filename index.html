@@ -11,8 +11,6 @@ title: Home
         <h1>Hey,</h1>
         <p>I'm Jesse, creative technologist and student. I like to create interactive experiences and websites.</p>
         <p>Below you can find all kinds of projects I've worked on, in my own time, during my study or professionally.</p>
-        <a id="github" class="btn text-light" href="https://github.com/Jessseee" target="_blank"><i class="fab fa-github"></i> GitHub</a>
-        <a id="gitlab" class="btn text-light" href="https://gitlab.com/Jessseee" target="_blank"><i class="fab fa-gitlab"></i> GitLab</a>
     </div>
 </div>
 
@@ -32,25 +30,7 @@ title: Home
 </div>
 
 <h2 id="contact">Contact Me!</h2>
-<script src="https://www.google.com/recaptcha/api.js"></script>
-<form id="contact-form" action="https://formspree.io/mnqgoeea" method="POST">
-    <div class="mb-2">
-        <label for="contact-email" class="form-label">Your email:</label>
-        <input id="contact-email" class="form-control" type="email" placeholder="yourname@email.com" name="_replyto">
-    </div>
-
-    <div class="mb-3">
-        <label for="contact-message" class="form-label">Your message:</label>
-        <textarea id="contact-message" class="form-control" placeholder="hey, I really liked your portfolio!" name="message"></textarea>
-    </div>
-
-    <button type="submit"
-            class="g-recaptcha btn btn-primary"
-            data-sitekey="6LcUkLMZAAAAAPTlyMkwgj5fUJRfHrE9IpiuPSc_"
-            data-callback='onSubmit'
-            data-action='submit'
-            value="Send">Submit</button>
-</form>
+{% include contact.html %}
 
 <script>
     var numProjects = {{ site.projects.size }};

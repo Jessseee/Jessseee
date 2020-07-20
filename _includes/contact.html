@@ -1,0 +1,68 @@
+<h4>Socials</h4>
+<a id="github" class="btn text-light" href="https://github.com/Jessseee" target="_blank"><i class="fab fa-github"></i> GitHub</a>
+<a id="gitlab" class="btn text-light" href="https://gitlab.com/Jessseee" target="_blank"><i class="fab fa-gitlab"></i> GitLab</a>
+<a id="linkedin" class="btn text-light" href="https://www.linkedin.com/in/jesse-visser-17a006171/" target="_blank"><i class="fab fa-linkedin"></i> LinkedIn</a>
+
+<form id="contact-form" class="mt-3" action="https://formspree.io/mnqgoeea" method="POST">
+    <h4>Contact Form</h4>
+    <div class="mb-2">
+        <label for="contact-email" class="form-label">Your email</label>
+        <input id="contact-email" class="form-control" type="email" placeholder="yourname@email.com" name="_replyto" required>
+    </div>
+
+    <div class="mb-3">
+        <label for="contact-message" class="form-label">Your message</label>
+        <textarea id="contact-message" class="form-control" placeholder="hey, I really liked your portfolio!" name="message" required></textarea>
+    </div>
+
+    <button type="submit"
+            id="contact-submit"
+            class="g-recaptcha btn btn-outline-dark"
+            data-sitekey="6LcUkLMZAAAAAPTlyMkwgj5fUJRfHrE9IpiuPSc_"
+            data-callback='onSubmit'
+            data-action='submit'
+            value="Send"> Submit </button>
+    <span id="contact-submit-status"></span>
+</form>
+
+<script>
+    window.addEventListener("DOMContentLoaded", function() {
+        const form = document.getElementById("contact-form");
+        const button = document.getElementById("contact-submit");
+        const status = document.getElementById("contact-submit-status");
+
+        function success() {
+            form.reset();
+            status.classList.add("bg-success", "text-light", "rounded", "px-3", "py-2");
+            status.innerHTML = "Thanks!";
+        }
+
+        function error() {
+            status.classList.add("bg-warning", "text-light", "rounded", "p-2");
+            status.innerHTML = "Oops! There was a problem.";
+        }
+
+        form.addEventListener("submit", function(ev) {
+            ev.preventDefault();
+            button.style.display = "none";
+            status.innerHTML = "<div class='spinner-border'></div>";
+            let data = new FormData(form);
+            ajax(form.method, form.action, data, success, error);
+        });
+    });
+
+    function ajax(method, url, data, success, error) {
+        let xhr = new XMLHttpRequest();
+        xhr.open(method, url);
+        xhr.setRequestHeader("Accept", "application/json");
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState !== XMLHttpRequest.DONE) return;
+            if (xhr.status === 200) {
+                success(xhr.response, xhr.responseType);
+            } else {
+                error(xhr.status, xhr.response, xhr.responseType);
+            }
+        };
+        xhr.send(data);
+    }
+</script>

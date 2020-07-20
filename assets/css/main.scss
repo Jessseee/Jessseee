@@ -24,6 +24,13 @@ html {
       background-color: mix(black, #fc6d26, 10%);
     }
   }
+
+  &#linkedin {
+    background-color: #0E76A8;
+    &:hover {
+      background-color: mix(black, #0E76A8, 20%);
+    }
+  }
 }
 
 .btn:active,
@@ -36,7 +43,6 @@ html {
   -moz-box-shadow: none !important;
   box-shadow: none !important;
 }
-
 
 .project-card {
   height: 200px;

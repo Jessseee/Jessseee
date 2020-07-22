@@ -79,6 +79,20 @@ html {
   }
 }
 
+.video-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.video-overlay {
+  display: block;
+  position: absolute;
+  z-index: 1;
+  color: #eee;
+}
+
 #navbar {
   @media only screen and (min-width: 900px) {
     position: fixed;
@@ -141,7 +155,7 @@ html {
 }
 
 #project-page {
-  img {
+  img, video {
     max-width: 700px;
   }
 }

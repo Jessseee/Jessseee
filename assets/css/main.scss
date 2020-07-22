@@ -14,20 +14,20 @@ html {
 .btn {
   &#github {
     background-color: #ffd33d;
-    &:hover {
+    &:hover, &:focus, &:active {
       background-color: mix(black, #ffd33d, 10%);
     }
   }
   &#gitlab {
     background-color: #fc6d26;
-    &:hover {
+    &:hover, &:focus, &:active {
       background-color: mix(black, #fc6d26, 10%);
     }
   }
 
   &#linkedin {
     background-color: #0E76A8;
-    &:hover {
+    &:hover, &:focus, &:active {
       background-color: mix(black, #0E76A8, 20%);
     }
   }
@@ -46,35 +46,31 @@ html {
 
 .project-card {
   height: 200px;
-  border: 2px solid #777777;
+  border: 2px solid transparent;
   color: #777777;
-  font-weight: 500;
   border-radius: 5px;
   display: grid;
   text-align: center;
   align-items: center;
   justify-content: center;
+  background-size: cover;
+  background-position: center;
+  filter: grayscale(100%);
 
   .summary {
-    opacity: 0;
     display: none;
-    transition: opacity 500ms ease-in-out;
-    -moz-transition: opacity 500ms ease-in-out;
-    -webkit-transition: opacity 500ms ease-in-out;
   }
 
-  &:hover:not(#more-to-come) {
-    border-color: #333333;
-    color: #333333;
-    font-weight: bold;
+  &:hover, &:focus, &:active {
+    &:not(#more-to-come) {
+      border-color: #333333;
+      color: #333333;
+      filter: grayscale(30%);
 
-    .title {
-      display: none;
-    }
-
-    .summary {
-      opacity: 1;
-      display: unset;
+      .summary {
+        opacity: 1;
+        display: unset;
+      }
     }
   }
 
@@ -95,7 +91,7 @@ html {
   .nav-link {
     border: 1px solid transparent;
 
-    &:hover {
+    &:hover, &:focus, &:active {
       border: 1px solid #444444;
     }
   }
@@ -141,6 +137,12 @@ html {
 
   @media only screen and (min-width: 1000px) {
     grid-template-columns: 30% 30%;
+  }
+}
+
+#project-page {
+  img {
+    max-width: 700px;
   }
 }
 

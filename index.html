@@ -5,7 +5,7 @@ title: Home
 
 <div id="intro-container" class="mt-5 justify-content-center">
     <div id="image" class="d-flex justify-content-center align-items-center">
-        <img class="round" src="{{ 'assets/img/profile-grayscale.png' | relative_url}}" alt="profile picture">
+        <img class="round" src="{{ 'assets/img/profile.jpg' | relative_url}}" alt="profile picture">
     </div>
     <div id="intro">
         <h1>Hey,</h1>
@@ -14,31 +14,17 @@ title: Home
     </div>
 </div>
 
-<hr class="my-4">
+<hr class="my-5">
 
 <h2 id="projects">Projects</h2>
 <div id="projects-container" class="mt-3 mb-5">
     {% for project in site.projects %}
-        <a id="{{ project.title }}" class="project-card px-4" href="{{ project.url }}">
-            <div class="body">
-                <h5 class="title">{{ project.title }}</h5>
-                <span class="summary">{{ project.summary }}</span>
-            </div>
+        <a id="{{ project.title }}" class="project-card px-4" href="{{ project.url }}" style="background-image: url('{{ project.cover | relative_url }}');">
+            <span class="summary bg-light p-4 rounded">{{ project.summary }}</span>
         </a>
     {% endfor %}
-    <span id="more-to-come" class="project-card d-none"><h5>More To Come!</h5></span>
+    <h5 id="more-to-come" class="project-card">More To Come!</h5>
 </div>
 
 <h2 id="contact">Contact Me!</h2>
 {% include contact.html %}
-
-<script>
-    var numProjects = {{ site.projects.size }};
-    if ((numProjects % 2) !== 0) {
-        document.getElementById("more-to-come").classList.remove("d-none");
-    }
-
-    function onSubmit(token) {
-        document.getElementById("contact-form").submit();
-    }
-</script>

@@ -1,9 +1,16 @@
 <!DOCTYPE html>
 <html lang="{{ site.lang | default: 'en-US' }}">
-    {% include head.html %}
+    <head>
+        {% include head.html %}
+        {{ page.meta }}
+    </head>
+
     <body>
-        <div class="container">
+        {% include navbar.html %}
+        <div id="project-page" class="container my-md-5">
+            <h1>{{ page.title }}</h1>
             {{ content }}
+
         </div>
     </body>
 </html>

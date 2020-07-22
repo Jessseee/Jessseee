@@ -6,3 +6,6 @@ I like to create interactive experiences and web applications!
 📁 Browse [my repositories](https://github.com/Jessseee?tab=repositories).  
 🎨 Check out [my portfolio](https://jesse-visser.nl).  
 💬 Don't hesitate to [contact me](https://jesse-visser.nl/contact)!  
+
+#### Github Stats
+![Jesse's GitHub Stats](https://github-readme-stats.vercel.app/api?username=Jessseee&show_icons=true&hide_title=true&hide=["stars"])

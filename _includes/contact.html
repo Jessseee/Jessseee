@@ -22,10 +22,14 @@
             data-callback='onSubmit'
             data-action='submit'
             value="Send"> Submit </button>
-    <span id="contact-submit-status"></span>
+    <span id="contact-submit-status" class="rounded px-3 py-2"></span>
 </form>
 
 <script>
+    function onSubmit(token) {
+        document.getElementById("contact-form").submit();
+    }
+
     window.addEventListener("DOMContentLoaded", function() {
         const form = document.getElementById("contact-form");
         const button = document.getElementById("contact-submit");
@@ -33,19 +37,19 @@
 
         function success() {
             form.reset();
-            status.classList.add("bg-success", "text-light", "rounded", "px-3", "py-2");
+            status.classList.add("bg-success", "text-light");
             status.innerHTML = "Thanks!";
         }
 
         function error() {
-            status.classList.add("bg-warning", "text-light", "rounded", "p-2");
+            status.classList.add("bg-warning", "text-light");
             status.innerHTML = "Oops! There was a problem.";
         }
 
         form.addEventListener("submit", function(ev) {
             ev.preventDefault();
             button.style.display = "none";
-            status.innerHTML = "<div class='spinner-border'></div>";
+            status.innerHTML = "<div class='spinner-border' style='width: 1.5rem; height: 1.5rem;'></div>";
             let data = new FormData(form);
             ajax(form.method, form.action, data, success, error);
         });

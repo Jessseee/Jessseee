@@ -1,0 +1,31 @@
+---
+layout: project
+title: Paint 'n Click
+summary: A puzzle game with a randomly generated maze. Solve puzzles using image recognition.
+cover: assets/img/paint-n-click.png
+---
+
+<div class="row mb-4">
+    <div class="col-md-5 col-xl-3">
+        <img class="mb-2 w-100" src="{{ 'assets/img/paint-n-click/overview.gif' | relative_url }}" alt="game screen">
+    </div>
+    <div class="col-md-7 col-xl-6">
+        <p>A puzzle game with a randomly generated maze. Find your way through the maze by physically drawing the key objects to solve the puzzles.</p>
+        <p>To recognize doodles drawn by the player a TensorFlow model is trained, a visualization of the different layers can be seen bellow. The code to train the model can be found in
+            <a href="https://github.com/JonaMata/Paint-n-Click/blob/master/tensorflow_files/train_model.py">train_model.py</a>.</p>
+        <p>Check out <i>Paint 'n Click</i> on GitHub:</p>
+        <a id="github" class="btn text-light" href="https://github.com/JonaMata/Paint-n-Click" target="_blank"><i class="fab fa-github"></i> GitHub</a>
+    </div>
+</div>
+<div class="row">
+    <div class="col-xl-3"></div>
+    <div class="col-xl-7 text-xl-right">
+        <p>We used the Quick Draw bitmaps dataset to identify doodles with TensorFlow: <br><a href="https://www.tensorflow.org/datasets/catalog/quickdraw_bitmap">QuickDraw bitmap dataset</a>.</p>
+        <p>We used the following tutorial for the TensorFlow training model: <br><a href="https://github.com/tensorflow/docs/blob/master/site/en/r1/tutorials/sequences/recurrent_quickdraw.md">TensorFlow recurrent QuickDraw tutorial</a>.</p>
+        <p>For the input of the trained TensorFlow model we use OpenCV to resize a webcam input to 28x28 grayscale. as you can see in drawing_camera.py</p>
+        <img class="mb-2" src="{{ 'assets/img/paint-n-click/cat.gif' | relative_url }}" alt="low resolution cat image">
+    </div>
+    <div class="col-xl-2 col-md-5">
+        <img class="mb-2 w-100" src="{{ 'assets/img/paint-n-click/tensorflow-model.png' | relative_url }}" alt="tensorflow model">
+    </div>
+</div>

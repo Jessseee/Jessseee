@@ -1,5 +1,5 @@
-url: ""
-baseurl: "/Jessseee"
+url: "https://jesse-visser.nl"
+baseurl: "/"
 title: "Jesse Visser"
 exclude:
   - Gemfile

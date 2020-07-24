@@ -27,30 +27,6 @@ html {
   -moz-box-shadow: none !important;
   box-shadow: none !important; }
 
-.project-card {
-  height: 200px;
-  border: 2px solid transparent;
-  color: #777777;
-  border-radius: 5px;
-  display: grid;
-  text-align: center;
-  align-items: center;
-  justify-content: center;
-  background-size: cover;
-  background-position: center;
-  filter: grayscale(100%); }
-  .project-card .summary {
-    display: none; }
-  .project-card:hover:not(#more-to-come), .project-card:focus:not(#more-to-come), .project-card:active:not(#more-to-come) {
-    border-color: #333333;
-    color: #333333;
-    filter: grayscale(30%); }
-    .project-card:hover:not(#more-to-come) .summary, .project-card:focus:not(#more-to-come) .summary, .project-card:active:not(#more-to-come) .summary {
-      opacity: 1;
-      display: unset; }
-  .project-card#more-to-come {
-    border: 2px solid #eeeeee; }
-
 .video-container {
   display: flex;
   align-items: center;
@@ -98,13 +74,37 @@ html {
   width: 100%;
   display: grid;
   grid-template-columns: 100%;
+  grid-auto-rows: 250px;
   grid-gap: 20px; }
   @media only screen and (min-width: 600px) {
     #projects-container {
       grid-template-columns: 1fr 1fr; } }
   @media only screen and (min-width: 1000px) {
     #projects-container {
-      grid-template-columns: 30% 30%; } }
+      grid-template-columns: 1fr 1fr 1fr; } }
+  #projects-container .project-card {
+    border: 2px solid transparent;
+    color: #777777;
+    border-radius: 5px;
+    display: grid;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    background-size: cover;
+    background-position: center;
+    filter: grayscale(100%); }
+    #projects-container .project-card .summary {
+      display: none; }
+    #projects-container .project-card:hover:not(#more-to-come), #projects-container .project-card:focus:not(#more-to-come), #projects-container .project-card:active:not(#more-to-come) {
+      border-color: #333333;
+      color: #333333;
+      filter: grayscale(30%); }
+      #projects-container .project-card:hover:not(#more-to-come) .summary, #projects-container .project-card:focus:not(#more-to-come) .summary, #projects-container .project-card:active:not(#more-to-come) .summary {
+        opacity: 1;
+        display: unset; }
+    #projects-container .project-card#more-to-come {
+      border: 2px solid #eeeeee;
+      margin: 0; }
 
 #project-page img, #project-page video {
   max-width: 700px; }

@@ -1,3 +1,6 @@
+---
+---
+
 $body-bg: #fafafa;
 $body-color: #444444;
 $link-decoration: none;
@@ -163,6 +166,10 @@ html {
 
 #contact-form {
   max-width: 500px;
+
+  .honeypot {
+    display: none;
+  }
 }
 
-@import "../bootstrap/scss/bootstrap";
+@import "bootstrap";

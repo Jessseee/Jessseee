@@ -5,9 +5,13 @@
 
 <form id="contact-form" class="mt-3" action="https://formspree.io/mnqgoeea" method="POST">
     <h4>Contact Form</h4>
+
+    <label for="gotcha" class="form-label honeypot">If you are a bot please fill in</label>
+    <input id="gotcha" class="honeypot" type="text" name="_gotcha" />
+
     <div class="mb-2">
         <label for="contact-email" class="form-label">Your email</label>
-        <input id="contact-email" class="form-control" type="email" placeholder="yourname@email.com" name="_replyto" required>
+        <input id="contact-email" class="form-control" type="email" placeholder="yourname@email.com" name="_replyto" required />
     </div>
 
     <div class="mb-3">

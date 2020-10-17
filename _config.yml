@@ -9,6 +9,9 @@ exclude:
   - assets/bootstrap/js/
   - assets/bootstrap/scss/
   - assets/css/.sass-cache/
+sass:
+  sass_dir: _bootstrap
+  style: compressed
 ignore_theme_config: true
 collections:
   projects:

@@ -1,13 +1,55 @@
 ---
 ---
 
-$body-bg: #fafafa;
-$body-color: #444444;
+$dark: #333333;
+$light: #f8f9fa;
+$github-color: #ffd33d;
+$gitlab-color: #fc6d26;
+$linkedin-color: #0e76a8;
 $link-decoration: none;
 $hr-height: 3px;
+$btn-box-shadow: none;
+$btn-active-box-shadow: none;
+$btn-focus-box-shadow: none;
+
+@import "bootstrap";
+
+label[for="theme-toggle"] {
+  margin-bottom: -3px;
+  padding: 5px;
+  margin-left: 20px;
+
+  &:hover {
+    cursor: pointer;
+  }
+
+  &:before {
+    display: inline-block;
+    font-style: normal;
+    font-variant: normal;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    font-family: "Font Awesome 5 Free", sans-serif;
+    font-weight: 900;
+    content: "\f186";
+  }
+}
+
+[data-theme="dark"] {
+  --bs-light: #333333;
+  --bs-dark: #f8f9fa;
+  label[for="theme-toggle"]:before {
+    content: "\f185";
+  }
+}
 
 html {
   scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--bs-light);
+  color: var(--bs-dark);
 }
 
 .round {
@@ -15,36 +57,38 @@ html {
 }
 
 .btn {
+  color: var(--bs-dark);
+
+  &:hover, &:focus, &:active {
+    color: var(--bs-dark);
+    outline: none !important;
+  }
+
   &#github {
-    background-color: #ffd33d;
+    background-color: $github-color;
     &:hover, &:focus, &:active {
-      background-color: mix(black, #ffd33d, 10%);
+      background-color: mix(black, $github-color, 10%);
     }
   }
   &#gitlab {
-    background-color: #fc6d26;
+    background-color: $gitlab-color;
     &:hover, &:focus, &:active {
-      background-color: mix(black, #fc6d26, 10%);
+      background-color: mix(black, $gitlab-color, 10%);
     }
   }
 
   &#linkedin {
-    background-color: #0E76A8;
+    background-color: $linkedin-color;
     &:hover, &:focus, &:active {
-      background-color: mix(black, #0E76A8, 20%);
+      background-color: mix(black, $linkedin-color, 20%);
     }
   }
-}
 
-.btn:active,
-.btn:focus,
-.btn.active,
-.btn:active:focus {
-  background-image: none !important;
-  outline: 0 !important;
-  -webkit-box-shadow: none !important;
-  -moz-box-shadow: none !important;
-  box-shadow: none !important;
+  &#contact-submit {
+    &:hover, &:focus, &:active {
+      border: 1px solid var(--bs-dark);
+    }
+  }
 }
 
 .video-container {
@@ -52,6 +96,8 @@ html {
   align-items: center;
   justify-content: center;
   margin-bottom: 20px;
+  background-color: var(--bs-dark);
+  color: var(--bs-light);
 }
 
 .video-overlay {
@@ -74,7 +120,7 @@ html {
     border: 1px solid transparent;
 
     &:hover, &:focus, &:active {
-      border: 1px solid #444444;
+      border: 1px solid var(--bs-dark);
     }
   }
 }
@@ -124,7 +170,6 @@ html {
 
   .project-card {
     border: 2px solid transparent;
-    color: #777777;
     border-radius: 5px;
     display: grid;
     text-align: center;
@@ -133,26 +178,28 @@ html {
     background-size: cover;
     background-position: center;
     filter: grayscale(100%);
+    transition: filter 300ms ease-in-out;
 
     .summary {
-      display: none;
+      opacity: 0;
+      transition: opacity 200ms ease-in-out;
     }
 
     &:hover, &:focus, &:active {
       &:not(#more-to-come) {
-        border-color: #333333;
-        color: #333333;
+        border-color: var(--bs-dark);
+        color: $dark;
         filter: grayscale(30%);
 
         .summary {
           opacity: 1;
-          display: unset;
         }
       }
     }
 
     &#more-to-come {
-      border: 2px solid #eeeeee;
+      border: 2px solid var(--bs-dark);
+      color: var(--bs-dark);
       margin: 0;
     }
   }
@@ -171,5 +218,3 @@ html {
     display: none;
   }
 }
-
-@import "bootstrap";

@@ -32,18 +32,32 @@
 <!--  CSS  -->
 <link rel="stylesheet" type="text/css" href="{{ 'assets/css/main.css' | relative_url }}">
 
-<!--  JS  -->
-<script src="https://kit.fontawesome.com/93a420105f.js" crossorigin="anonymous"></script>
-<script src="https://unpkg.com/@popperjs/core@2"></script>
-<script src="{{ 'assets/js/bootstrap.min.js' | relative_url }}"></script>
-<script src="{{ 'assets/js/main.js' | relative_url }}"></script>
-
-<!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-126840544-1"></script>
 <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
+    /* COOKIES */
+    function setCookie(cname, cvalue, exdays) {
+        let d = new Date();
+        d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+        let expires = "expires="+d.toUTCString();
+        document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+    }
 
-    gtag('config', 'UA-126840544-1');
+    function getCookie(cname) {
+        let name = cname + "=";
+        let ca = document.cookie.split(';');
+        for(let i = 0; i < ca.length; i++) {
+            let c = ca[i];
+            while (c.charAt(0) === ' ') {
+                c = c.substring(1);
+            }
+            if (c.indexOf(name) === 0) {
+                return c.substring(name.length, c.length);
+            }
+        }
+        return "";
+    }
+
+    /* SET THEME */
+    if (getCookie('theme') === "dark") {
+        document.documentElement.setAttribute('data-theme', 'dark');
+    }
 </script>

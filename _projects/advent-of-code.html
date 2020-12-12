@@ -1,0 +1,32 @@
+---
+layout: project
+title: Advent of Code
+summary: Advent of Code is an Advent calendar of small programming puzzles.
+cover: assets/img/advent-of-code.png
+---
+
+<div class="row mb-4">
+    <div class="col-xl-5">
+        <img class="mb-2 w-100" src="{{ 'assets/img/advent-of-code.png' | relative_url }}" alt="advent of code">
+    </div>
+    <div class="col-xl-7">
+        <p>Advent of Code is an Advent calendar of small programming puzzles for a variety of skill sets and skill levels that can be solved in any programming language you like. People use them as a speed contest, interview prep, company training, university coursework, practice problems, or to challenge each other.</p>
+        <p>This is the first year I'm taking part in this challenge and I chose to take on these puzzles using Python as I find it easy to quickly try different approaches using this language.</p>
+        <p>Visit the official <a href="https://adventofcode.com/about">Advent of Code website</a> for more information on the event.</p>
+        <p>Check out my <i>Advent of Code</i> puzzle answers on GitHub:</p>
+        <a id="github" class="btn text-light" href="https://github.com/Jessseee/AdventOfCode2020" target="_blank"><i class="fab fa-github"></i> GitHub</a>
+    </div>
+</div>
+
+<div class="row">
+    {% for post in site.categories.aoc %}
+        <div class="col-xl-6 my-2">
+            <h3>{{ post.title }}</h3>
+            <p>
+                {{ post.content | markdownify }}
+                Also check out this day's solution on <a target="_blank" href="https://github.com/Jessseee/AdventOfCode2020/blob/master/day_{{ forloop.length | minus: forloop.index0 }}.py">GitHub <i class="fab fa-github"></i></a>.
+            </p>
+
+        </div>
+    {% endfor %}
+</div>

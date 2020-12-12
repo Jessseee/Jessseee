@@ -12,6 +12,10 @@ exclude:
 sass:
   sass_dir: _bootstrap
   style: compressed
+markdown: kramdown
+kramdown:
+  input: GFM
+  syntax_highlighter: rouge
 ignore_theme_config: true
 collections:
   projects:

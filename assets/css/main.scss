@@ -3,9 +3,10 @@
 
 $dark: #333333;
 $light: #f8f9fa;
-$github-color: #ffd33d;
+$github-color: #fcc300;
 $gitlab-color: #fc6d26;
 $linkedin-color: #0e76a8;
+$link-color: #2196F3;
 $link-decoration: none;
 $hr-height: 3px;
 $btn-box-shadow: none;
@@ -58,6 +59,7 @@ body {
 
 .btn {
   color: var(--bs-dark);
+  font-weight: bold;
 
   &:hover, &:focus, &:active {
     color: var(--bs-dark);
@@ -218,4 +220,21 @@ body {
   .honeypot {
     display: none;
   }
+}
+
+.highlight::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+.highlight {
+  scrollbar-width: thin;
+  scrollbar-color: #8a8a8a #333333;
+}
+.highlight::-webkit-scrollbar-track {
+  background: #333333;
+  border-radius: 6px;
+}
+.highlight::-webkit-scrollbar-thumb {
+  background-color: #8a8a8a;
+  border-radius: 6px;
 }

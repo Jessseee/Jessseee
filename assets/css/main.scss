@@ -110,12 +110,23 @@ body {
 }
 
 #navbar {
+  & > * {
+    transition: margin 0.3s;
+  }
   @media only screen and (min-width: 900px) {
     position: fixed;
     top: 0;
     right: 0;
     left: 0;
     z-index: 1;
+  }
+
+  @media only screen and (max-width: 700px) {
+    background-color: var(--bs-light);
+    height: 40px;
+    & > * {
+      margin-top: -10px;
+    }
   }
 
   .nav-link {

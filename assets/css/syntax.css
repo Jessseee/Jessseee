@@ -1,10 +1,62 @@
+[data-theme="light"] {
+  --background: #f0f0f0;
+  --text: #444444;
+  --scrollbar-base-color: #dddddd;
+  --scrollbar-track-color: #aaaaaa;
+  --light-yellow: #f35d08;
+  --yellow: #eeb60f;
+  --pink: #f53cbc;
+  --baby-blue: #9213f1;
+  --light-blue: #0360d0;
+  --blue: #07e0a3;
+  --light-green: #6ce204;
+  --orange: #f35d08;
+}
+
+[data-theme="dark"] {
+  --background: #444444;
+  --text: #eeeeee;
+  --scrollbar-base-color: #8a8a8a;
+  --scrollbar-track-color: #333333;
+  --light-yellow: #fff0a6;
+  --yellow: #f6dd62;
+  --pink: #f696db;
+  --baby-blue: #a8e1fe;
+  --light-blue: #4df4ff;
+  --blue: #4df4ff;
+  --light-green: #b2fd6d;
+  --orange: #ffb000;
+}
+
 .highlight table td { padding: 5px; }
 .highlight table pre { margin: 0; }
 .highlight {
-  color: #faf6e4;
-  background-color: #222222;
+  transition: background-color 300ms ease-in-out;
+  color: var(--text);
+  background-color: var(--background);
   padding: 5px;
   margin-bottom: 1px;
+}
+
+.highlight > span {
+  transition: color 300ms ease-in-out;
+}
+
+.highlight::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+.highlight {
+  scrollbar-width: thin;
+  scrollbar-color: var(--background) var(--text);
+}
+.highlight::-webkit-scrollbar-track {
+  background: var(--scrollbar-track-color);
+  border-radius: 6px;
+}
+.highlight::-webkit-scrollbar-thumb {
+  background-color: var(--scrollbar-base-color);
+  border-radius: 6px;
 }
 
 .highlight .gl {
@@ -33,15 +85,15 @@
   font-style: italic;
 }
 .highlight .k, .highlight .kd, .highlight .kv {
-  color: #f6dd62;
+  color: var(--yellow);
   font-weight: bold;
 }
 .highlight .o, .highlight .ow {
-  color: #4df4ff;
+  color: var(--blue);
   font-weight: bold;
 }
 .highlight .p, .highlight .pi {
-  color: #4df4ff;
+  color: var(--light-blue);
 }
 .highlight .gd {
   color: #cc0000;
@@ -64,23 +116,23 @@
   font-weight: bold;
 }
 .highlight .kn {
-  color: #ffb000;
+  color: var(--orange);
   font-weight: bold;
 }
 .highlight .kp {
-  color: #ffb000;
+  color: var(--orange);
   font-weight: bold;
 }
 .highlight .kr {
-  color: #ffb000;
+  color: var(--orange);
   font-weight: bold;
 }
 .highlight .gh {
-  color: #ffb000;
+  color: var(--orange);
   font-weight: bold;
 }
 .highlight .gu {
-  color: #ffb000;
+  color: var(--orange);
   font-weight: bold;
 }
 .highlight .kt {
@@ -88,39 +140,39 @@
   font-weight: bold;
 }
 .highlight .no {
-  color: #b2fd6d;
+  color: var(--light-green);
   font-weight: bold;
 }
 .highlight .nc {
-  color: #b2fd6d;
+  color: var(--light-green);
   font-weight: bold;
 }
 .highlight .nd {
-  color: #b2fd6d;
+  color: var(--light-green);
   font-weight: bold;
 }
 .highlight .nn {
-  color: #b2fd6d;
+  color: var(--light-green);
   font-weight: bold;
 }
 .highlight .bp {
-  color: #b2fd6d;
+  color: var(--light-green);
   font-weight: bold;
 }
 .highlight .ne {
-  color: #b2fd6d;
+  color: var(--light-green);
   font-weight: bold;
 }
 .highlight .nl {
-  color: #ffb000;
+  color: var(--orange);
   font-weight: bold;
 }
 .highlight .nt {
-  color: #ffb000;
+  color: var(--orange);
   font-weight: bold;
 }
 .highlight .m, .highlight .mb, .highlight .mf, .highlight .mh, .highlight .mi, .highlight .il, .highlight .mo, .highlight .mx {
-  color: #f696db;
+  color: var(--pink);
   font-weight: bold;
 }
 .highlight .ld {
@@ -132,11 +184,11 @@
   font-weight: bold;
 }
 .highlight .s, .highlight .sb, .highlight .dl, .highlight .sd, .highlight .s2, .highlight .sh, .highlight .sx, .highlight .sr, .highlight .s1 {
-  color: #fff0a6;
+  color: var(--light-yellow);
   font-weight: bold;
 }
 .highlight .sa {
-  color: #f6dd62;
+  color: var(--yellow);
   font-weight: bold;
 }
 .highlight .se {
@@ -165,20 +217,21 @@
   color: #BBBBBB;
 }
 .highlight .nf, .highlight .fm {
-  color: #a8e1fe;
+  color: var(--baby-blue);
+  font-weight: bold;
 }
 .highlight .py {
-  color: #a8e1fe;
+  color: var(--baby-blue);
 }
 .highlight .na {
-  color: #a8e1fe;
+  color: var(--baby-blue);
 }
 .highlight .nv, .highlight .vc, .highlight .vg, .highlight .vi, .highlight .vm {
-  color: #a8e1fe;
+  color: var(--baby-blue);
   font-weight: bold;
 }
 code.highlighter-rouge.language-plaintext {
-  color: #f1f1f1;
-  background-color: #222222;
+  color: var(--text);
+  background-color: var(--background);
   padding: 5px;
 }

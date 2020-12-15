@@ -232,20 +232,3 @@ body {
     display: none;
   }
 }
-
-.highlight::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
-}
-.highlight {
-  scrollbar-width: thin;
-  scrollbar-color: #8a8a8a #333333;
-}
-.highlight::-webkit-scrollbar-track {
-  background: #333333;
-  border-radius: 6px;
-}
-.highlight::-webkit-scrollbar-thumb {
-  background-color: #8a8a8a;
-  border-radius: 6px;
-}

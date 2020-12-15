@@ -231,6 +231,7 @@
   font-weight: bold;
 }
 code.highlighter-rouge.language-plaintext {
+  transition: background-color 300ms ease-in-out;
   color: var(--text);
   background-color: var(--background);
   padding: 5px;

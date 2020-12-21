@@ -10,6 +10,7 @@ LLLL.LL.LLL.LL.LL.LLL.L.L..L...LL...LL.LL
 L.LL.LL.LLL.LL.LLL.L.L..L..LLLL.LLL.L.L..
 ```
 
+#### Part One
 For the first half of today's puzzle we needed to create a model of how people will choose (or abandon) their seats. The following rules can be applied to every seat simultaneously:
 - If a seat is empty `L` and there are no occupied seats adjacent to it, the seat becomes occupied.
 - If a seat is occupied `#` and four or more seats adjacent to it are also occupied, the seat becomes empty.
@@ -31,6 +32,8 @@ def check_adjacent(grid, seat):
 
 When we have iterated over every seat we can save the new matrix of seats and continue to recursively do this step again until we find a stable seating. 
 
+
+#### Part Two
 For the second part of the puzzle instead of looking only at the seat immediately adjacent we look at every seat that a person could see from their seat. We also increase the tolerance to 5. The other rules mentioned above still apply as well.
 
 To solve this puzzle we again go over every seat and check the closest visible seats using the following method. By looking in each direction until we either hit the edge of the grid or find a seat. 

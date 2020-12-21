@@ -5,6 +5,7 @@ title: Day 10 - Adapter Array
 
 The input of day 10 is a series of numbers indicating the ouput **joltage** of all the adapters in our bag. each adapter is compatible with any adapter that has an output **joltage** of **1-3 jolts lower**. The outlet is rated **0 jolts** and our device we want to connect is rated **3 jolts higher** than the highest rated adapter.
 
+#### Part One
 For the first half of the puzzle we need to find a chain of adapters, to connect our device to the outlet, that uses all the adapters and find the number of **1-jolt** and **3-jolt** differences between adapters.
 
 We can approach this problem by recursively comparing each adapter to the next and count the number of 1-jolt and 3-jolt differences.

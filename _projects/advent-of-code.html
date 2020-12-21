@@ -24,7 +24,8 @@ cover: assets/img/advent-of-code.png
             <h3>{{ post.title }}</h3>
             <p>
                 {{ post.content | markdownify }}
-                Also check out this day's solution on <a target="_blank" href="https://github.com/Jessseee/AdventOfCode2020/blob/master/day_{{ forloop.length | minus: forloop.index0 }}.py">GitHub <i class="fab fa-github"></i></a>.
+                Check out this day's solution on <a target="_blank" href="https://github.com/Jessseee/AdventOfCode2020/blob/master/day_{{ forloop.length | minus: forloop.index0 }}.py">GitHub <i class="fab fa-github"></i></a> or read the puzzle on the
+                <a href="https://adventofcode.com/2020/day/{{ forloop.length | minus: forloop.index0 }}">AoC website <i class="fas fa-gift"></i></a>
             </p>
 
         </div>

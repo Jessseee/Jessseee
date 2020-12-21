@@ -1,13 +1,17 @@
 ---
 title: Day 4 - Passport Processing
 ---
-The day 4 input consists of a list of passport information, each passport divided by an empty line. For the first part we had to check if every passport contains the required fields. To solve this puzzle we simply loop over every passport in the input and check if all the required keys are present on the passport.
+The day 4 input consists of a list of passport information, each passport divided by an empty line. 
+
+#### Part One
+For the first part we had to check if every passport contains the required fields. To solve this puzzle we simply loop over every passport in the input and check if all the required keys are present on the passport.
 
 ```python
 def check_required_fields(passport):
     return all(key in passport for key in REQUIRED_KEYS)
 ```
 
+#### Part Two
 For the second part we also need to validate the field content. This was asking for some regex as you can see bellow. This dictionary includes the required fields, and the regex to validate the given fields.
 
 ```python

@@ -3,7 +3,8 @@ title: Day 5 - Binary Boarding
 ---
 The day 5 input was a list of encoded boarding passes. It was our task to decode these to seat IDs. The encoded boarding passes consist of a series of letters. The first seven consisting of F/B and the last three of L/R. For example: `FBBFBBBRLR` 
 
-The first seven characters tells us which row of the plane the seat is (out of 127), and the last three characters specify the seat's column (out of 8). Each character specifies which half of the possible rows or columns we should look at until we are left with just one possible row and column. Then the seat ID can be calculated as `row * 8 + column`
+#### Part One
+For the first part of the puzzle we will have to decode these Seat locations. The first seven characters tells us which row of the plane the seat is (out of 127), and the last three characters specify the seat's column (out of 8). Each character specifies which half of the possible rows or columns we should look at until we are left with just one possible row and column. Then the seat ID can be calculated as `row * 8 + column`
 
 ```python
 def decode_boarding_pass(boarding_pass):
@@ -29,6 +30,7 @@ def decode_boarding_pass(boarding_pass):
     return seat_id
 ```
 
+#### Part Two
 Now for the second half we needed to find one missing boarding pass and corresponding seat ID from the list which was neither at the beginning nor the end of the plane. So by checking only the range between the minimum seat ID and the maximum seat ID we can easily find the missing boarding pass.
 
 ```python

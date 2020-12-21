@@ -1,7 +1,10 @@
 ---
 title: Day 8 - Handheld Halting
 ---
-The day 8 input is a series of instructions, similar to a rudimentary assembly program. For the first part we want to run through the program and see where it will run into an infinite loop. This is quite easy to catch, as we can be certain the program will end up in an infinite loop whenever it returns to an instruction it has already visited.
+The day 8 input is a series of instructions, similar to a rudimentary assembly program. 
+
+#### Part One
+For the first part we want to run through the program and see where it will run into an infinite loop. This is quite easy to catch, as we can be certain the program will end up in an infinite loop whenever it returns to an instruction it has already visited.
 
 There are three possible instructions in our program: 
 - `acc` Increases the value of the global **accumulator**.
@@ -51,6 +54,7 @@ elif instruction[0] == 'jmp':
     )
 ```
 
+#### Part Two
 For the second part of the puzzle we need to rewrite **one** `jmp` to `nop` or `nop` to `jmp` so the program can run until the end. To find the right instruction to rewrite we will have to try to change each `jmp` or `nop` instruction to see if the change will end in an *infinite loop* or allow the program to *terminate successfully*. 
 
 To keep track of if we have already changed an instruction we add a *changed parameter* to the recursive method and check it before we run a `jmp` or `nop` instruction. The `rewrite_instruction` method will return true when the recursive method returns true once it has reached the *end of the program* and did not encounter an *infinite loop*.

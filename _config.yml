@@ -20,3 +20,5 @@ ignore_theme_config: true
 collections:
   projects:
     output: true
+  wip:
+    output: true

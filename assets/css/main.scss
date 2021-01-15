@@ -53,6 +53,13 @@ body {
   color: var(--bs-dark);
 }
 
+#pico8-logo {
+  width:300px;
+  @media only screen and (max-width: 500px) {
+    width:100% !important;
+  }
+}
+
 .round {
   border-radius: 100%;
 }
@@ -231,4 +238,10 @@ body {
   .honeypot {
     display: none;
   }
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+.ps2p {
+  font-family: 'Press Start 2P', sans-serif;
 }

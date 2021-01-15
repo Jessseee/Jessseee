@@ -1,0 +1,35 @@
+---
+layout: project
+title: PICO-8
+summary: PICO-8 is a fantasy console for making, sharing and playing tiny games and other computer programs.
+cover: assets/img/pico8.png
+---
+<div class="row">
+    <div class="w-100">
+            <img id="pico8-logo" class="float-left pr-2" src="{{ 'assets/img/pico8.png' | relative_url }}" alt="campsite">
+        <div class="float-none" style="max-width: 800px;">
+            <p>
+                Lately I felt inspired by the limitations of the 8-bit fantasy console PICO-8. Made by <a href="https://www.lexaloffle.com/">Lexaloffle Games</a> this small arcade machine that never existed brings out a type of nostalgia and boosts creativity with its limited specs.
+            </p>
+
+            <p>
+                One of the reasons I stumbled upon this fun engine is because of the awesome game <a href="http://www.celestegame.com/">Celeste</a>. The game was originally developed using PICO-8 and later remade in a more capable game engine to be released on consoles and PC. The original PICO-8 game can still be played on an old pc hidden in the game's levels.
+            </p>
+        </div>
+    </div>
+</div>
+
+<h2>Cartridges</h2>
+<div class="row">
+    {% for cart in site.cartridges %}
+        <div class="col-6 col-lg-4 mb-3">
+            <a href="{{ cart.url }}" class="d-inline-block">
+                <img src="{{ cart.cover | relative_url }}" alt="cartridge image">
+            </a>
+            <div class="d-inline-block align-middle pl-1" style="max-width:200px">
+                <h5 class="ps2p mb-1 mt-3">{{ cart.title }}</h5>
+                {{ cart.content | markdownify }}
+            </div>
+        </div>
+    {% endfor %}
+</div>

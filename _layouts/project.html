@@ -2,7 +2,20 @@
 <html lang="{{ site.lang | default: 'en-US' }}">
     <head>
         {% include head.html %}
-        {{ page.meta }}
+
+        <!--    Page CSS    -->
+        {% if page.css %}
+            {% for css in page.css %}
+                <link rel="stylesheet" href="{{ css | relative_url }}">
+            {% endfor %}
+        {% endif %}
+
+        <!--    Page JS    -->
+        {% if page.js %}
+            {% for js in page.js %}
+                <script type="text/javascript" src="{{ js | relative_url }}"></script>
+            {% endfor %}
+        {% endif %}
     </head>
 
     <body>

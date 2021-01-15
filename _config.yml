@@ -22,3 +22,5 @@ collections:
     output: true
   wip:
     output: true
+  cartridges:
+    output: true

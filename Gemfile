@@ -1,8 +1,9 @@
 source "https://rubygems.org"
 
+gem 'jekyll', '~> 4.2'
+
 # If you have any plugins, put them here!
 group :jekyll_plugins do
-  gem "github-pages"
   gem 'bootstrap', '~> 5.0.0.beta2'
 end
 

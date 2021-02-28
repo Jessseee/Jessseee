@@ -1,3 +1,6 @@
+//= require popper
+//= require bootstrap-sprockets
+
 /* PLAY BUTTON */
 function playButton(video, overlay) {
     if(video.paused) {

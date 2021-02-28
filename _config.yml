@@ -6,11 +6,10 @@ exclude:
   - Gemfile.lock
   - README.md
   - .idea/
-  - assets/bootstrap/js/
-  - assets/bootstrap/scss/
   - assets/css/.sass-cache/
+  - node_modules
 sass:
-  sass_dir: _bootstrap
+  sass_dir: node_modules
   style: compressed
 markdown: kramdown
 kramdown:

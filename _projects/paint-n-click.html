@@ -14,12 +14,12 @@ cover: assets/img/paint-n-click.png
         <p>To recognize doodles drawn by the player a TensorFlow model is trained, a visualization of the different layers can be seen bellow. The code to train the model can be found in
             <a href="https://github.com/JonaMata/Paint-n-Click/blob/master/tensorflow_files/train_model.py">train_model.py</a>.</p>
         <p>Check out <i>Paint 'n Click</i> on GitHub:</p>
-        <a id="github" class="btn text-light" href="https://github.com/JonaMata/Paint-n-Click" target="_blank"><i class="fab fa-github"></i> GitHub</a>
+        <a class="btn btn-github text-light" href="https://github.com/JonaMata/Paint-n-Click" target="_blank"><i class="fab fa-github"></i> GitHub</a>
     </div>
 </div>
 <div class="row">
     <div class="col-xl-3"></div>
-    <div class="col-xl-7 text-xl-right">
+    <div class="col-xl-7 text-xl-end">
         <p>We used the Quick Draw bitmaps dataset to identify doodles with TensorFlow: <br><a href="https://www.tensorflow.org/datasets/catalog/quickdraw_bitmap">QuickDraw bitmap dataset</a>.</p>
         <p>We used the following tutorial for the TensorFlow training model: <br><a href="https://github.com/tensorflow/docs/blob/master/site/en/r1/tutorials/sequences/recurrent_quickdraw.md">TensorFlow recurrent QuickDraw tutorial</a>.</p>
         <p>For the input of the trained TensorFlow model we use OpenCV to resize a webcam input to 28x28 grayscale. as you can see in drawing_camera.py</p>

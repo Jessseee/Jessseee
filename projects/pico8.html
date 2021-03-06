@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en-US">
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="utf-8">
+<title>Jesse Visser | PICO-8</title>
+
+<!-- FavIcons -->
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/favicons/favicon-16x16.png">
+<link rel="manifest" href="/assets/favicons/site.webmanifest">
+<link rel="mask-icon" href="/assets/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<link rel="shortcut icon" href="/assets/favicons/favicon.ico">
+<meta name="msapplication-config" content="/assets/favicons/browserconfig.xml">
+<meta name="msapplication-TileColor" content="#ffffff">
+<meta name="theme-color" content="#ffffff">
+
+<!--  Open Graph  -->
+<meta property="og:type" content="website">
+<meta property="og:type" content="en_GB">
+<meta property="og:title" content="Jesse Visser | PICO-8">
+<meta property="og:description" content="PICO-8 is a fantasy console for making, sharing and playing tiny games and other computer programs.">
+<meta property="og:image" content="https://jesse-visser.nl/assets/img/pico8.png">
+<meta property="og:image:alt" content="PICO-8">
+<meta property="og:url" content="https://jesse-visser.nl/projects/pico8.html">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@oneofmanyjesses">
+<meta name="twitter:title" content="Jesse Visser | PICO-8">
+<meta name="twitter:description" content="PICO-8 is a fantasy console for making, sharing and playing tiny games and other computer programs.">
+<meta name="twitter:image" content="https://jesse-visser.nl/assets/img/pico8.png">
+
+<!--  CSS  -->
+<link rel="stylesheet" type="text/css" href="/assets/css/main.css">
+<link rel="stylesheet" type="text/css" href="/assets/css/syntax.css">
+
+<script>
+    /* COOKIES */
+    function setCookie(cname, cvalue, exdays) {
+        let d = new Date();
+        d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+        let expires = "expires="+d.toUTCString();
+        document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+    }
+
+    function getCookie(cname) {
+        let name = cname + "=";
+        let ca = document.cookie.split(';');
+        for(let i = 0; i < ca.length; i++) {
+            let c = ca[i];
+            while (c.charAt(0) === ' ') {
+                c = c.substring(1);
+            }
+            if (c.indexOf(name) === 0) {
+                return c.substring(name.length, c.length);
+            }
+        }
+        return "";
+    }
+
+    /* SET THEME */
+    if (getCookie('theme') === "dark") {
+        document.documentElement.setAttribute('data-theme', 'dark');
+    } else {
+        document.documentElement.setAttribute('data-theme', 'light');
+    }
+</script>
+
+        <!--    Page CSS    -->
+        
+
+        <!--    Page JS    -->
+        
+    </head>
+
+    <body>
+        <div id="navbar" class="nav nav-pills sticky-top justify-content-end align-items-center px-3">
+    <a class="navbar-brand me-auto" href="/">
+        <img height="50" src="/assets/img/logo.png" alt="logo">
+    </a>
+
+    <label for="theme-toggle"></label>
+    <input id="theme-toggle" type="checkbox" class="d-none" />
+</div>
+        <div id="project-page" class="container my-md-5">
+            <h1>PICO-8</h1>
+            <div class="row">
+    <div class="w-100">
+            <img id="pico8-logo" class="float-left pr-2" src="/assets/img/pico8.png" alt="campsite">
+        <div class="float-none" style="max-width: 800px;">
+            <p>
+                Lately I felt inspired by the limitations of the 8-bit fantasy console PICO-8. Made by <a href="https://www.lexaloffle.com/">Lexaloffle Games</a> this small arcade machine that never existed brings out a type of nostalgia and boosts creativity with its limited specs.
+            </p>
+
+            <p>
+                One of the reasons I stumbled upon this fun engine is because of the awesome game <a href="http://www.celestegame.com/">Celeste</a>. The game was originally developed using PICO-8 and later remade in a more capable game engine to be released on consoles and PC. The original PICO-8 game can still be played on an old pc hidden in the game's levels.
+            </p>
+        </div>
+    </div>
+</div>
+
+<h2>Cartridges</h2>
+<div class="row">
+    
+        <div class="col-6 col-lg-4 mb-3">
+            <a href="/cartridges/bounce.html" class="d-inline-block">
+                <img src="/assets/img/pico8/bounce.png" alt="cartridge image">
+            </a>
+            <div class="d-inline-block align-middle pl-1" style="max-width:200px">
+                <h5 class="ps2p mb-1 mt-3">Bounce</h5>
+                <p>A simple cartridge I made to start learning PICO-8 featuring balls that bounce off of each other and the ground.</p>
+
+            </div>
+        </div>
+    
+        <div class="col-6 col-lg-4 mb-3">
+            <a href="/cartridges/connect4.html" class="d-inline-block">
+                <img src="/assets/img/pico8/connect4.png" alt="cartridge image">
+            </a>
+            <div class="d-inline-block align-middle pl-1" style="max-width:200px">
+                <h5 class="ps2p mb-1 mt-3">Connect Four</h5>
+                <p>The classic game of connect four implemented in PICO-8.</p>
+
+            </div>
+        </div>
+    
+        <div class="col-6 col-lg-4 mb-3">
+            <a href="/cartridges/life.html" class="d-inline-block">
+                <img src="/assets/img/pico8/life.png" alt="cartridge image">
+            </a>
+            <div class="d-inline-block align-middle pl-1" style="max-width:200px">
+                <h5 class="ps2p mb-1 mt-3">Life</h5>
+                <p>Conway’s <a href="https://nl.wikipedia.org/wiki/Game_of_Life">game of life</a>. Including a simple but beautiful pattern that stabilizes after 450 cycles. A tribute to the brilliant <a href="https://nl.wikipedia.org/wiki/John_Conway">John Conway</a> who died in 2020.</p>
+
+            </div>
+        </div>
+    
+</div>
+        </div>
+    </body>
+
+    <!--  JS  -->
+<script src="https://kit.fontawesome.com/93a420105f.js" crossorigin="anonymous"></script>
+<script src="/assets/js/main.js"></script>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-126840544-1"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-126840544-1');
+</script>
+</html>

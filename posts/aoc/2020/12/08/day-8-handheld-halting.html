@@ -1,0 +1,69 @@
+<p>The day 8 input is a series of instructions, similar to a rudimentary assembly program.</p>
+
+<h4 id="part-one">Part One</h4>
+<p>For the first part we want to run through the program and see where it will run into an infinite loop. This is quite easy to catch, as we can be certain the program will end up in an infinite loop whenever it returns to an instruction it has already visited.</p>
+
+<p>There are three possible instructions in our program:</p>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">acc</code> Increases the value of the global <strong>accumulator</strong>.</li>
+  <li><code class="language-plaintext highlighter-rouge">jmp</code> <strong>Jumps</strong> to an instruction relative to itself.</li>
+  <li><code class="language-plaintext highlighter-rouge">nop</code> Stands for <strong>No OPeration</strong>, it does nothing.</li>
+</ul>
+
+<p>Each instruction is followed by a positive or negative integer to be used as value for the instruction. For example: <code class="language-plaintext highlighter-rouge">acc 39</code> will increase the value of the global accumulator by 39, <code class="language-plaintext highlighter-rouge">jmp +99</code> will jump 99 instructions forward and <code class="language-plaintext highlighter-rouge">nop 235</code> will just continue to the next instruction.</p>
+
+<p>To tackle the first half of the puzzle we had to keep track of the visited instructions, so we know when an infinite loop would occur.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Instruction is empty and, program has terminated successfully
+</span><span class="k">if</span> <span class="ow">not</span> <span class="n">instructions</span><span class="p">[</span><span class="n">index</span><span class="p">]:</span>
+    <span class="k">return</span> <span class="bp">True</span>
+
+<span class="c1"># Add instruction to visited list if it is not yet visited
+</span><span class="k">if</span> <span class="n">index</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">visited</span><span class="p">:</span>
+    <span class="n">visited</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">index</span><span class="p">)</span>
+<span class="c1"># Instruction is already visited so will end in infinite loop
+</span><span class="k">else</span><span class="p">:</span>
+    <span class="k">return</span> <span class="bp">False</span>
+</code></pre></div></div>
+
+<p>Now we can go over each instruction in the program recursively. Adding to the global accumulator and jumping back and forth when instructed.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span> <span class="n">instruction</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s">'acc'</span><span class="p">:</span>
+    <span class="k">return</span> <span class="n">execute_instruction</span><span class="p">(</span>
+        <span class="n">index</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span>
+        <span class="n">acc</span> <span class="o">+</span> <span class="nb">int</span><span class="p">(</span><span class="n">instruction</span><span class="p">[</span><span class="mi">1</span><span class="p">]),</span>
+        <span class="n">visited</span><span class="p">,</span>
+        <span class="n">changed</span>
+    <span class="p">)</span>
+<span class="k">elif</span> <span class="n">instruction</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s">'nop'</span><span class="p">:</span>
+    <span class="k">return</span> <span class="n">execute_instruction</span><span class="p">(</span>
+        <span class="n">index</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span>
+        <span class="n">acc</span><span class="p">,</span>
+        <span class="n">visited</span><span class="p">,</span>
+        <span class="n">changed</span>
+    <span class="p">)</span>
+<span class="k">elif</span> <span class="n">instruction</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s">'jmp'</span><span class="p">:</span>
+    <span class="k">return</span> <span class="n">execute_instruction</span><span class="p">(</span>
+        <span class="n">index</span> <span class="o">+</span> <span class="nb">int</span><span class="p">(</span><span class="n">instruction</span><span class="p">[</span><span class="mi">1</span><span class="p">]),</span>
+        <span class="n">acc</span><span class="p">,</span>
+        <span class="n">visited</span><span class="p">,</span>
+        <span class="n">changed</span>
+    <span class="p">)</span>
+</code></pre></div></div>
+
+<h4 id="part-two">Part Two</h4>
+<p>For the second part of the puzzle we need to rewrite <strong>one</strong> <code class="language-plaintext highlighter-rouge">jmp</code> to <code class="language-plaintext highlighter-rouge">nop</code> or <code class="language-plaintext highlighter-rouge">nop</code> to <code class="language-plaintext highlighter-rouge">jmp</code> so the program can run until the end. To find the right instruction to rewrite we will have to try to change each <code class="language-plaintext highlighter-rouge">jmp</code> or <code class="language-plaintext highlighter-rouge">nop</code> instruction to see if the change will end in an <em>infinite loop</em> or allow the program to <em>terminate successfully</em>.</p>
+
+<p>To keep track of if we have already changed an instruction we add a <em>changed parameter</em> to the recursive method and check it before we run a <code class="language-plaintext highlighter-rouge">jmp</code> or <code class="language-plaintext highlighter-rouge">nop</code> instruction. The <code class="language-plaintext highlighter-rouge">rewrite_instruction</code> method will return true when the recursive method returns true once it has reached the <em>end of the program</em> and did not encounter an <em>infinite loop</em>.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">elif</span> <span class="n">instruction</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s">'nop'</span><span class="p">:</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">changed</span> <span class="ow">and</span> <span class="n">rewrite_instruction</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="n">instruction</span><span class="p">,</span> <span class="s">'jmp'</span><span class="p">,</span> <span class="n">acc</span><span class="p">,</span> <span class="n">visited</span><span class="p">):</span>
+        <span class="k">return</span>
+</code></pre></div></div>
+
+<p>Now we can rewrite the instructions using a small helper method.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">rewrite_instruction</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="n">instruction</span><span class="p">,</span> <span class="n">new_instruction</span><span class="p">,</span> <span class="n">acc</span><span class="p">,</span> <span class="n">visited</span><span class="p">):</span>
+    <span class="n">instructions</span><span class="p">[</span><span class="n">index</span><span class="p">]</span> <span class="o">=</span> <span class="sa">f</span><span class="s">'</span><span class="si">{</span><span class="n">new_instruction</span><span class="si">}</span><span class="s"> </span><span class="si">{</span><span class="n">instruction</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s">'</span>
+    <span class="k">return</span> <span class="n">execute_instruction</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="n">acc</span><span class="p">,</span> <span class="n">visited</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="bp">True</span><span class="p">)</span>
+</code></pre></div></div>

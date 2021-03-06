@@ -1,0 +1,37 @@
+<p>The day 12 input consisted of a series of directions and values to move a ferry around.</p>
+
+<h4 id="part-one">Part One</h4>
+<p>For the first part the boat can move in any of the cardinal directions or rotate around. The instructions given are either <code class="language-plaintext highlighter-rouge">N/S/E/W</code> for the cardinal directions, <code class="language-plaintext highlighter-rouge">R/L</code> to rotate clockwise / counter clockwise or <code class="language-plaintext highlighter-rouge">F</code> to move forward in the direction the ferry is currently facing. The ferry will start of at <strong>(0, 0)</strong> and <strong>facing east</strong>.</p>
+
+<p>Now to interpret these instructions we can loop over them and for each instruction change the position of the boat which has an <em>x</em> and <em>y</em> position and a <em>rotation</em>. For the cardinal directions we can simply change the x or y position accordingly.</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span> <span class="nb">dir</span> <span class="o">==</span> <span class="s">'N'</span><span class="p">:</span> 
+    <span class="n">boat</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-=</span> <span class="n">amount</span>
+</code></pre></div></div>
+
+<p>Now for the rotation and moving the boat forward we have to make sure the rotation is clamped to 360 degrees.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span> <span class="nb">dir</span> <span class="o">==</span> <span class="s">'L'</span><span class="p">:</span>
+    <span class="n">boat</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">boat</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">+</span> <span class="n">amount</span><span class="p">)</span> <span class="o">%</span> <span class="mi">360</span>
+</code></pre></div></div>
+
+<p>After that when we have to move the boat forward we can check the current rotation and move the ferry just like we did with the cardinal directions.</p>
+
+<h4 id="part-two">Part Two</h4>
+<p>For the second part the puzzle changes as we no longer move the ferry directly but instead move a <strong>waypoint</strong> relative to the ferry and only on the forward instruction we move the ferry in the direction of this waypoint.</p>
+
+<p>The cardinal directions still work the same as before and just move the waypoint by a certain amount in the given direction. The rotation has become a little more complex as the waypoint needs to rotate <strong>around the ferry</strong>. Luckily the rotations given in the instructions are limited to multiples of 90 degrees. Making this issue easy to tackle with some basic <em>matrix rotations</em>.</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span> <span class="nb">dir</span> <span class="o">==</span> <span class="s">'L'</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">amount</span> <span class="o">==</span> <span class="mi">90</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">[</span><span class="o">-</span><span class="n">new_waypoint</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">new_waypoint</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span>
+    <span class="k">elif</span> <span class="n">amount</span> <span class="o">==</span> <span class="mi">180</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">[</span><span class="o">-</span><span class="n">new_waypoint</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="o">-</span><span class="n">new_waypoint</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span>
+    <span class="k">elif</span> <span class="n">amount</span> <span class="o">==</span> <span class="mi">270</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">[</span><span class="n">new_waypoint</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="o">-</span><span class="n">new_waypoint</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span>
+</code></pre></div></div>
+
+<p>Now that we have correctly placed the waypoint once we have to move the boat forward we can use the waypoint coordinates and multiply it with the amount we want to move in the waypoint’s direction.</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span> <span class="nb">dir</span> <span class="o">==</span> <span class="s">'F'</span><span class="p">:</span>
+    <span class="n">boat</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+=</span> <span class="n">amount</span> <span class="o">*</span> <span class="n">waypoint</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">boat</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+=</span> <span class="n">amount</span> <span class="o">*</span> <span class="n">waypoint</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">new_waypoint</span>
+</code></pre></div></div>

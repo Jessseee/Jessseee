@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en-US">
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="utf-8">
+<title>Jesse Visser | Garden of 3D3N</title>
+
+<!-- FavIcons -->
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/favicons/favicon-16x16.png">
+<link rel="manifest" href="/assets/favicons/site.webmanifest">
+<link rel="mask-icon" href="/assets/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<link rel="shortcut icon" href="/assets/favicons/favicon.ico">
+<meta name="msapplication-config" content="/assets/favicons/browserconfig.xml">
+<meta name="msapplication-TileColor" content="#ffffff">
+<meta name="theme-color" content="#ffffff">
+
+<!--  Open Graph  -->
+<meta property="og:type" content="website">
+<meta property="og:type" content="en_GB">
+<meta property="og:title" content="Jesse Visser | Garden of 3D3N">
+<meta property="og:description" content="A VR experience made for the GogBot festival in Enschede.">
+<meta property="og:image" content="https://jesse-visser.nl/assets/img/garden-of-3d3n.png">
+<meta property="og:image:alt" content="Garden of 3D3N">
+<meta property="og:url" content="https://jesse-visser.nl/projects/garden-of-3d3n.html">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@oneofmanyjesses">
+<meta name="twitter:title" content="Jesse Visser | Garden of 3D3N">
+<meta name="twitter:description" content="A VR experience made for the GogBot festival in Enschede.">
+<meta name="twitter:image" content="https://jesse-visser.nl/assets/img/garden-of-3d3n.png">
+
+<!--  CSS  -->
+<link rel="stylesheet" type="text/css" href="/assets/css/main.css">
+<link rel="stylesheet" type="text/css" href="/assets/css/syntax.css">
+
+<script>
+    /* COOKIES */
+    function setCookie(cname, cvalue, exdays) {
+        let d = new Date();
+        d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+        let expires = "expires="+d.toUTCString();
+        document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+    }
+
+    function getCookie(cname) {
+        let name = cname + "=";
+        let ca = document.cookie.split(';');
+        for(let i = 0; i < ca.length; i++) {
+            let c = ca[i];
+            while (c.charAt(0) === ' ') {
+                c = c.substring(1);
+            }
+            if (c.indexOf(name) === 0) {
+                return c.substring(name.length, c.length);
+            }
+        }
+        return "";
+    }
+
+    /* SET THEME */
+    if (getCookie('theme') === "dark") {
+        document.documentElement.setAttribute('data-theme', 'dark');
+    } else {
+        document.documentElement.setAttribute('data-theme', 'light');
+    }
+</script>
+
+        <!--    Page CSS    -->
+        
+
+        <!--    Page JS    -->
+        
+    </head>
+
+    <body>
+        <div id="navbar" class="nav nav-pills sticky-top justify-content-end align-items-center px-3">
+    <a class="navbar-brand me-auto" href="/">
+        <img height="50" src="/assets/img/logo.png" alt="logo">
+    </a>
+
+    <label for="theme-toggle"></label>
+    <input id="theme-toggle" type="checkbox" class="d-none" />
+</div>
+        <div id="project-page" class="container my-md-5">
+            <h1>Garden of 3D3N</h1>
+            <div class="row mb-4">
+    <div class="col-xl-5">
+        <img class="mb-2 w-100" src="/assets/img/garden-of-3d3n/intro.png" alt="project logo">
+    </div>
+    <div class="col-xl-7">
+        <p>With our installation we want to test you in creating new live and in the regulation of the genetic manipulation. Our installation setup consists of three main parts. Once you walk through the gate, you are greeted by the Garden of Eden, our new world. If you look to your right you can see a Virtual Reality setup. In the VR environment, new life is created. This new life takes shape as a creature! While in the VR simulation, your creature will be formed in front of you when you grab DNA fragments and connect them together.</p>
+    </div>
+</div>
+<div class="row mb-4">
+    <div class="col-xl-7 text-xl-end">
+        <h4>The Installation</h4>
+        <p>Different limbs or other body parts are added to your creature as you attach more DNA-fragments. Once your creature is complete, which you have to decide for yourself, the collective will vote whether it lives or dies, which is done by placing Eden-stones on a scale. If it dies, it shall cease to exist, but if it lives, it will be placed in the Garden of Eden. The Garden is our new world, a lush, green, beautiful place, where our new creatures roam freely and happily. Walk through that arch and join us! Be a part of 3D3N, and help us in creating a “perfect” world.</p>
+    </div>
+    <div class="col-xl-5">
+        <div class="video-container">
+            <div onclick="playButton(this.nextElementSibling, this)" class="video-overlay"><i class="fas fa-play-circle fa-4x"></i></div>
+            <video onclick="playButton(this, this.previousElementSibling)" class="w-100" loop>
+                <source src="/assets/img/garden-of-3d3n/interaction.mp4" type="video/mp4">
+                Sorry, it seems this video cannot be loaded.
+            </video>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-xl-5">
+        <img class="mb-2 w-100" src="/assets/img/garden-of-3d3n/flowmap.jpg" alt="experience flowmap">
+    </div>
+    <div class="col-xl-7">
+        <h4>Experience Flowmap</h4>
+        <p>Before creating our installation we thought out the complete experience we want people to have when interacting with our installation. We made a concise flowmap that describes the experience we expect people to have when interacting with the different parts of our installation.</p>
+    </div>
+</div>
+        </div>
+    </body>
+
+    <!--  JS  -->
+<script src="https://kit.fontawesome.com/93a420105f.js" crossorigin="anonymous"></script>
+<script src="/assets/js/main.js"></script>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-126840544-1"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-126840544-1');
+</script>
+</html>

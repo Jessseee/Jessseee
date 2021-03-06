@@ -1,0 +1,19 @@
+<p><em><span class="text-warning">The tenth day was also quite busy for me, so I was not able to finish the puzzle. I will revisit this later when I have some more time.</span></em></p>
+
+<p>The input of day 10 is a series of numbers indicating the ouput <strong>joltage</strong> of all the adapters in our bag. each adapter is compatible with any adapter that has an output <strong>joltage</strong> of <strong>1-3 jolts lower</strong>. The outlet is rated <strong>0 jolts</strong> and our device we want to connect is rated <strong>3 jolts higher</strong> than the highest rated adapter.</p>
+
+<h4 id="part-one">Part One</h4>
+<p>For the first half of the puzzle we need to find a chain of adapters, to connect our device to the outlet, that uses all the adapters and find the number of <strong>1-jolt</strong> and <strong>3-jolt</strong> differences between adapters.</p>
+
+<p>We can approach this problem by recursively comparing each adapter to the next and count the number of 1-jolt and 3-jolt differences.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">compare_joltage</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">diffs</span><span class="o">=</span><span class="p">{}):</span>
+    <span class="k">if</span> <span class="n">index</span><span class="o">+</span><span class="mi">1</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">adapters</span><span class="p">):</span>
+        <span class="n">diff</span> <span class="o">=</span> <span class="n">adapters</span><span class="p">[</span><span class="n">index</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="n">adapters</span><span class="p">[</span><span class="n">index</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">diff</span> <span class="ow">in</span> <span class="n">diffs</span><span class="p">:</span>
+            <span class="n">diffs</span><span class="p">[</span><span class="n">diff</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">diffs</span><span class="p">[</span><span class="n">diff</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="n">compare_joltage</span><span class="p">(</span><span class="n">index</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">diffs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="n">diffs</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span>
+</code></pre></div></div>

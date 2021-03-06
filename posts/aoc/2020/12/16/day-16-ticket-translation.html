@@ -1,0 +1,53 @@
+<p>The day 17 input consists of three lists related to our train ticket. First a series of rules, then our train ticket and lastly a series of numbers which are retrieved from all the train tickets of other people at the train station.</p>
+
+<h4 id="part-one">Part One</h4>
+<p>For the first part of today’s puzzle it was our task to find any <strong>invalid</strong> ticket in the sequence of tickets we received from other people at the train station.</p>
+
+<p>A ticket is invalid if any of its values don’t fit in any range of the given rules. So, by checking if the values fit inside all the ranges given by the rules we can find all the invalid tickets. As you can see bellow we can use the <code class="language-plaintext highlighter-rouge">all()</code> method to check if a value falls outside <strong>all</strong> the given ranges.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">scan_tickets</span><span class="p">(</span><span class="n">tickets</span><span class="p">,</span> <span class="n">rules</span><span class="p">):</span>
+    <span class="n">valid_tickets</span> <span class="o">=</span> <span class="n">tickets</span><span class="p">.</span><span class="n">copy</span><span class="p">()</span>
+    <span class="n">invalid_values</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">ticket</span> <span class="ow">in</span> <span class="n">tickets</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">ticket_value</span> <span class="ow">in</span> <span class="n">ticket</span><span class="p">:</span>
+            <span class="n">eval_ticket_value</span> <span class="o">=</span> <span class="p">[</span>
+                <span class="ow">not</span> <span class="p">(</span><span class="n">r</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">ticket_value</span> <span class="o">&lt;=</span> <span class="n">r</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="ow">or</span> 
+                <span class="n">r</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">ticket_value</span> <span class="o">&lt;=</span> <span class="n">r</span><span class="p">[</span><span class="mi">3</span><span class="p">])</span> 
+                <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">rules</span><span class="p">.</span><span class="n">values</span><span class="p">()]</span>
+            <span class="k">if</span> <span class="nb">all</span><span class="p">(</span><span class="n">eval_ticket_value</span><span class="p">):</span>
+                <span class="n">invalid_values</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">ticket_value</span><span class="p">)</span>
+                <span class="n">valid_tickets</span><span class="p">.</span><span class="n">remove</span><span class="p">(</span><span class="n">ticket</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">valid_tickets</span><span class="p">,</span> <span class="n">invalid_values</span>
+</code></pre></div></div>
+
+<h4 id="part-two">Part Two</h4>
+<p>Now we have removed any invalid tickets. For the second part we had to find the order of the fields in our ticket, because we do not know which field is which. Based on the nearby tickets with the given rules, and the process of elimination we can find the right order.</p>
+
+<p>First we compare the rules to every field in the tickets and for each field we return the rules that match all values of that field.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">check_field_position</span><span class="p">(</span><span class="n">tickets</span><span class="p">,</span> <span class="n">rules</span><span class="p">):</span>
+    <span class="n">possible_fields</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">rules</span><span class="p">)):</span>
+        <span class="n">possible_fields</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">tickets_field_i</span> <span class="o">=</span> <span class="p">[</span><span class="n">ticket</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">ticket</span> <span class="ow">in</span> <span class="n">tickets</span><span class="p">]</span>
+        <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">rules</span><span class="p">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="n">eval_ticket_values</span> <span class="o">=</span> <span class="p">[</span>
+                <span class="n">r</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">ticket_field_i</span> <span class="o">&lt;=</span> <span class="n">r</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="ow">or</span> 
+                <span class="n">r</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">ticket_field_i</span> <span class="o">&lt;=</span> <span class="n">r</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> 
+                <span class="k">for</span> <span class="n">ticket_field_i</span> <span class="ow">in</span> <span class="n">tickets_field_i</span><span class="p">]</span>
+            <span class="k">if</span> <span class="nb">all</span><span class="p">(</span><span class="n">eval_ticket_values</span><span class="p">):</span>
+                <span class="n">possible_fields</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">append</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>We can now see that the possible field names are an increasing series. which means we can sort them by the number of possible matches and then remove the already matched field from all the other possible matches. Leaving us with one match for each ticket field.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="n">taken</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">possible_fields</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">key</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">possible_fields</span><span class="p">[</span><span class="n">key</span><span class="p">])):</span>
+        <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">taken</span><span class="p">:</span>
+            <span class="n">possible_fields</span><span class="p">[</span><span class="n">key</span><span class="p">].</span><span class="n">remove</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">possible_fields</span><span class="p">[</span><span class="n">key</span><span class="p">]:</span>
+            <span class="n">taken</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+
+    <span class="n">ticket_fields</span> <span class="o">=</span> <span class="p">[</span><span class="n">value</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">possible_fields</span><span class="p">.</span><span class="n">values</span><span class="p">()]</span>
+    <span class="k">return</span> <span class="n">ticket_fields</span>
+</code></pre></div></div>

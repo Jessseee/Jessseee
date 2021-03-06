@@ -1,0 +1,169 @@
+<html lang="en-US">
+    <head>
+        <title>Jesse Visser | Connect Four</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="utf-8">
+<title>Jesse Visser | Connect Four</title>
+
+<!-- FavIcons -->
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/favicons/favicon-16x16.png">
+<link rel="manifest" href="/assets/favicons/site.webmanifest">
+<link rel="mask-icon" href="/assets/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<link rel="shortcut icon" href="/assets/favicons/favicon.ico">
+<meta name="msapplication-config" content="/assets/favicons/browserconfig.xml">
+<meta name="msapplication-TileColor" content="#ffffff">
+<meta name="theme-color" content="#ffffff">
+
+<!--  Open Graph  -->
+<meta property="og:type" content="website">
+<meta property="og:type" content="en_GB">
+<meta property="og:title" content="Jesse Visser | Connect Four">
+<meta property="og:description" content="">
+<meta property="og:image" content="https://jesse-visser.nl/assets/img/pico8/connect4.png">
+<meta property="og:image:alt" content="Connect Four">
+<meta property="og:url" content="https://jesse-visser.nl/cartridges/connect4.html">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@oneofmanyjesses">
+<meta name="twitter:title" content="Jesse Visser | Connect Four">
+<meta name="twitter:description" content="">
+<meta name="twitter:image" content="https://jesse-visser.nl/assets/img/pico8/connect4.png">
+
+<!--  CSS  -->
+<link rel="stylesheet" type="text/css" href="/assets/css/main.css">
+<link rel="stylesheet" type="text/css" href="/assets/css/syntax.css">
+
+<script>
+    /* COOKIES */
+    function setCookie(cname, cvalue, exdays) {
+        let d = new Date();
+        d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+        let expires = "expires="+d.toUTCString();
+        document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+    }
+
+    function getCookie(cname) {
+        let name = cname + "=";
+        let ca = document.cookie.split(';');
+        for(let i = 0; i < ca.length; i++) {
+            let c = ca[i];
+            while (c.charAt(0) === ' ') {
+                c = c.substring(1);
+            }
+            if (c.indexOf(name) === 0) {
+                return c.substring(name.length, c.length);
+            }
+        }
+        return "";
+    }
+
+    /* SET THEME */
+    if (getCookie('theme') === "dark") {
+        document.documentElement.setAttribute('data-theme', 'dark');
+    } else {
+        document.documentElement.setAttribute('data-theme', 'light');
+    }
+</script>
+        <meta name="viewport" content="width=device-width, user-scalable=no">
+        <script src="/assets/js/pico8-shell.js"></script>
+        <script src="/assets/pico8/connect4.js" ></script>
+        <link rel="stylesheet" href="/assets/css/pico8.css">
+    </head>
+    <body>
+        <div id="navbar" class="nav nav-pills sticky-top justify-content-end align-items-center px-3">
+    <a class="navbar-brand me-auto" href="/">
+        <img height="50" src="/assets/img/logo.png" alt="logo">
+    </a>
+
+    <label for="theme-toggle"></label>
+    <input id="theme-toggle" type="checkbox" class="d-none" />
+</div>
+        <div id="body_0"> <!-- hide this when playing in mobile (p8_touch_detected) so that elements don't affect layout -->
+            <div id="p8_desktop" style="display:block; position:absolute; top:10px; left:10px"></div> <!-- desktop for saving gifs / screenshots -->
+            <div id="p8_frame_0" style="max-width:800px; max-height:800px; margin:auto;"> <!-- double function: limit size, and display only this div for touch devices -->
+                <div id="p8_frame" style="display:flex; width:100%; max-width:90vw; height:90vw; max-height:95vh; margin:auto;">
+                    <div id="p8_menu_buttons_touch" style="position:absolute; width:100%; z-index:10; left:0;">
+                        <div class="p8_menu_button" id="p8b_full"  style="float:left;margin-left:10px" onClick="p8_give_focus(); p8_request_fullscreen();"></div>
+                        <div class="p8_menu_button" id="p8b_sound" style="float:left;margin-left:10px" onClick="p8_give_focus(); p8_create_audio_context(); Module.pico8ToggleSound();"></div>
+                        <div class="p8_menu_button" id="p8b_close" style="float:right; margin-right:10px" onClick="p8_close_cart();"></div>
+                    </div>
+
+                    <div id="p8_container"
+                         style="margin:auto; display:table;"
+                         onclick="p8_create_audio_context(); p8_run_cart('/assets/pico8/connect4.js');">
+
+                        <div id="p8_start_button" class="p8_start_button" style="width:100%; height:100%; display:flex;">
+                            <img style="margin:auto; width:100%" alt="start button"
+                                 src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFAAAABQCAYAAACOEfKtAAABpklEQVR42u3au23DQBCEYUXOXIGKcujQXUgFuA0XIKgW90Q9oEAg+Ljd27vd2RsCf058gEDqhofPj+OB6SMCAQlIQAIyAhKQgARkBAQDnM6XSRsB7/2e/tSA0//12fCAKsQX3ntDA4oRFwBRIc0AixE38BAhTQGLEAsBUSDNAXcRhYDRIZsAPlp99VECRoXsDpgN0g0wC6Q7IDpkGEBUyG6A0+vKBtkdMBukG2AWSHdAdMgwgKiQ4QDRIMMCokCGB4wOCQPYFVKw2cABNocUjl6wgE0gFashPKAZpHJ2TQNYBVmxW6cDFENWDv9pAUshCVgJScBKSAISkD9hPkT4GkNAMdzepyj8Kye852EBLe51CZHHWQK4JcThD1SlcHPEYY/0a+A0n6SkGZV6w6WZNb3g4Id1b7hwgGhwYQBR4dwB0eHcALPAdQfMBhcOEA0uDCAqnDsgOpwbYBa4poA/31+rZYFrBriFpwGMCtcEcA9PAhgdzhywBK8EEQXOFFCCtwaIBmcGKMWbI6LCmQBq8R6hw5kAMgISkIAEJCAjIAEJSEBGQI9ukV7lRn9nD+gAAAAASUVORK5CYII="/>
+                        </div>
+
+                        <div id="p8_playarea" style="display:none; margin:auto;
+                            -webkit-user-select:none; -moz-user-select: none;
+                            user-select: none; -webkit-touch-callout:none;">
+                            <div style="display:flex; position:relative">
+                                <!-- pointer-events turned off for mobile in p8_update_layout because need for desktop mouse -->
+                                <canvas class="emscripten" id="canvas" oncontextmenu="event.preventDefault();" >
+                                </canvas>
+                                <div class=p8_menu_buttons id="p8_menu_buttons" style="margin-left:10px;">
+                                    <div class="p8_menu_button" id="p8b_controls" onClick="p8_give_focus(); Module.pico8ToggleControlMenu();"></div>
+                                    <div class="p8_menu_button" id="p8b_pause" onClick="p8_give_focus(); Module.pico8TogglePaused(); p8_update_layout_hash = -22;"></div>
+                                    <div class="p8_menu_button" id="p8b_sound" onClick="p8_give_focus(); p8_create_audio_context(); Module.pico8ToggleSound();"></div>
+                                    <div class="p8_menu_button" id="p8b_full" onClick="p8_give_focus(); p8_request_fullscreen();"></div>
+                                </div>
+                            </div>
+
+
+                            <!-- display after first layout update -->
+                            <div  id="touch_controls_gfx"
+                                  style=" pointer-events:none; display:table; position:fixed;
+                                  top:0; left:0; border:0; width:100vw; height:100vh">
+
+                                <img src="" id="controls_right_panel" style="position:absolute; opacity:0.5;" alt="right controls  panel">
+                                <img src="" id="controls_left_panel" style="position:absolute;  opacity:0.5;" alt="left controls panel">
+
+
+                            </div>
+
+                            <!-- used for clipboard access & keyboard input; displayed and used by PICO-8 only once needed. can be safely removed if clipboard / key presses not needed. -->
+                            <!-- (needs to be inside p8_playarea so that it still works under Chrome when fullscreened) -->
+                            <textarea id="codo_textarea" class="emscripten" style="display:none; position:absolute; left:-9999px; height:0px; overflow:hidden"></textarea>
+
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <script type="text/javascript">
+
+            p8_update_layout();
+            p8_update_button_icons();
+
+            const canvas = document.getElementById("canvas");
+            Module = {};
+            Module.canvas = canvas;
+
+            // From @ultrabrite's shell: test if an AudioContext can be created outside of an event callback.
+            // If it can't be created, then require pressing the start button to run the cartridge
+
+            if (p8_autoplay)
+            {
+                let temp_context = new AudioContext();
+                temp_context.onstatechange = function ()
+                {
+                    if (temp_context.state === 'running')
+                    {
+                        p8_run_cart("/assets/pico8/connect4.js");
+                        temp_context.close();
+                    }
+                };
+            }
+
+        </script>
+        </body>
+</html>

@@ -1,0 +1,35 @@
+<p>The day 4 input consists of a list of passport information, each passport divided by an empty line.</p>
+
+<h4 id="part-one">Part One</h4>
+<p>For the first part we had to check if every passport contains the required fields. To solve this puzzle we simply loop over every passport in the input and check if all the required keys are present on the passport.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">check_required_fields</span><span class="p">(</span><span class="n">passport</span><span class="p">):</span>
+    <span class="k">return</span> <span class="nb">all</span><span class="p">(</span><span class="n">key</span> <span class="ow">in</span> <span class="n">passport</span> <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">REQUIRED_KEYS</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h4 id="part-two">Part Two</h4>
+<p>For the second part we also need to validate the field content. This was asking for some regex as you can see bellow. This dictionary includes the required fields, and the regex to validate the given fields.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">REQUIRED_KEYS</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s">'pid'</span><span class="p">:</span> <span class="sa">r</span><span class="s">'^(\d{9})$'</span><span class="p">,</span>
+    <span class="s">'byr'</span><span class="p">:</span> <span class="sa">r</span><span class="s">'19[2-9]\d|200[0-2]'</span><span class="p">,</span>
+    <span class="s">'iyr'</span><span class="p">:</span> <span class="sa">r</span><span class="s">'20(1\d|20)'</span><span class="p">,</span>
+    <span class="s">'eyr'</span><span class="p">:</span> <span class="sa">r</span><span class="s">'20(2\d|30)'</span><span class="p">,</span>
+    <span class="s">'hgt'</span><span class="p">:</span> <span class="sa">r</span><span class="s">'1([5-8]\d|9[0-3])cm|(59|6\d|7[0-6])in'</span><span class="p">,</span>
+    <span class="s">'hcl'</span><span class="p">:</span> <span class="sa">r</span><span class="s">'#[0-9a-f]{6}'</span><span class="p">,</span>
+    <span class="s">'ecl'</span><span class="p">:</span> <span class="sa">r</span><span class="s">'amb|blu|brn|gry|grn|hzl|oth'</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>But, of course we also still need to check if all the required fields are present. So the following method checks if all required fields are present and then matches these fields with the corresponding regex.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">validate_fields</span><span class="p">(</span><span class="n">passport</span><span class="p">):</span>
+    <span class="k">if</span> <span class="nb">all</span><span class="p">(</span><span class="n">key</span> <span class="ow">in</span> <span class="n">passport</span> <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">REQUIRED_KEYS</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">REQUIRED_KEYS</span><span class="p">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">value</span> <span class="o">!=</span> <span class="s">''</span><span class="p">:</span>
+                <span class="n">regex</span> <span class="o">=</span> <span class="n">re</span><span class="p">.</span><span class="nb">compile</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="n">regex</span><span class="p">.</span><span class="n">match</span><span class="p">(</span><span class="n">passport</span><span class="p">[</span><span class="n">key</span><span class="p">]):</span>
+                    <span class="k">return</span> <span class="bp">False</span>
+        <span class="k">return</span> <span class="bp">True</span>
+    <span class="k">return</span> <span class="bp">False</span>
+</code></pre></div></div>

@@ -1,0 +1,18 @@
+<p>The day 1 input consisted of a simple list of numbers.</p>
+
+<h4 id="part-one--two">Part One &amp; Two</h4>
+<p>For the first part of the puzzle it was our task to find the product of <strong>two</strong> numbers that added together summed to <em>2020</em>. For the second part we needed to find the product of <strong>three</strong> numbers that summed up to <em>2020</em>. So, I wrote a method to loop over the input and sum every item with a certain number of other items and print the product of any numbers that summed to a given result. To make it a little more concise I chose to use <a href="https://docs.python.org/3/library/itertools.html">itertools</a> and <a href="https://numpy.org/doc/stable/contents.html">numpy</a> to easily make these combinations of numbers and get the product of the numbers that added up to the given result.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">itertools</span> <span class="k">as</span> <span class="n">itr</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="n">np</span>
+
+<span class="k">def</span> <span class="nf">find_sum_with_result</span><span class="p">(</span><span class="n">nr</span><span class="p">,</span> <span class="n">result</span><span class="p">):</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">file_name</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="n">lines</span> <span class="o">=</span> <span class="n">f</span><span class="p">.</span><span class="n">readlines</span><span class="p">()</span>
+        <span class="n">integers</span> <span class="o">=</span> <span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">lines</span><span class="p">]</span>
+        <span class="k">for</span> <span class="n">items</span> <span class="ow">in</span> <span class="n">itr</span><span class="p">.</span><span class="n">combinations</span><span class="p">(</span><span class="n">integers</span><span class="p">,</span> <span class="n">nr</span><span class="p">):</span>
+            <span class="k">if</span> <span class="nb">sum</span><span class="p">(</span><span class="n">items</span><span class="p">)</span> <span class="o">==</span> <span class="n">result</span><span class="p">:</span>
+                <span class="k">return</span> <span class="sa">f</span><span class="s">'</span><span class="si">{</span><span class="n">items</span><span class="si">}</span><span class="se">\n</span><span class="s">'</span> \
+                       <span class="sa">f</span><span class="s">'sum = </span><span class="si">{</span><span class="n">result</span><span class="si">}</span><span class="se">\n</span><span class="s">'</span> \
+                       <span class="sa">f</span><span class="s">'product = </span><span class="si">{</span><span class="n">np</span><span class="p">.</span><span class="n">prod</span><span class="p">(</span><span class="n">np</span><span class="p">.</span><span class="n">array</span><span class="p">(</span><span class="n">items</span><span class="p">))</span><span class="si">}</span><span class="se">\n</span><span class="s">'</span>
+</code></pre></div></div>

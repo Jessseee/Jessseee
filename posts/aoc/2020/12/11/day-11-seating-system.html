@@ -1,0 +1,52 @@
+<p>The day 11 input consists of rows of seats <code class="language-plaintext highlighter-rouge">L</code> and empty floor spaces <code class="language-plaintext highlighter-rouge">.</code></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>L.LL.LL.LL...LLLL.LLLLLLLLL.LL..LLL.LL.LL
+LLLLLLL.LLL.L.L..L..LLLL.LL.LL.LLLL..L.L.
+L.L.L..L..L.L.L..L..LLLL.LL.LL.LLLL.LL.LL
+LLLL.LL.LLL.LL.LL.LLL.L.L..L...LL...LL.LL
+L.LL.LL.LLL.LL.LLL.L.L..L..LLLL.LLL.L.L..
+</code></pre></div></div>
+
+<h4 id="part-one">Part One</h4>
+<p>For the first half of today’s puzzle we needed to create a model of how people will choose (or abandon) their seats. The following rules can be applied to every seat simultaneously:</p>
+<ul>
+  <li>If a seat is empty <code class="language-plaintext highlighter-rouge">L</code> and there are no occupied seats adjacent to it, the seat becomes occupied.</li>
+  <li>If a seat is occupied <code class="language-plaintext highlighter-rouge">#</code> and four or more seats adjacent to it are also occupied, the seat becomes empty.</li>
+  <li>Otherwise, the seat’s state does not change.
+After some time with the above rules the state of the seating area will stabilize, and we can count the number of occupied seats.</li>
+</ul>
+
+<p>We can create such a simulation by checking each neighbouring seat. If all seats around an unoccupied seat are empty then we can occupy that seat. If there are more than 4 (tolerance) seats occupied we can abandon that seat.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">check_adjacent</span><span class="p">(</span><span class="n">grid</span><span class="p">,</span> <span class="n">seat</span><span class="p">):</span>
+    <span class="n">occupied_seats</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="nb">dir</span> <span class="ow">in</span> <span class="n">DIRS</span><span class="p">:</span>
+        <span class="n">pos</span> <span class="o">=</span> <span class="p">[</span><span class="n">seat</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">+</span><span class="nb">dir</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">seat</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">+</span><span class="nb">dir</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span>
+        <span class="k">if</span> <span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">pos</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">grid_size</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">and</span> <span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">pos</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">grid_size</span><span class="p">[</span><span class="mi">1</span><span class="p">]:</span>
+            <span class="k">if</span> <span class="n">grid</span><span class="p">[</span><span class="n">pos</span><span class="p">[</span><span class="mi">0</span><span class="p">]][</span><span class="n">pos</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span> <span class="o">==</span> <span class="n">GRID_CELL</span><span class="p">[</span><span class="s">'occupied'</span><span class="p">]:</span>
+                <span class="n">occupied_seats</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="k">return</span> <span class="n">occupied_seats</span>
+</code></pre></div></div>
+
+<p>When we have iterated over every seat we can save the new matrix of seats and continue to recursively do this step again until we find a stable seating.</p>
+
+<h4 id="part-two">Part Two</h4>
+<p>For the second part of the puzzle instead of looking only at the seat immediately adjacent we look at every seat that a person could see from their seat. We also increase the tolerance to 5. The other rules mentioned above still apply as well.</p>
+
+<p>To solve this puzzle we again go over every seat and check the closest visible seats using the following method. By looking in each direction until we either hit the edge of the grid or find a seat.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">check_visible</span><span class="p">(</span><span class="n">grid</span><span class="p">,</span> <span class="n">seat</span><span class="p">):</span>
+    <span class="n">occupied_seats</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="nb">dir</span> <span class="ow">in</span> <span class="n">DIRS</span><span class="p">:</span>
+        <span class="n">pos</span> <span class="o">=</span> <span class="p">[</span><span class="n">seat</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">+</span><span class="nb">dir</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">seat</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">+</span><span class="nb">dir</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span>
+        <span class="k">while</span> <span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">pos</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">grid_size</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">and</span> <span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">pos</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">grid_size</span><span class="p">[</span><span class="mi">1</span><span class="p">]:</span>
+            <span class="n">cur_seat</span> <span class="o">=</span> <span class="n">grid</span><span class="p">[</span><span class="n">pos</span><span class="p">[</span><span class="mi">0</span><span class="p">]][</span><span class="n">pos</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span>
+            <span class="k">if</span> <span class="n">cur_seat</span> <span class="o">==</span> <span class="n">GRID_CELL</span><span class="p">[</span><span class="s">'occupied'</span><span class="p">]:</span>
+                <span class="n">occupied_seats</span> <span class="o">+=</span> <span class="mi">1</span>
+                <span class="k">break</span>
+            <span class="k">elif</span> <span class="n">cur_seat</span> <span class="o">==</span> <span class="n">GRID_CELL</span><span class="p">[</span><span class="s">'unoccupied'</span><span class="p">]:</span>
+                <span class="k">break</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">pos</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+=</span> <span class="nb">dir</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+                <span class="n">pos</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+=</span> <span class="nb">dir</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">occupied_seats</span>
+</code></pre></div></div>

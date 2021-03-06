@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en-US">
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="utf-8">
+<title>Jesse Visser | Into The Forest</title>
+
+<!-- FavIcons -->
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/favicons/favicon-16x16.png">
+<link rel="manifest" href="/assets/favicons/site.webmanifest">
+<link rel="mask-icon" href="/assets/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<link rel="shortcut icon" href="/assets/favicons/favicon.ico">
+<meta name="msapplication-config" content="/assets/favicons/browserconfig.xml">
+<meta name="msapplication-TileColor" content="#ffffff">
+<meta name="theme-color" content="#ffffff">
+
+<!--  Open Graph  -->
+<meta property="og:type" content="website">
+<meta property="og:type" content="en_GB">
+<meta property="og:title" content="Jesse Visser | Into The Forest">
+<meta property="og:description" content="A small story game made using Unity together with one other person.">
+<meta property="og:image" content="https://jesse-visser.nl/assets/img/into-the-forest.png">
+<meta property="og:image:alt" content="Into The Forest">
+<meta property="og:url" content="https://jesse-visser.nl/projects/into-the-forest.html">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@oneofmanyjesses">
+<meta name="twitter:title" content="Jesse Visser | Into The Forest">
+<meta name="twitter:description" content="A small story game made using Unity together with one other person.">
+<meta name="twitter:image" content="https://jesse-visser.nl/assets/img/into-the-forest.png">
+
+<!--  CSS  -->
+<link rel="stylesheet" type="text/css" href="/assets/css/main.css">
+<link rel="stylesheet" type="text/css" href="/assets/css/syntax.css">
+
+<script>
+    /* COOKIES */
+    function setCookie(cname, cvalue, exdays) {
+        let d = new Date();
+        d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+        let expires = "expires="+d.toUTCString();
+        document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+    }
+
+    function getCookie(cname) {
+        let name = cname + "=";
+        let ca = document.cookie.split(';');
+        for(let i = 0; i < ca.length; i++) {
+            let c = ca[i];
+            while (c.charAt(0) === ' ') {
+                c = c.substring(1);
+            }
+            if (c.indexOf(name) === 0) {
+                return c.substring(name.length, c.length);
+            }
+        }
+        return "";
+    }
+
+    /* SET THEME */
+    if (getCookie('theme') === "dark") {
+        document.documentElement.setAttribute('data-theme', 'dark');
+    } else {
+        document.documentElement.setAttribute('data-theme', 'light');
+    }
+</script>
+
+        <!--    Page CSS    -->
+        
+
+        <!--    Page JS    -->
+        
+    </head>
+
+    <body>
+        <div id="navbar" class="nav nav-pills sticky-top justify-content-end align-items-center px-3">
+    <a class="navbar-brand me-auto" href="/">
+        <img height="50" src="/assets/img/logo.png" alt="logo">
+    </a>
+
+    <label for="theme-toggle"></label>
+    <input id="theme-toggle" type="checkbox" class="d-none" />
+</div>
+        <div id="project-page" class="container my-md-5">
+            <h1>Into The Forest</h1>
+            <div class="row mb-4">
+    <div class="col-xl-5">
+        <video class="w-100" autoplay loop>
+            <source src="/assets/img/into-the-forest/intro.mp4" type="video/mp4">
+            Sorry, it seems this video cannot be loaded.
+        </video>
+    </div>
+    <div class="col-xl-6">
+        <p>One of the project in the Creative Technology course consists of making a 3D game in Unity in teams of 2 people. We started of our development with a couple of brainstorming sessions in which we quickly decided we wanted to make a more story based game.</p>
+        <p>Our idea for a game was more an experience rather than a puzzle, strategy or fighting games. We wanted to deliver an immersive experience to the player. We tried to achieve this by having environmental storytelling and an interesting art style.</p>
+    </div>
+</div>
+<div class="row mb-4">
+    <div class="col-xl-7 text-xl-end">
+        <h4>Prototyping</h4>
+        <p>We started of the development by demoing individual pieces of the gameplay. We started of by implementing the
+            <a href="https://yarnspinner.dev/" target="_blank">YarnSpinner</a> dialogue system, which is an incredibly flexible dialogue system and a very easy way to write complex and nonlinear narrative. We set up a simple scene with a player and an NPC which were both boxes and made is possible to simply move around the scene and start a fun little dialogue with the NPC.</p>
+        <p>The YarnSpinner system also allows for choices and function calls from within the dialogue. Making it possible to remember the players choices or trigger an event within the game’s code. For the demo we made it possible to push the NPC off of the plane the characters were standing on. This was simply done by adding a script to the NPC and a choice in the dialogue.</p>
+    </div>
+    <div class="col-xl-5">
+        <div class="video-container">
+            <div onclick="playButton(this.nextElementSibling, this)" class="video-overlay"><i class="fas fa-play-circle fa-4x"></i></div>
+            <video onclick="playButton(this, this.previousElementSibling)" class="w-100" loop>
+                <source src="/assets/img/into-the-forest/prototype.mp4" type="video/mp4">
+                Sorry, it seems this video cannot be loaded.
+            </video>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-xl-5">
+        <div class="video-container">
+            <div onclick="playButton(this.nextElementSibling, this)" class="video-overlay"><i class="fas fa-play-circle fa-4x"></i></div>
+            <video onclick="playButton(this, this.previousElementSibling)" class="w-100" loop>
+                <source src="/assets/img/into-the-forest/squirrel.mp4" type="video/mp4">
+                Sorry, it seems this video cannot be loaded.
+            </video>
+        </div>
+    </div>
+    <div class="col-xl-7">
+        <h4>Story</h4>
+        <p>Our game’s story arose later on in the process. The outline of the story is as follows: </p>
+        <i>You wake up, and find yourself in a forest. A nice, open, peaceful forest, where you are surrounded by flowers and bathe in sunlight. Everything feels so peaceful at first. You’re able to talk to animals, who surprisingly, talk back. Though there is something a little bit off about what they say. You then encounter a mysterious spirit that tells you to follow them. Your journey starts and you follow the path that lies ahead. Slowly, you notice that the open and peaceful forest starts to become more grim and less welcoming. The creatures you encounter start to give alarming messages about the journey ahead. You don’t know what it is, and you are scared yet intrigued to find out. The spirit you then encounter also encourages you to continue your path.</i>
+    </div>
+</div>
+<div class="row">
+    <h4>Footage</h4>
+    <div class="col-xl-6">
+        <div class="video-container">
+            <div onclick="playButton(this.nextElementSibling, this)" class="video-overlay"><i class="fas fa-play-circle fa-4x"></i></div>
+            <video onclick="playButton(this, this.previousElementSibling)" class="w-100" loop>
+                <source src="/assets/img/into-the-forest/ghost-1.mp4" type="video/mp4">
+                Sorry, it seems this video cannot be loaded.
+            </video>
+        </div>
+    </div>
+    <div class="col-xl-6">
+        <div class="video-container">
+            <div onclick="playButton(this.nextElementSibling, this)" class="video-overlay"><i class="fas fa-play-circle fa-4x"></i></div>
+            <video onclick="playButton(this, this.previousElementSibling)" class="w-100" loop>
+                <source src="/assets/img/into-the-forest/ghost-2.mp4" type="video/mp4">
+                Sorry, it seems this video cannot be loaded.
+            </video>
+        </div>
+    </div>
+</div>
+
+        </div>
+    </body>
+
+    <!--  JS  -->
+<script src="https://kit.fontawesome.com/93a420105f.js" crossorigin="anonymous"></script>
+<script src="/assets/js/main.js"></script>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-126840544-1"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-126840544-1');
+</script>
+</html>

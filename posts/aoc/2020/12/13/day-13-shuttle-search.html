@@ -1,0 +1,32 @@
+<p>The day 13 input is a starting timestamp, and a series of bus IDs. Each bus ID stands for the interval (in minutes) on which the bus leaves for the airport. All busses depart at the same time on timestamp 0. A sample from the input: <code class="language-plaintext highlighter-rouge">739,x,29,x,x,x,x,</code></p>
+
+<h4 id="part-one">Part One</h4>
+<p>For the first part of the puzzle we can ignore the <code class="language-plaintext highlighter-rouge">x</code> in the input and only focus on the bus IDs. It is our job to find the earliest bus we can take to the airport from the given starting timestamp. To find the timestamps on which a bus departs we can take the modulo of the current timestamp and the bus ID, if this is equal to <strong>0</strong> the bus will depart on that timestamp. So, for the first part of the puzzle we can increment the time from the starting timestamp and check for each bus ID in the input if the modulo of the current timestamp, and the bus ID equals 0.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">catch_first_bus</span><span class="p">(</span><span class="n">cur_time</span><span class="p">,</span> <span class="n">schedule</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">schedule</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">col</span> <span class="o">!=</span> <span class="s">'x'</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">cur_time</span> <span class="o">%</span> <span class="n">col</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">'timestamp: </span><span class="si">{</span><span class="n">cur_time</span><span class="si">}</span><span class="s">, bus: </span><span class="si">{</span><span class="n">col</span><span class="si">}</span><span class="s">'</span><span class="p">)</span>
+                <span class="k">return</span> <span class="p">(</span><span class="n">cur_time</span><span class="o">-</span><span class="n">earliest_timestamp</span><span class="p">)</span><span class="o">*</span><span class="n">col</span>
+    <span class="k">return</span> <span class="n">catch_first_bus</span><span class="p">(</span><span class="n">cur_time</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">schedule</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p><br /></p>
+
+<h4 id="part-two">Part Two</h4>
+<p>For the second part of the puzzle it is our job to find the most ideal starting time for the bus schedule. It took me quite a while to wrap my head around the maths but eventually I came up with the following method.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">calculate_schedule_start_time</span><span class="p">(</span><span class="n">start_time</span><span class="p">,</span> <span class="n">schedule</span><span class="p">):</span>
+    <span class="n">cur_time</span> <span class="o">=</span> <span class="n">start_time</span>
+    <span class="n">increment</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">col</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">schedule</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">col</span> <span class="o">==</span> <span class="s">'x'</span><span class="p">:</span>
+            <span class="k">continue</span>
+        <span class="k">while</span> <span class="p">(</span><span class="n">cur_time</span> <span class="o">+</span> <span class="n">i</span><span class="p">)</span> <span class="o">%</span> <span class="n">col</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">cur_time</span> <span class="o">+=</span> <span class="n">increment</span>
+        <span class="n">increment</span> <span class="o">*=</span> <span class="n">col</span>
+    <span class="k">return</span> <span class="n">cur_tim</span>
+</code></pre></div></div>
+
+<p>This method tries to find the largest interval at which all busses can depart simultaneously. When we know that one bus can leave at a certain interval we can increase the increment at which we are trying to find the next interval as it will have to intersect with the interval we calculated before.</p>

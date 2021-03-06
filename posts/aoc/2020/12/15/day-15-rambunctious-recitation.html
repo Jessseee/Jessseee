@@ -1,0 +1,26 @@
+<p>The input of day 15 is quite simple. It consists of seven numbers with which we had to play a memory game. The rules of this game are simple.</p>
+
+<ul>
+  <li>If it is the first time a number has been seen the next number will be <strong>0</strong></li>
+  <li>Otherwise, the next number will be the <strong>number of turns</strong> since the number was last seen.</li>
+</ul>
+
+<p>So, after the initial seven numbers each number will either be <strong>0</strong>, or the <strong>age</strong> of a repeated number. In essence this game is the <a href="https://www.youtube.com/watch?v=etMJxB-igrc">Van Eck Sequence</a>.</p>
+
+<h4 id="part-one--two">Part One &amp; Two</h4>
+<p>For the first part of the puzzle we had to solve this game for <strong>2020</strong> rounds and for the second part we had to solve it for <strong>30.000.000</strong> turns. So of course for the second part we had to do some performance improvements.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">previous</span> <span class="o">=</span> <span class="p">{</span><span class="n">number</span><span class="p">:</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">number</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">start_numbers</span><span class="p">)}</span>
+    <span class="n">turn</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">previous</span><span class="p">)</span>
+    <span class="n">number</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">start_numbers</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+    <span class="k">while</span> <span class="n">turn</span> <span class="o">&lt;</span> <span class="n">number_of_turns</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">previous</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="n">number</span><span class="p">,</span> <span class="bp">None</span><span class="p">):</span>
+            <span class="n">previous</span><span class="p">[</span><span class="n">number</span><span class="p">]</span> <span class="o">=</span> <span class="n">turn</span>
+            <span class="n">number</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">last_seen</span> <span class="o">=</span> <span class="n">previous</span><span class="p">[</span><span class="n">number</span><span class="p">]</span>
+            <span class="n">previous</span><span class="p">[</span><span class="n">number</span><span class="p">]</span> <span class="o">=</span> <span class="n">turn</span>
+            <span class="n">number</span> <span class="o">=</span> <span class="n">turn</span> <span class="o">-</span> <span class="n">last_seen</span>
+        <span class="n">turn</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">'</span><span class="si">{</span><span class="n">turn</span><span class="si">}</span><span class="s"> </span><span class="se">\t</span><span class="s"> </span><span class="si">{</span><span class="n">number</span><span class="si">}</span><span class="s">'</span><span class="p">)</span>
+</code></pre></div></div>

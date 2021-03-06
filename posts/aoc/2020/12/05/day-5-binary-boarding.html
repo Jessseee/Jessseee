@@ -1,0 +1,40 @@
+<p>The day 5 input was a list of encoded boarding passes. It was our task to decode these to seat IDs. The encoded boarding passes consist of a series of letters. The first seven consisting of F/B and the last three of L/R. For example: <code class="language-plaintext highlighter-rouge">FBBFBBBRLR</code></p>
+
+<h4 id="part-one">Part One</h4>
+<p>For the first part of the puzzle we will have to decode these Seat locations. The first seven characters tells us which row of the plane the seat is (out of 127), and the last three characters specify the seat’s column (out of 8). Each character specifies which half of the possible rows or columns we should look at until we are left with just one possible row and column. Then the seat ID can be calculated as <code class="language-plaintext highlighter-rouge">row * 8 + column</code></p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">decode_boarding_pass</span><span class="p">(</span><span class="n">boarding_pass</span><span class="p">):</span>
+    <span class="n">min_row</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">max_row</span> <span class="o">=</span> <span class="n">plane_rows</span> <span class="o">-</span> <span class="mi">1</span>
+    <span class="n">min_column</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">max_column</span> <span class="o">=</span> <span class="n">plane_columns</span> <span class="o">-</span> <span class="mi">1</span>
+
+    <span class="k">for</span> <span class="n">char</span> <span class="ow">in</span> <span class="n">boarding_pass</span><span class="p">:</span>
+        <span class="n">current_range_row</span> <span class="o">=</span> <span class="n">max_row</span> <span class="o">-</span> <span class="n">min_row</span> <span class="o">+</span> <span class="mi">1</span>
+        <span class="n">current_range_column</span> <span class="o">=</span> <span class="n">max_column</span> <span class="o">-</span> <span class="n">min_column</span> <span class="o">+</span> <span class="mi">1</span>
+        <span class="k">if</span> <span class="n">char</span> <span class="o">==</span> <span class="s">'F'</span><span class="p">:</span>
+            <span class="n">max_row</span> <span class="o">-=</span> <span class="n">current_range_row</span> <span class="o">//</span> <span class="mi">2</span>
+        <span class="k">elif</span> <span class="n">char</span> <span class="o">==</span> <span class="s">'B'</span><span class="p">:</span>
+            <span class="n">min_row</span> <span class="o">+=</span> <span class="n">current_range_row</span> <span class="o">//</span> <span class="mi">2</span>
+        <span class="k">elif</span> <span class="n">char</span> <span class="o">==</span> <span class="s">'L'</span><span class="p">:</span>
+            <span class="n">max_column</span> <span class="o">-=</span> <span class="n">current_range_column</span> <span class="o">//</span> <span class="mi">2</span>
+        <span class="k">elif</span> <span class="n">char</span> <span class="o">==</span> <span class="s">'R'</span><span class="p">:</span>
+            <span class="n">min_column</span> <span class="o">+=</span> <span class="n">current_range_column</span> <span class="o">//</span> <span class="mi">2</span>
+    <span class="n">row</span> <span class="o">=</span> <span class="n">min_row</span>
+    <span class="n">column</span> <span class="o">=</span> <span class="n">min_column</span>
+    <span class="n">seat_id</span> <span class="o">=</span> <span class="n">row</span> <span class="o">*</span> <span class="mi">8</span> <span class="o">+</span> <span class="n">column</span>
+    <span class="k">return</span> <span class="n">seat_id</span>
+</code></pre></div></div>
+
+<h4 id="part-two">Part Two</h4>
+<p>Now for the second half we needed to find one missing boarding pass and corresponding seat ID from the list which was neither at the beginning nor the end of the plane. So by checking only the range between the minimum seat ID and the maximum seat ID we can easily find the missing boarding pass.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">find_missing_seat_ids</span><span class="p">(</span><span class="n">boarding_passes</span><span class="p">):</span>
+    <span class="n">missing_seat_ids</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">min_seat_id</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">boarding_passes</span><span class="p">)</span>
+    <span class="n">max_seat_id</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">boarding_passes</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">seat_id</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">min_seat_id</span><span class="p">,</span> <span class="n">max_seat_id</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">seat_id</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">boarding_passes</span><span class="p">:</span>
+            <span class="n">missing_seat_ids</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">seat_id</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">missing_seat_ids</span>
+</code></pre></div></div>

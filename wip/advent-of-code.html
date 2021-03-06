@@ -1,0 +1,837 @@
+<!DOCTYPE html>
+<html lang="en-US">
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="utf-8">
+<title>Jesse Visser | Advent of Code</title>
+
+<!-- FavIcons -->
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/favicons/favicon-16x16.png">
+<link rel="manifest" href="/assets/favicons/site.webmanifest">
+<link rel="mask-icon" href="/assets/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<link rel="shortcut icon" href="/assets/favicons/favicon.ico">
+<meta name="msapplication-config" content="/assets/favicons/browserconfig.xml">
+<meta name="msapplication-TileColor" content="#ffffff">
+<meta name="theme-color" content="#ffffff">
+
+<!--  Open Graph  -->
+<meta property="og:type" content="website">
+<meta property="og:type" content="en_GB">
+<meta property="og:title" content="Jesse Visser | Advent of Code">
+<meta property="og:description" content="Advent of Code is an Advent calendar of small programming puzzles.">
+<meta property="og:image" content="https://jesse-visser.nl/assets/img/advent-of-code.png">
+<meta property="og:image:alt" content="Advent of Code">
+<meta property="og:url" content="https://jesse-visser.nl/wip/advent-of-code.html">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@oneofmanyjesses">
+<meta name="twitter:title" content="Jesse Visser | Advent of Code">
+<meta name="twitter:description" content="Advent of Code is an Advent calendar of small programming puzzles.">
+<meta name="twitter:image" content="https://jesse-visser.nl/assets/img/advent-of-code.png">
+
+<!--  CSS  -->
+<link rel="stylesheet" type="text/css" href="/assets/css/main.css">
+<link rel="stylesheet" type="text/css" href="/assets/css/syntax.css">
+
+<script>
+    /* COOKIES */
+    function setCookie(cname, cvalue, exdays) {
+        let d = new Date();
+        d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+        let expires = "expires="+d.toUTCString();
+        document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+    }
+
+    function getCookie(cname) {
+        let name = cname + "=";
+        let ca = document.cookie.split(';');
+        for(let i = 0; i < ca.length; i++) {
+            let c = ca[i];
+            while (c.charAt(0) === ' ') {
+                c = c.substring(1);
+            }
+            if (c.indexOf(name) === 0) {
+                return c.substring(name.length, c.length);
+            }
+        }
+        return "";
+    }
+
+    /* SET THEME */
+    if (getCookie('theme') === "dark") {
+        document.documentElement.setAttribute('data-theme', 'dark');
+    } else {
+        document.documentElement.setAttribute('data-theme', 'light');
+    }
+</script>
+
+        <!--    Page CSS    -->
+        
+
+        <!--    Page JS    -->
+        
+    </head>
+
+    <body>
+        <div id="navbar" class="nav nav-pills sticky-top justify-content-end align-items-center px-3">
+    <a class="navbar-brand me-auto" href="/">
+        <img height="50" src="/assets/img/logo.png" alt="logo">
+    </a>
+
+    <label for="theme-toggle"></label>
+    <input id="theme-toggle" type="checkbox" class="d-none" />
+</div>
+        <div id="project-page" class="container my-md-5">
+            <h1>Advent of Code</h1>
+            <div class="row mb-4">
+    <div class="col-xl-5">
+        <img class="mb-2 w-100" src="/assets/img/advent-of-code.png" alt="advent of code">
+    </div>
+    <div class="col-xl-7">
+        <p>Advent of Code is an Advent calendar of small programming puzzles for a variety of skill sets and skill levels that can be solved in any programming language you like. People use them as a speed contest, interview prep, company training, university coursework, practice problems, or to challenge each other.</p>
+        <p>This is the first year I'm taking part in this challenge and I chose to take on these puzzles using Python as I find it easy to quickly try different approaches using this language.</p>
+        <p>Visit the official <a href="https://adventofcode.com/about">Advent of Code website</a> for more information on the event.</p>
+        <p>Check out my <i>Advent of Code</i> puzzle answers on GitHub:</p>
+        <a id="github" class="btn text-light" href="https://github.com/Jessseee/AdventOfCode2020" target="_blank"><i class="fab fa-github"></i> GitHub</a>
+    </div>
+</div>
+
+<div class="row">
+    
+        <div class="col-xl-6 my-2">
+            <h3>Day 17 - Conway Cubes</h3>
+            <p>
+                
+
+                Check out this day's solution on <a target="_blank" href="https://github.com/Jessseee/AdventOfCode2020/blob/master/day_17.py">GitHub <i class="fab fa-github"></i></a> or read the puzzle on the
+                <a href="https://adventofcode.com/2020/day/17">AoC website <i class="fas fa-gift"></i></a>
+            </p>
+
+        </div>
+    
+        <div class="col-xl-6 my-2">
+            <h3>Day 16 - Ticket Translation</h3>
+            <p>
+                <p>The day 17 input consists of three lists related to our train ticket. First a series of rules, then our train ticket and lastly a series of numbers which are retrieved from all the train tickets of other people at the train station.</p>
+
+<h4 id="part-one">Part One</h4>
+<p>For the first part of today’s puzzle it was our task to find any <strong>invalid</strong> ticket in the sequence of tickets we received from other people at the train station.</p>
+
+<p>A ticket is invalid if any of its values don’t fit in any range of the given rules. So, by checking if the values fit inside all the ranges given by the rules we can find all the invalid tickets. As you can see bellow we can use the <code class="language-plaintext highlighter-rouge">all()</code> method to check if a value falls outside <strong>all</strong> the given ranges.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">scan_tickets</span><span class="p">(</span><span class="n">tickets</span><span class="p">,</span> <span class="n">rules</span><span class="p">):</span>
+    <span class="n">valid_tickets</span> <span class="o">=</span> <span class="n">tickets</span><span class="p">.</span><span class="n">copy</span><span class="p">()</span>
+    <span class="n">invalid_values</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">ticket</span> <span class="ow">in</span> <span class="n">tickets</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">ticket_value</span> <span class="ow">in</span> <span class="n">ticket</span><span class="p">:</span>
+            <span class="n">eval_ticket_value</span> <span class="o">=</span> <span class="p">[</span>
+                <span class="ow">not</span> <span class="p">(</span><span class="n">r</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">ticket_value</span> <span class="o">&lt;=</span> <span class="n">r</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="ow">or</span> 
+                <span class="n">r</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">ticket_value</span> <span class="o">&lt;=</span> <span class="n">r</span><span class="p">[</span><span class="mi">3</span><span class="p">])</span> 
+                <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">rules</span><span class="p">.</span><span class="n">values</span><span class="p">()]</span>
+            <span class="k">if</span> <span class="nb">all</span><span class="p">(</span><span class="n">eval_ticket_value</span><span class="p">):</span>
+                <span class="n">invalid_values</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">ticket_value</span><span class="p">)</span>
+                <span class="n">valid_tickets</span><span class="p">.</span><span class="n">remove</span><span class="p">(</span><span class="n">ticket</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">valid_tickets</span><span class="p">,</span> <span class="n">invalid_values</span>
+</code></pre></div></div>
+
+<h4 id="part-two">Part Two</h4>
+<p>Now we have removed any invalid tickets. For the second part we had to find the order of the fields in our ticket, because we do not know which field is which. Based on the nearby tickets with the given rules, and the process of elimination we can find the right order.</p>
+
+<p>First we compare the rules to every field in the tickets and for each field we return the rules that match all values of that field.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">check_field_position</span><span class="p">(</span><span class="n">tickets</span><span class="p">,</span> <span class="n">rules</span><span class="p">):</span>
+    <span class="n">possible_fields</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">rules</span><span class="p">)):</span>
+        <span class="n">possible_fields</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">tickets_field_i</span> <span class="o">=</span> <span class="p">[</span><span class="n">ticket</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">ticket</span> <span class="ow">in</span> <span class="n">tickets</span><span class="p">]</span>
+        <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">rules</span><span class="p">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="n">eval_ticket_values</span> <span class="o">=</span> <span class="p">[</span>
+                <span class="n">r</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">ticket_field_i</span> <span class="o">&lt;=</span> <span class="n">r</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="ow">or</span> 
+                <span class="n">r</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">ticket_field_i</span> <span class="o">&lt;=</span> <span class="n">r</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> 
+                <span class="k">for</span> <span class="n">ticket_field_i</span> <span class="ow">in</span> <span class="n">tickets_field_i</span><span class="p">]</span>
+            <span class="k">if</span> <span class="nb">all</span><span class="p">(</span><span class="n">eval_ticket_values</span><span class="p">):</span>
+                <span class="n">possible_fields</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">append</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>We can now see that the possible field names are an increasing series. which means we can sort them by the number of possible matches and then remove the already matched field from all the other possible matches. Leaving us with one match for each ticket field.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="n">taken</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">possible_fields</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">key</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">possible_fields</span><span class="p">[</span><span class="n">key</span><span class="p">])):</span>
+        <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">taken</span><span class="p">:</span>
+            <span class="n">possible_fields</span><span class="p">[</span><span class="n">key</span><span class="p">].</span><span class="n">remove</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">possible_fields</span><span class="p">[</span><span class="n">key</span><span class="p">]:</span>
+            <span class="n">taken</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+
+    <span class="n">ticket_fields</span> <span class="o">=</span> <span class="p">[</span><span class="n">value</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">possible_fields</span><span class="p">.</span><span class="n">values</span><span class="p">()]</span>
+    <span class="k">return</span> <span class="n">ticket_fields</span>
+</code></pre></div></div>
+
+                Check out this day's solution on <a target="_blank" href="https://github.com/Jessseee/AdventOfCode2020/blob/master/day_16.py">GitHub <i class="fab fa-github"></i></a> or read the puzzle on the
+                <a href="https://adventofcode.com/2020/day/16">AoC website <i class="fas fa-gift"></i></a>
+            </p>
+
+        </div>
+    
+        <div class="col-xl-6 my-2">
+            <h3>Day 15 - Rambunctious Recitation</h3>
+            <p>
+                <p>The input of day 15 is quite simple. It consists of seven numbers with which we had to play a memory game. The rules of this game are simple.</p>
+
+<ul>
+  <li>If it is the first time a number has been seen the next number will be <strong>0</strong></li>
+  <li>Otherwise, the next number will be the <strong>number of turns</strong> since the number was last seen.</li>
+</ul>
+
+<p>So, after the initial seven numbers each number will either be <strong>0</strong>, or the <strong>age</strong> of a repeated number. In essence this game is the <a href="https://www.youtube.com/watch?v=etMJxB-igrc">Van Eck Sequence</a>.</p>
+
+<h4 id="part-one--two">Part One &amp; Two</h4>
+<p>For the first part of the puzzle we had to solve this game for <strong>2020</strong> rounds and for the second part we had to solve it for <strong>30.000.000</strong> turns. So of course for the second part we had to do some performance improvements.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">previous</span> <span class="o">=</span> <span class="p">{</span><span class="n">number</span><span class="p">:</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">number</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">start_numbers</span><span class="p">)}</span>
+    <span class="n">turn</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">previous</span><span class="p">)</span>
+    <span class="n">number</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">start_numbers</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+    <span class="k">while</span> <span class="n">turn</span> <span class="o">&lt;</span> <span class="n">number_of_turns</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">previous</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="n">number</span><span class="p">,</span> <span class="bp">None</span><span class="p">):</span>
+            <span class="n">previous</span><span class="p">[</span><span class="n">number</span><span class="p">]</span> <span class="o">=</span> <span class="n">turn</span>
+            <span class="n">number</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">last_seen</span> <span class="o">=</span> <span class="n">previous</span><span class="p">[</span><span class="n">number</span><span class="p">]</span>
+            <span class="n">previous</span><span class="p">[</span><span class="n">number</span><span class="p">]</span> <span class="o">=</span> <span class="n">turn</span>
+            <span class="n">number</span> <span class="o">=</span> <span class="n">turn</span> <span class="o">-</span> <span class="n">last_seen</span>
+        <span class="n">turn</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">'</span><span class="si">{</span><span class="n">turn</span><span class="si">}</span><span class="s"> </span><span class="se">\t</span><span class="s"> </span><span class="si">{</span><span class="n">number</span><span class="si">}</span><span class="s">'</span><span class="p">)</span>
+</code></pre></div></div>
+
+                Check out this day's solution on <a target="_blank" href="https://github.com/Jessseee/AdventOfCode2020/blob/master/day_15.py">GitHub <i class="fab fa-github"></i></a> or read the puzzle on the
+                <a href="https://adventofcode.com/2020/day/15">AoC website <i class="fas fa-gift"></i></a>
+            </p>
+
+        </div>
+    
+        <div class="col-xl-6 my-2">
+            <h3>Day 14 - Docking Data</h3>
+            <p>
+                <p>The day 14 input was an interesting one, it consists of a series of memory addresses with values to assign to these addresses like <code class="language-plaintext highlighter-rouge">mem[10] = 42</code> and <a href="https://en.wikipedia.org/wiki/Mask_(computing)">bitmasks</a> like <code class="language-plaintext highlighter-rouge">mask = 11000000011011010X01011011XX100011XX</code> Each bitmask is 36 bits long with the most significant bit on the left <code class="language-plaintext highlighter-rouge">2^35</code> and the least significant bit on the right<code class="language-plaintext highlighter-rouge">2^0</code>.</p>
+
+<h4 id="part-1">Part <code class="language-plaintext highlighter-rouge">1</code></h4>
+<p>For part one of the puzzle it was our task to properly allocate the values to their corresponding memory addresses after applying the given bitmask to the value.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">apply_bitmask</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">bitmask</span><span class="p">):</span>
+    <span class="n">bin_value</span> <span class="o">=</span> <span class="nb">format</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="sa">f</span><span class="s">'036b'</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">36</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">bitmask</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="s">'X'</span><span class="p">:</span>
+            <span class="k">continue</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">replace_chr</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">bitmask</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">bin_value</span><span class="p">)</span>
+    <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="n">bin_value</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>First we will have to convert our integer values to a bit string with a length of 36 bits, just like the bitmask. Luckily this is easy in Python using the format method. <code class="language-plaintext highlighter-rouge">format(value, f'036b')</code> will produce a string representation of our value in 36 bits.</p>
+
+<p>Now we can apply our mask to the value by comparing each bit of the mask to the corresponding bit in the value and replacing it if necessary. After we have applied the mask we can simply store the new value at the given memory address.</p>
+
+<h4 id="part-10">Part <code class="language-plaintext highlighter-rouge">10</code></h4>
+<p>For part two instead of applying the bitmask to the value we have to apply it to the given memory address. The meaning of <code class="language-plaintext highlighter-rouge">X</code> in the bitmask has also changed. Instead of simply skipping over these bits they are now <strong>floating</strong> bits. A floating bit can represent both <code class="language-plaintext highlighter-rouge">0</code> or <code class="language-plaintext highlighter-rouge">1</code> which means we will have to find every possible combination of these bits.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">apply_bitmask</span><span class="p">(</span><span class="n">address</span><span class="p">,</span> <span class="n">bitmask</span><span class="p">):</span>
+    <span class="n">bin_adr</span> <span class="o">=</span> <span class="nb">format</span><span class="p">(</span><span class="n">address</span><span class="p">,</span> <span class="sa">f</span><span class="s">'0</span><span class="si">{</span><span class="n">MASK_LEN</span><span class="si">}</span><span class="s">b'</span><span class="p">)</span>
+    <span class="n">floating</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">addresses</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">MASK_LEN</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">bitmask</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="s">'0'</span><span class="p">:</span>
+            <span class="k">continue</span>
+        <span class="k">if</span> <span class="n">bitmask</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="s">'1'</span><span class="p">:</span>
+            <span class="n">bin_adr</span> <span class="o">=</span> <span class="n">replace_chr</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="s">'1'</span><span class="p">,</span> <span class="n">bin_adr</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">bitmask</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="s">'X'</span><span class="p">:</span>
+            <span class="n">floating</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="o">**</span><span class="nb">len</span><span class="p">(</span><span class="n">floating</span><span class="p">)):</span>
+        <span class="n">address</span> <span class="o">=</span> <span class="n">bin_adr</span>
+        <span class="k">for</span> <span class="n">index</span> <span class="ow">in</span> <span class="n">floating</span><span class="p">:</span>
+            <span class="n">address</span> <span class="o">=</span> <span class="n">replace_chr</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">i</span> <span class="o">%</span> <span class="mi">2</span><span class="p">),</span> <span class="n">address</span><span class="p">)</span>
+            <span class="n">i</span> <span class="o">=</span> <span class="n">i</span><span class="o">//</span><span class="mi">2</span>
+        <span class="n">addresses</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">address</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">addresses</span>
+</code></pre></div></div>
+
+<p>For this we can use recursion to find all possible combinations of the floating bits and return a list of addresses to which the given value has to be written.</p>
+
+                Check out this day's solution on <a target="_blank" href="https://github.com/Jessseee/AdventOfCode2020/blob/master/day_14.py">GitHub <i class="fab fa-github"></i></a> or read the puzzle on the
+                <a href="https://adventofcode.com/2020/day/14">AoC website <i class="fas fa-gift"></i></a>
+            </p>
+
+        </div>
+    
+        <div class="col-xl-6 my-2">
+            <h3>Day 13 - Shuttle Search</h3>
+            <p>
+                <p>The day 13 input is a starting timestamp, and a series of bus IDs. Each bus ID stands for the interval (in minutes) on which the bus leaves for the airport. All busses depart at the same time on timestamp 0. A sample from the input: <code class="language-plaintext highlighter-rouge">739,x,29,x,x,x,x,</code></p>
+
+<h4 id="part-one">Part One</h4>
+<p>For the first part of the puzzle we can ignore the <code class="language-plaintext highlighter-rouge">x</code> in the input and only focus on the bus IDs. It is our job to find the earliest bus we can take to the airport from the given starting timestamp. To find the timestamps on which a bus departs we can take the modulo of the current timestamp and the bus ID, if this is equal to <strong>0</strong> the bus will depart on that timestamp. So, for the first part of the puzzle we can increment the time from the starting timestamp and check for each bus ID in the input if the modulo of the current timestamp, and the bus ID equals 0.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">catch_first_bus</span><span class="p">(</span><span class="n">cur_time</span><span class="p">,</span> <span class="n">schedule</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">schedule</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">col</span> <span class="o">!=</span> <span class="s">'x'</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">cur_time</span> <span class="o">%</span> <span class="n">col</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">'timestamp: </span><span class="si">{</span><span class="n">cur_time</span><span class="si">}</span><span class="s">, bus: </span><span class="si">{</span><span class="n">col</span><span class="si">}</span><span class="s">'</span><span class="p">)</span>
+                <span class="k">return</span> <span class="p">(</span><span class="n">cur_time</span><span class="o">-</span><span class="n">earliest_timestamp</span><span class="p">)</span><span class="o">*</span><span class="n">col</span>
+    <span class="k">return</span> <span class="n">catch_first_bus</span><span class="p">(</span><span class="n">cur_time</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">schedule</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p><br /></p>
+
+<h4 id="part-two">Part Two</h4>
+<p>For the second part of the puzzle it is our job to find the most ideal starting time for the bus schedule. It took me quite a while to wrap my head around the maths but eventually I came up with the following method.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">calculate_schedule_start_time</span><span class="p">(</span><span class="n">start_time</span><span class="p">,</span> <span class="n">schedule</span><span class="p">):</span>
+    <span class="n">cur_time</span> <span class="o">=</span> <span class="n">start_time</span>
+    <span class="n">increment</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">col</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">schedule</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">col</span> <span class="o">==</span> <span class="s">'x'</span><span class="p">:</span>
+            <span class="k">continue</span>
+        <span class="k">while</span> <span class="p">(</span><span class="n">cur_time</span> <span class="o">+</span> <span class="n">i</span><span class="p">)</span> <span class="o">%</span> <span class="n">col</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">cur_time</span> <span class="o">+=</span> <span class="n">increment</span>
+        <span class="n">increment</span> <span class="o">*=</span> <span class="n">col</span>
+    <span class="k">return</span> <span class="n">cur_tim</span>
+</code></pre></div></div>
+
+<p>This method tries to find the largest interval at which all busses can depart simultaneously. When we know that one bus can leave at a certain interval we can increase the increment at which we are trying to find the next interval as it will have to intersect with the interval we calculated before.</p>
+
+                Check out this day's solution on <a target="_blank" href="https://github.com/Jessseee/AdventOfCode2020/blob/master/day_13.py">GitHub <i class="fab fa-github"></i></a> or read the puzzle on the
+                <a href="https://adventofcode.com/2020/day/13">AoC website <i class="fas fa-gift"></i></a>
+            </p>
+
+        </div>
+    
+        <div class="col-xl-6 my-2">
+            <h3>Day 12 - Rain Risk</h3>
+            <p>
+                <p>The day 12 input consisted of a series of directions and values to move a ferry around.</p>
+
+<h4 id="part-one">Part One</h4>
+<p>For the first part the boat can move in any of the cardinal directions or rotate around. The instructions given are either <code class="language-plaintext highlighter-rouge">N/S/E/W</code> for the cardinal directions, <code class="language-plaintext highlighter-rouge">R/L</code> to rotate clockwise / counter clockwise or <code class="language-plaintext highlighter-rouge">F</code> to move forward in the direction the ferry is currently facing. The ferry will start of at <strong>(0, 0)</strong> and <strong>facing east</strong>.</p>
+
+<p>Now to interpret these instructions we can loop over them and for each instruction change the position of the boat which has an <em>x</em> and <em>y</em> position and a <em>rotation</em>. For the cardinal directions we can simply change the x or y position accordingly.</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span> <span class="nb">dir</span> <span class="o">==</span> <span class="s">'N'</span><span class="p">:</span> 
+    <span class="n">boat</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-=</span> <span class="n">amount</span>
+</code></pre></div></div>
+
+<p>Now for the rotation and moving the boat forward we have to make sure the rotation is clamped to 360 degrees.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span> <span class="nb">dir</span> <span class="o">==</span> <span class="s">'L'</span><span class="p">:</span>
+    <span class="n">boat</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">boat</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">+</span> <span class="n">amount</span><span class="p">)</span> <span class="o">%</span> <span class="mi">360</span>
+</code></pre></div></div>
+
+<p>After that when we have to move the boat forward we can check the current rotation and move the ferry just like we did with the cardinal directions.</p>
+
+<h4 id="part-two">Part Two</h4>
+<p>For the second part the puzzle changes as we no longer move the ferry directly but instead move a <strong>waypoint</strong> relative to the ferry and only on the forward instruction we move the ferry in the direction of this waypoint.</p>
+
+<p>The cardinal directions still work the same as before and just move the waypoint by a certain amount in the given direction. The rotation has become a little more complex as the waypoint needs to rotate <strong>around the ferry</strong>. Luckily the rotations given in the instructions are limited to multiples of 90 degrees. Making this issue easy to tackle with some basic <em>matrix rotations</em>.</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span> <span class="nb">dir</span> <span class="o">==</span> <span class="s">'L'</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">amount</span> <span class="o">==</span> <span class="mi">90</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">[</span><span class="o">-</span><span class="n">new_waypoint</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">new_waypoint</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span>
+    <span class="k">elif</span> <span class="n">amount</span> <span class="o">==</span> <span class="mi">180</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">[</span><span class="o">-</span><span class="n">new_waypoint</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="o">-</span><span class="n">new_waypoint</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span>
+    <span class="k">elif</span> <span class="n">amount</span> <span class="o">==</span> <span class="mi">270</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">[</span><span class="n">new_waypoint</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="o">-</span><span class="n">new_waypoint</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span>
+</code></pre></div></div>
+
+<p>Now that we have correctly placed the waypoint once we have to move the boat forward we can use the waypoint coordinates and multiply it with the amount we want to move in the waypoint’s direction.</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span> <span class="nb">dir</span> <span class="o">==</span> <span class="s">'F'</span><span class="p">:</span>
+    <span class="n">boat</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+=</span> <span class="n">amount</span> <span class="o">*</span> <span class="n">waypoint</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">boat</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+=</span> <span class="n">amount</span> <span class="o">*</span> <span class="n">waypoint</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">new_waypoint</span>
+</code></pre></div></div>
+
+                Check out this day's solution on <a target="_blank" href="https://github.com/Jessseee/AdventOfCode2020/blob/master/day_12.py">GitHub <i class="fab fa-github"></i></a> or read the puzzle on the
+                <a href="https://adventofcode.com/2020/day/12">AoC website <i class="fas fa-gift"></i></a>
+            </p>
+
+        </div>
+    
+        <div class="col-xl-6 my-2">
+            <h3>Day 11 - Seating System</h3>
+            <p>
+                <p>The day 11 input consists of rows of seats <code class="language-plaintext highlighter-rouge">L</code> and empty floor spaces <code class="language-plaintext highlighter-rouge">.</code></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>L.LL.LL.LL...LLLL.LLLLLLLLL.LL..LLL.LL.LL
+LLLLLLL.LLL.L.L..L..LLLL.LL.LL.LLLL..L.L.
+L.L.L..L..L.L.L..L..LLLL.LL.LL.LLLL.LL.LL
+LLLL.LL.LLL.LL.LL.LLL.L.L..L...LL...LL.LL
+L.LL.LL.LLL.LL.LLL.L.L..L..LLLL.LLL.L.L..
+</code></pre></div></div>
+
+<h4 id="part-one">Part One</h4>
+<p>For the first half of today’s puzzle we needed to create a model of how people will choose (or abandon) their seats. The following rules can be applied to every seat simultaneously:</p>
+<ul>
+  <li>If a seat is empty <code class="language-plaintext highlighter-rouge">L</code> and there are no occupied seats adjacent to it, the seat becomes occupied.</li>
+  <li>If a seat is occupied <code class="language-plaintext highlighter-rouge">#</code> and four or more seats adjacent to it are also occupied, the seat becomes empty.</li>
+  <li>Otherwise, the seat’s state does not change.
+After some time with the above rules the state of the seating area will stabilize, and we can count the number of occupied seats.</li>
+</ul>
+
+<p>We can create such a simulation by checking each neighbouring seat. If all seats around an unoccupied seat are empty then we can occupy that seat. If there are more than 4 (tolerance) seats occupied we can abandon that seat.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">check_adjacent</span><span class="p">(</span><span class="n">grid</span><span class="p">,</span> <span class="n">seat</span><span class="p">):</span>
+    <span class="n">occupied_seats</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="nb">dir</span> <span class="ow">in</span> <span class="n">DIRS</span><span class="p">:</span>
+        <span class="n">pos</span> <span class="o">=</span> <span class="p">[</span><span class="n">seat</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">+</span><span class="nb">dir</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">seat</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">+</span><span class="nb">dir</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span>
+        <span class="k">if</span> <span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">pos</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">grid_size</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">and</span> <span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">pos</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">grid_size</span><span class="p">[</span><span class="mi">1</span><span class="p">]:</span>
+            <span class="k">if</span> <span class="n">grid</span><span class="p">[</span><span class="n">pos</span><span class="p">[</span><span class="mi">0</span><span class="p">]][</span><span class="n">pos</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span> <span class="o">==</span> <span class="n">GRID_CELL</span><span class="p">[</span><span class="s">'occupied'</span><span class="p">]:</span>
+                <span class="n">occupied_seats</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="k">return</span> <span class="n">occupied_seats</span>
+</code></pre></div></div>
+
+<p>When we have iterated over every seat we can save the new matrix of seats and continue to recursively do this step again until we find a stable seating.</p>
+
+<h4 id="part-two">Part Two</h4>
+<p>For the second part of the puzzle instead of looking only at the seat immediately adjacent we look at every seat that a person could see from their seat. We also increase the tolerance to 5. The other rules mentioned above still apply as well.</p>
+
+<p>To solve this puzzle we again go over every seat and check the closest visible seats using the following method. By looking in each direction until we either hit the edge of the grid or find a seat.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">check_visible</span><span class="p">(</span><span class="n">grid</span><span class="p">,</span> <span class="n">seat</span><span class="p">):</span>
+    <span class="n">occupied_seats</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="nb">dir</span> <span class="ow">in</span> <span class="n">DIRS</span><span class="p">:</span>
+        <span class="n">pos</span> <span class="o">=</span> <span class="p">[</span><span class="n">seat</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">+</span><span class="nb">dir</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">seat</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">+</span><span class="nb">dir</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span>
+        <span class="k">while</span> <span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">pos</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">grid_size</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">and</span> <span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">pos</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">grid_size</span><span class="p">[</span><span class="mi">1</span><span class="p">]:</span>
+            <span class="n">cur_seat</span> <span class="o">=</span> <span class="n">grid</span><span class="p">[</span><span class="n">pos</span><span class="p">[</span><span class="mi">0</span><span class="p">]][</span><span class="n">pos</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span>
+            <span class="k">if</span> <span class="n">cur_seat</span> <span class="o">==</span> <span class="n">GRID_CELL</span><span class="p">[</span><span class="s">'occupied'</span><span class="p">]:</span>
+                <span class="n">occupied_seats</span> <span class="o">+=</span> <span class="mi">1</span>
+                <span class="k">break</span>
+            <span class="k">elif</span> <span class="n">cur_seat</span> <span class="o">==</span> <span class="n">GRID_CELL</span><span class="p">[</span><span class="s">'unoccupied'</span><span class="p">]:</span>
+                <span class="k">break</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">pos</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+=</span> <span class="nb">dir</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+                <span class="n">pos</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+=</span> <span class="nb">dir</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">occupied_seats</span>
+</code></pre></div></div>
+
+                Check out this day's solution on <a target="_blank" href="https://github.com/Jessseee/AdventOfCode2020/blob/master/day_11.py">GitHub <i class="fab fa-github"></i></a> or read the puzzle on the
+                <a href="https://adventofcode.com/2020/day/11">AoC website <i class="fas fa-gift"></i></a>
+            </p>
+
+        </div>
+    
+        <div class="col-xl-6 my-2">
+            <h3>Day 10 - Adapter Array</h3>
+            <p>
+                <p><em><span class="text-warning">The tenth day was also quite busy for me, so I was not able to finish the puzzle. I will revisit this later when I have some more time.</span></em></p>
+
+<p>The input of day 10 is a series of numbers indicating the ouput <strong>joltage</strong> of all the adapters in our bag. each adapter is compatible with any adapter that has an output <strong>joltage</strong> of <strong>1-3 jolts lower</strong>. The outlet is rated <strong>0 jolts</strong> and our device we want to connect is rated <strong>3 jolts higher</strong> than the highest rated adapter.</p>
+
+<h4 id="part-one">Part One</h4>
+<p>For the first half of the puzzle we need to find a chain of adapters, to connect our device to the outlet, that uses all the adapters and find the number of <strong>1-jolt</strong> and <strong>3-jolt</strong> differences between adapters.</p>
+
+<p>We can approach this problem by recursively comparing each adapter to the next and count the number of 1-jolt and 3-jolt differences.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">compare_joltage</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">diffs</span><span class="o">=</span><span class="p">{}):</span>
+    <span class="k">if</span> <span class="n">index</span><span class="o">+</span><span class="mi">1</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">adapters</span><span class="p">):</span>
+        <span class="n">diff</span> <span class="o">=</span> <span class="n">adapters</span><span class="p">[</span><span class="n">index</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="n">adapters</span><span class="p">[</span><span class="n">index</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">diff</span> <span class="ow">in</span> <span class="n">diffs</span><span class="p">:</span>
+            <span class="n">diffs</span><span class="p">[</span><span class="n">diff</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">diffs</span><span class="p">[</span><span class="n">diff</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="n">compare_joltage</span><span class="p">(</span><span class="n">index</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">diffs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="n">diffs</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span>
+</code></pre></div></div>
+
+                Check out this day's solution on <a target="_blank" href="https://github.com/Jessseee/AdventOfCode2020/blob/master/day_10.py">GitHub <i class="fab fa-github"></i></a> or read the puzzle on the
+                <a href="https://adventofcode.com/2020/day/10">AoC website <i class="fas fa-gift"></i></a>
+            </p>
+
+        </div>
+    
+        <div class="col-xl-6 my-2">
+            <h3>Day 9 - Encoding Error</h3>
+            <p>
+                <p>The day 9 input is a series of numbers with a preamble of 25 numbers. Each number after the preamble should be <em>the sum of any two numbers from the 25 immediately previous numbers</em>.</p>
+
+<h4 id="part-one">Part One</h4>
+<p>For the first part of the puzzle it our job to find a number that does not adhere to this rule. This is quite straightforward, we just loop through every entry after the preamble and compare it to the sum of every combination of the previous 25 numbers.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">itertools</span> <span class="k">as</span> <span class="n">itr</span>
+<span class="n">preamble_len</span> <span class="o">=</span> <span class="mi">25</span>
+
+<span class="k">def</span> <span class="nf">compare_to_preamble</span><span class="p">(</span><span class="n">index</span><span class="p">):</span>
+    <span class="n">preamble</span> <span class="o">=</span> <span class="n">sequence</span><span class="p">[</span><span class="n">index</span><span class="o">-</span><span class="n">preamble_len</span><span class="p">:</span><span class="n">index</span><span class="p">]</span>
+    <span class="k">for</span> <span class="n">number</span><span class="p">,</span> <span class="n">other</span> <span class="ow">in</span> <span class="n">itr</span><span class="p">.</span><span class="n">combinations</span><span class="p">(</span><span class="n">preamble</span><span class="p">,</span> <span class="mi">2</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">number</span><span class="o">+</span><span class="n">other</span> <span class="o">==</span> <span class="n">sequence</span><span class="p">[</span><span class="n">index</span><span class="p">]:</span>
+            <span class="k">return</span> <span class="n">compare_to_preamble</span><span class="p">(</span><span class="n">index</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">sequence</span><span class="p">[</span><span class="n">index</span><span class="p">]</span>
+</code></pre></div></div>
+
+<h4 id="part-two">Part Two</h4>
+<p>For the second half of the puzzle we need to use the invalid number found in the first half to find a series of numbers (more than 2) that together add up to the invalid number from the first half.</p>
+
+<p>To solve this part we compare every number in the list with every number after that as long as the sum of this sequence is smaller than the invalid_number we are looking for.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">find_weakness</span><span class="p">(</span><span class="n">invalid_number</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">number</span> <span class="ow">in</span> <span class="n">sequence</span><span class="p">:</span>
+        <span class="n">contiguous_set</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">other</span> <span class="ow">in</span> <span class="n">sequence</span><span class="p">[</span><span class="n">number</span><span class="p">:]:</span>
+            <span class="n">contiguous_set</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">other</span><span class="p">)</span>
+            <span class="n">sum_set</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">contiguous_set</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">sum_set</span> <span class="o">&gt;</span> <span class="n">invalid_number</span><span class="p">:</span>
+                <span class="k">break</span>
+            <span class="k">elif</span> <span class="n">sum_set</span> <span class="o">==</span> <span class="n">invalid_number</span><span class="p">:</span>
+                <span class="k">return</span> <span class="nb">min</span><span class="p">(</span><span class="n">contiguous_set</span><span class="p">)</span> <span class="o">+</span> <span class="nb">max</span><span class="p">(</span><span class="n">contiguous_set</span><span class="p">)</span>
+</code></pre></div></div>
+
+
+                Check out this day's solution on <a target="_blank" href="https://github.com/Jessseee/AdventOfCode2020/blob/master/day_9.py">GitHub <i class="fab fa-github"></i></a> or read the puzzle on the
+                <a href="https://adventofcode.com/2020/day/9">AoC website <i class="fas fa-gift"></i></a>
+            </p>
+
+        </div>
+    
+        <div class="col-xl-6 my-2">
+            <h3>Day 8 - Handheld Halting</h3>
+            <p>
+                <p>The day 8 input is a series of instructions, similar to a rudimentary assembly program.</p>
+
+<h4 id="part-one">Part One</h4>
+<p>For the first part we want to run through the program and see where it will run into an infinite loop. This is quite easy to catch, as we can be certain the program will end up in an infinite loop whenever it returns to an instruction it has already visited.</p>
+
+<p>There are three possible instructions in our program:</p>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">acc</code> Increases the value of the global <strong>accumulator</strong>.</li>
+  <li><code class="language-plaintext highlighter-rouge">jmp</code> <strong>Jumps</strong> to an instruction relative to itself.</li>
+  <li><code class="language-plaintext highlighter-rouge">nop</code> Stands for <strong>No OPeration</strong>, it does nothing.</li>
+</ul>
+
+<p>Each instruction is followed by a positive or negative integer to be used as value for the instruction. For example: <code class="language-plaintext highlighter-rouge">acc 39</code> will increase the value of the global accumulator by 39, <code class="language-plaintext highlighter-rouge">jmp +99</code> will jump 99 instructions forward and <code class="language-plaintext highlighter-rouge">nop 235</code> will just continue to the next instruction.</p>
+
+<p>To tackle the first half of the puzzle we had to keep track of the visited instructions, so we know when an infinite loop would occur.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Instruction is empty and, program has terminated successfully
+</span><span class="k">if</span> <span class="ow">not</span> <span class="n">instructions</span><span class="p">[</span><span class="n">index</span><span class="p">]:</span>
+    <span class="k">return</span> <span class="bp">True</span>
+
+<span class="c1"># Add instruction to visited list if it is not yet visited
+</span><span class="k">if</span> <span class="n">index</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">visited</span><span class="p">:</span>
+    <span class="n">visited</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">index</span><span class="p">)</span>
+<span class="c1"># Instruction is already visited so will end in infinite loop
+</span><span class="k">else</span><span class="p">:</span>
+    <span class="k">return</span> <span class="bp">False</span>
+</code></pre></div></div>
+
+<p>Now we can go over each instruction in the program recursively. Adding to the global accumulator and jumping back and forth when instructed.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span> <span class="n">instruction</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s">'acc'</span><span class="p">:</span>
+    <span class="k">return</span> <span class="n">execute_instruction</span><span class="p">(</span>
+        <span class="n">index</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span>
+        <span class="n">acc</span> <span class="o">+</span> <span class="nb">int</span><span class="p">(</span><span class="n">instruction</span><span class="p">[</span><span class="mi">1</span><span class="p">]),</span>
+        <span class="n">visited</span><span class="p">,</span>
+        <span class="n">changed</span>
+    <span class="p">)</span>
+<span class="k">elif</span> <span class="n">instruction</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s">'nop'</span><span class="p">:</span>
+    <span class="k">return</span> <span class="n">execute_instruction</span><span class="p">(</span>
+        <span class="n">index</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span>
+        <span class="n">acc</span><span class="p">,</span>
+        <span class="n">visited</span><span class="p">,</span>
+        <span class="n">changed</span>
+    <span class="p">)</span>
+<span class="k">elif</span> <span class="n">instruction</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s">'jmp'</span><span class="p">:</span>
+    <span class="k">return</span> <span class="n">execute_instruction</span><span class="p">(</span>
+        <span class="n">index</span> <span class="o">+</span> <span class="nb">int</span><span class="p">(</span><span class="n">instruction</span><span class="p">[</span><span class="mi">1</span><span class="p">]),</span>
+        <span class="n">acc</span><span class="p">,</span>
+        <span class="n">visited</span><span class="p">,</span>
+        <span class="n">changed</span>
+    <span class="p">)</span>
+</code></pre></div></div>
+
+<h4 id="part-two">Part Two</h4>
+<p>For the second part of the puzzle we need to rewrite <strong>one</strong> <code class="language-plaintext highlighter-rouge">jmp</code> to <code class="language-plaintext highlighter-rouge">nop</code> or <code class="language-plaintext highlighter-rouge">nop</code> to <code class="language-plaintext highlighter-rouge">jmp</code> so the program can run until the end. To find the right instruction to rewrite we will have to try to change each <code class="language-plaintext highlighter-rouge">jmp</code> or <code class="language-plaintext highlighter-rouge">nop</code> instruction to see if the change will end in an <em>infinite loop</em> or allow the program to <em>terminate successfully</em>.</p>
+
+<p>To keep track of if we have already changed an instruction we add a <em>changed parameter</em> to the recursive method and check it before we run a <code class="language-plaintext highlighter-rouge">jmp</code> or <code class="language-plaintext highlighter-rouge">nop</code> instruction. The <code class="language-plaintext highlighter-rouge">rewrite_instruction</code> method will return true when the recursive method returns true once it has reached the <em>end of the program</em> and did not encounter an <em>infinite loop</em>.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">elif</span> <span class="n">instruction</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s">'nop'</span><span class="p">:</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">changed</span> <span class="ow">and</span> <span class="n">rewrite_instruction</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="n">instruction</span><span class="p">,</span> <span class="s">'jmp'</span><span class="p">,</span> <span class="n">acc</span><span class="p">,</span> <span class="n">visited</span><span class="p">):</span>
+        <span class="k">return</span>
+</code></pre></div></div>
+
+<p>Now we can rewrite the instructions using a small helper method.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">rewrite_instruction</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="n">instruction</span><span class="p">,</span> <span class="n">new_instruction</span><span class="p">,</span> <span class="n">acc</span><span class="p">,</span> <span class="n">visited</span><span class="p">):</span>
+    <span class="n">instructions</span><span class="p">[</span><span class="n">index</span><span class="p">]</span> <span class="o">=</span> <span class="sa">f</span><span class="s">'</span><span class="si">{</span><span class="n">new_instruction</span><span class="si">}</span><span class="s"> </span><span class="si">{</span><span class="n">instruction</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s">'</span>
+    <span class="k">return</span> <span class="n">execute_instruction</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="n">acc</span><span class="p">,</span> <span class="n">visited</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="bp">True</span><span class="p">)</span>
+</code></pre></div></div>
+
+                Check out this day's solution on <a target="_blank" href="https://github.com/Jessseee/AdventOfCode2020/blob/master/day_8.py">GitHub <i class="fab fa-github"></i></a> or read the puzzle on the
+                <a href="https://adventofcode.com/2020/day/8">AoC website <i class="fas fa-gift"></i></a>
+            </p>
+
+        </div>
+    
+        <div class="col-xl-6 my-2">
+            <h3>Day 7 - Handy Haversacks</h3>
+            <p>
+                <p><em><span class="text-warning">The seventh day was quite busy for me, so I was not able to finish the puzzle. I will revisit this later when I have some more time.</span></em></p>
+
+<p>The day 7 input consisted of a series of rules. Each rule specifies what coloured bag should contain a certain number of other coloured bag(s). For example: <code class="language-plaintext highlighter-rouge">light red bags contain 1 bright white bag, 2 muted yellow bags.</code></p>
+
+                Check out this day's solution on <a target="_blank" href="https://github.com/Jessseee/AdventOfCode2020/blob/master/day_7.py">GitHub <i class="fab fa-github"></i></a> or read the puzzle on the
+                <a href="https://adventofcode.com/2020/day/7">AoC website <i class="fas fa-gift"></i></a>
+            </p>
+
+        </div>
+    
+        <div class="col-xl-6 my-2">
+            <h3>Day 6 - Custom Customs</h3>
+            <p>
+                <p>For day 6 the input existed of a list of customs declaration form answers. Each line represents the fields on which one person answered ‘<em>yes</em>’. The fields are marked with letters from <strong>a</strong> to <strong>z</strong>. So, a persons input could look something like this: <code class="language-plaintext highlighter-rouge">cjdulxqwi</code></p>
+
+<p>All the people on board the airplane are divided in groups and so are the answers to their customs declaration forms. Each groups answers separated by a <em>blank line</em>.</p>
+
+<h4 id="part-one">Part One</h4>
+<p>For the first part of the puzzle our task was to count each unique answer in every group. So, if multiple people in a group answered yes to the same question this questions is counted only once for that group. This was rather easy to implement in Python as we can use <strong>sets</strong>. Which can only contain any entry once. So, by converting the list of a groups answers to a set we get only their unique answers.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">count_group_unique_answers</span><span class="p">(</span><span class="n">group</span><span class="p">):</span>
+    <span class="n">group</span> <span class="o">=</span> <span class="n">group</span><span class="p">.</span><span class="n">replace</span><span class="p">(</span><span class="s">'</span><span class="se">\n</span><span class="s">'</span><span class="p">,</span> <span class="s">''</span><span class="p">)</span>
+    <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">group</span><span class="p">))</span>
+</code></pre></div></div>
+
+<h4 id="part-two">Part Two</h4>
+<p>For the second part of the puzzle we instead had to count every question <strong>all</strong> people in a group had answered ‘<em>yes</em>’ to. This can be done easily by getting the intersection of the list of answers of each person in the group.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">count_group_matching_answers</span><span class="p">(</span><span class="n">group</span><span class="p">):</span>
+    <span class="n">forms</span> <span class="o">=</span> <span class="n">group</span><span class="p">.</span><span class="n">split</span><span class="p">(</span><span class="s">'</span><span class="se">\n</span><span class="s">'</span><span class="p">)</span>
+    <span class="n">matching_answers</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">forms</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="k">for</span> <span class="n">form</span> <span class="ow">in</span> <span class="n">forms</span><span class="p">:</span>
+        <span class="n">matching_answers</span> <span class="o">=</span> <span class="n">matching_answers</span><span class="p">.</span><span class="n">intersection</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">form</span><span class="p">))</span>
+    <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="n">matching_answers</span><span class="p">)</span>
+</code></pre></div></div>
+
+                Check out this day's solution on <a target="_blank" href="https://github.com/Jessseee/AdventOfCode2020/blob/master/day_6.py">GitHub <i class="fab fa-github"></i></a> or read the puzzle on the
+                <a href="https://adventofcode.com/2020/day/6">AoC website <i class="fas fa-gift"></i></a>
+            </p>
+
+        </div>
+    
+        <div class="col-xl-6 my-2">
+            <h3>Day 5 - Binary Boarding</h3>
+            <p>
+                <p>The day 5 input was a list of encoded boarding passes. It was our task to decode these to seat IDs. The encoded boarding passes consist of a series of letters. The first seven consisting of F/B and the last three of L/R. For example: <code class="language-plaintext highlighter-rouge">FBBFBBBRLR</code></p>
+
+<h4 id="part-one">Part One</h4>
+<p>For the first part of the puzzle we will have to decode these Seat locations. The first seven characters tells us which row of the plane the seat is (out of 127), and the last three characters specify the seat’s column (out of 8). Each character specifies which half of the possible rows or columns we should look at until we are left with just one possible row and column. Then the seat ID can be calculated as <code class="language-plaintext highlighter-rouge">row * 8 + column</code></p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">decode_boarding_pass</span><span class="p">(</span><span class="n">boarding_pass</span><span class="p">):</span>
+    <span class="n">min_row</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">max_row</span> <span class="o">=</span> <span class="n">plane_rows</span> <span class="o">-</span> <span class="mi">1</span>
+    <span class="n">min_column</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">max_column</span> <span class="o">=</span> <span class="n">plane_columns</span> <span class="o">-</span> <span class="mi">1</span>
+
+    <span class="k">for</span> <span class="n">char</span> <span class="ow">in</span> <span class="n">boarding_pass</span><span class="p">:</span>
+        <span class="n">current_range_row</span> <span class="o">=</span> <span class="n">max_row</span> <span class="o">-</span> <span class="n">min_row</span> <span class="o">+</span> <span class="mi">1</span>
+        <span class="n">current_range_column</span> <span class="o">=</span> <span class="n">max_column</span> <span class="o">-</span> <span class="n">min_column</span> <span class="o">+</span> <span class="mi">1</span>
+        <span class="k">if</span> <span class="n">char</span> <span class="o">==</span> <span class="s">'F'</span><span class="p">:</span>
+            <span class="n">max_row</span> <span class="o">-=</span> <span class="n">current_range_row</span> <span class="o">//</span> <span class="mi">2</span>
+        <span class="k">elif</span> <span class="n">char</span> <span class="o">==</span> <span class="s">'B'</span><span class="p">:</span>
+            <span class="n">min_row</span> <span class="o">+=</span> <span class="n">current_range_row</span> <span class="o">//</span> <span class="mi">2</span>
+        <span class="k">elif</span> <span class="n">char</span> <span class="o">==</span> <span class="s">'L'</span><span class="p">:</span>
+            <span class="n">max_column</span> <span class="o">-=</span> <span class="n">current_range_column</span> <span class="o">//</span> <span class="mi">2</span>
+        <span class="k">elif</span> <span class="n">char</span> <span class="o">==</span> <span class="s">'R'</span><span class="p">:</span>
+            <span class="n">min_column</span> <span class="o">+=</span> <span class="n">current_range_column</span> <span class="o">//</span> <span class="mi">2</span>
+    <span class="n">row</span> <span class="o">=</span> <span class="n">min_row</span>
+    <span class="n">column</span> <span class="o">=</span> <span class="n">min_column</span>
+    <span class="n">seat_id</span> <span class="o">=</span> <span class="n">row</span> <span class="o">*</span> <span class="mi">8</span> <span class="o">+</span> <span class="n">column</span>
+    <span class="k">return</span> <span class="n">seat_id</span>
+</code></pre></div></div>
+
+<h4 id="part-two">Part Two</h4>
+<p>Now for the second half we needed to find one missing boarding pass and corresponding seat ID from the list which was neither at the beginning nor the end of the plane. So by checking only the range between the minimum seat ID and the maximum seat ID we can easily find the missing boarding pass.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">find_missing_seat_ids</span><span class="p">(</span><span class="n">boarding_passes</span><span class="p">):</span>
+    <span class="n">missing_seat_ids</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">min_seat_id</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">boarding_passes</span><span class="p">)</span>
+    <span class="n">max_seat_id</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">boarding_passes</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">seat_id</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">min_seat_id</span><span class="p">,</span> <span class="n">max_seat_id</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">seat_id</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">boarding_passes</span><span class="p">:</span>
+            <span class="n">missing_seat_ids</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">seat_id</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">missing_seat_ids</span>
+</code></pre></div></div>
+
+                Check out this day's solution on <a target="_blank" href="https://github.com/Jessseee/AdventOfCode2020/blob/master/day_5.py">GitHub <i class="fab fa-github"></i></a> or read the puzzle on the
+                <a href="https://adventofcode.com/2020/day/5">AoC website <i class="fas fa-gift"></i></a>
+            </p>
+
+        </div>
+    
+        <div class="col-xl-6 my-2">
+            <h3>Day 4 - Passport Processing</h3>
+            <p>
+                <p>The day 4 input consists of a list of passport information, each passport divided by an empty line.</p>
+
+<h4 id="part-one">Part One</h4>
+<p>For the first part we had to check if every passport contains the required fields. To solve this puzzle we simply loop over every passport in the input and check if all the required keys are present on the passport.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">check_required_fields</span><span class="p">(</span><span class="n">passport</span><span class="p">):</span>
+    <span class="k">return</span> <span class="nb">all</span><span class="p">(</span><span class="n">key</span> <span class="ow">in</span> <span class="n">passport</span> <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">REQUIRED_KEYS</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h4 id="part-two">Part Two</h4>
+<p>For the second part we also need to validate the field content. This was asking for some regex as you can see bellow. This dictionary includes the required fields, and the regex to validate the given fields.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">REQUIRED_KEYS</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s">'pid'</span><span class="p">:</span> <span class="sa">r</span><span class="s">'^(\d{9})$'</span><span class="p">,</span>
+    <span class="s">'byr'</span><span class="p">:</span> <span class="sa">r</span><span class="s">'19[2-9]\d|200[0-2]'</span><span class="p">,</span>
+    <span class="s">'iyr'</span><span class="p">:</span> <span class="sa">r</span><span class="s">'20(1\d|20)'</span><span class="p">,</span>
+    <span class="s">'eyr'</span><span class="p">:</span> <span class="sa">r</span><span class="s">'20(2\d|30)'</span><span class="p">,</span>
+    <span class="s">'hgt'</span><span class="p">:</span> <span class="sa">r</span><span class="s">'1([5-8]\d|9[0-3])cm|(59|6\d|7[0-6])in'</span><span class="p">,</span>
+    <span class="s">'hcl'</span><span class="p">:</span> <span class="sa">r</span><span class="s">'#[0-9a-f]{6}'</span><span class="p">,</span>
+    <span class="s">'ecl'</span><span class="p">:</span> <span class="sa">r</span><span class="s">'amb|blu|brn|gry|grn|hzl|oth'</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>But, of course we also still need to check if all the required fields are present. So the following method checks if all required fields are present and then matches these fields with the corresponding regex.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">validate_fields</span><span class="p">(</span><span class="n">passport</span><span class="p">):</span>
+    <span class="k">if</span> <span class="nb">all</span><span class="p">(</span><span class="n">key</span> <span class="ow">in</span> <span class="n">passport</span> <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">REQUIRED_KEYS</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">REQUIRED_KEYS</span><span class="p">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">value</span> <span class="o">!=</span> <span class="s">''</span><span class="p">:</span>
+                <span class="n">regex</span> <span class="o">=</span> <span class="n">re</span><span class="p">.</span><span class="nb">compile</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="n">regex</span><span class="p">.</span><span class="n">match</span><span class="p">(</span><span class="n">passport</span><span class="p">[</span><span class="n">key</span><span class="p">]):</span>
+                    <span class="k">return</span> <span class="bp">False</span>
+        <span class="k">return</span> <span class="bp">True</span>
+    <span class="k">return</span> <span class="bp">False</span>
+</code></pre></div></div>
+
+                Check out this day's solution on <a target="_blank" href="https://github.com/Jessseee/AdventOfCode2020/blob/master/day_4.py">GitHub <i class="fab fa-github"></i></a> or read the puzzle on the
+                <a href="https://adventofcode.com/2020/day/4">AoC website <i class="fas fa-gift"></i></a>
+            </p>
+
+        </div>
+    
+        <div class="col-xl-6 my-2">
+            <h3>Day 3 - Toboggan Trajectory</h3>
+            <p>
+                <p>The day 3 input is a kind of map consisting of dots and hashtags. <code class="language-plaintext highlighter-rouge">..#.##....#.##.</code> Every <code class="language-plaintext highlighter-rouge">#</code> is a tree and the <code class="language-plaintext highlighter-rouge">.</code> are empty spaces. Our job was to count the number of trees we encounter on a certain trajectory through the input.*</p>
+
+<p>It is important to note that <em>the input should infinitely extend to the right.</em> To achieve this we can clamp the current X position to the width of the input lines using the modulo (%) operator. <code class="language-plaintext highlighter-rouge">x = (x + right) % (len(line) - 1)</code></p>
+
+<h4 id="part-one--two">Part One &amp; Two</h4>
+<p>I approached today’s puzzle by creating a method that loops over every line in the input and takes a slope as parameter. Which happened to work for both parts of the puzzle. On every line it will first check if the required y position is reached and otherwise skip that line. when it is on the desired line it will take a certain number of steps to the right. Whenever the function finds a <code class="language-plaintext highlighter-rouge">#</code> in the current position it will add one to the number of trees encountered. For the first part we only had to do this for one simple slope but for the second part we also had to apply this method to slopes that went down multiple steps on each round.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">check_trajectory_for_trees</span><span class="p">(</span><span class="n">right</span><span class="p">,</span> <span class="n">down</span><span class="p">,</span> <span class="n">print_trajectory</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">tree_count</span> <span class="o">=</span> <span class="mi">0</span>
+    
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">file_name</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">f</span><span class="p">.</span><span class="n">readlines</span><span class="p">():</span>
+            <span class="n">line</span> <span class="o">=</span> <span class="n">line</span><span class="p">.</span><span class="n">replace</span><span class="p">(</span><span class="s">'.'</span><span class="p">,</span> <span class="s">'_'</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">y</span> <span class="o">!=</span> <span class="n">down</span> <span class="ow">and</span> <span class="n">print_trajectory</span><span class="p">:</span>
+                <span class="k">print</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">x</span> <span class="o">=</span> <span class="p">(</span><span class="n">x</span> <span class="o">+</span> <span class="n">right</span><span class="p">)</span> <span class="o">%</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">line</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>    
+                <span class="k">if</span> <span class="n">line</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">==</span> <span class="s">'#'</span><span class="p">:</span>
+                    <span class="n">tree_count</span> <span class="o">+=</span> <span class="mi">1</span>
+                    <span class="k">if</span> <span class="n">print_trajectory</span><span class="p">:</span>
+                        <span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">'</span><span class="si">{</span><span class="n">line</span><span class="p">[:</span><span class="n">x</span><span class="p">]</span><span class="si">}{</span><span class="n">color_text</span><span class="p">(</span><span class="s">"X"</span><span class="p">,</span> <span class="mi">31</span><span class="p">)</span><span class="si">}{</span><span class="n">line</span><span class="p">[</span><span class="n">x</span> <span class="o">+</span> <span class="mi">1</span><span class="p">:]</span><span class="si">}</span><span class="s">'</span><span class="p">)</span>
+                <span class="k">elif</span> <span class="n">print_trajectory</span><span class="p">:</span>
+                    <span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">'</span><span class="si">{</span><span class="n">line</span><span class="p">[:</span><span class="n">x</span><span class="p">]</span><span class="si">}</span><span class="s">O</span><span class="si">{</span><span class="n">line</span><span class="p">[</span><span class="n">x</span> <span class="o">+</span> <span class="mi">1</span><span class="p">:]</span><span class="si">}</span><span class="s">'</span><span class="p">)</span>
+                <span class="n">y</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="n">y</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="n">f</span><span class="p">.</span><span class="n">close</span><span class="p">()</span>
+    <span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">'number of trees in trajectory </span><span class="si">{</span><span class="n">right</span><span class="p">,</span> <span class="n">down</span><span class="si">}</span><span class="s">: </span><span class="si">{</span><span class="n">color_text</span><span class="p">(</span><span class="n">tree_count</span><span class="p">,</span> <span class="mi">31</span><span class="p">)</span><span class="si">}</span><span class="s">'</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">tree_count</span>
+</code></pre></div></div>
+
+                Check out this day's solution on <a target="_blank" href="https://github.com/Jessseee/AdventOfCode2020/blob/master/day_3.py">GitHub <i class="fab fa-github"></i></a> or read the puzzle on the
+                <a href="https://adventofcode.com/2020/day/3">AoC website <i class="fas fa-gift"></i></a>
+            </p>
+
+        </div>
+    
+        <div class="col-xl-6 my-2">
+            <h3>Day 2 - Password Philosophy</h3>
+            <p>
+                <p>The day 2 input consisted of a list of passwords policies and passwords. For example: <code class="language-plaintext highlighter-rouge">input: 1-3 a: abcde</code> Our job was to check which passwords were valid according to the given policies. To split the lines of the input into the policy and password I wrote the following method.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">dissect_line</span><span class="p">(</span><span class="n">line</span><span class="p">):</span>
+    <span class="n">policy</span><span class="p">,</span> <span class="n">password</span> <span class="o">=</span> <span class="n">line</span><span class="p">.</span><span class="n">split</span><span class="p">(</span><span class="s">':'</span><span class="p">)</span>
+    <span class="n">limits</span><span class="p">,</span> <span class="n">char</span> <span class="o">=</span> <span class="n">policy</span><span class="p">.</span><span class="n">split</span><span class="p">(</span><span class="s">' '</span><span class="p">)</span>
+    <span class="n">first_limit</span><span class="p">,</span> <span class="n">second_limit</span> <span class="o">=</span> <span class="nb">map</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="n">limits</span><span class="p">.</span><span class="n">split</span><span class="p">(</span><span class="s">'-'</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">first_limit</span><span class="p">,</span> <span class="n">second_limit</span><span class="p">,</span> <span class="n">char</span><span class="p">,</span> <span class="n">password</span>
+</code></pre></div></div>
+<p><br /></p>
+<h4 id="part-one">Part One</h4>
+<p>For the first part the passwords were valid if the character given in the policy appears in the password no fewer times than the first number and no more than the second. After dissecting the policy from the password it becomes trivial to check the number of appearances of the given character in the input passwords.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">sled_rental_pswd_policy_checker</span><span class="p">(</span><span class="n">lines</span><span class="p">):</span>
+    <span class="n">nr_of_valid_passwords</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">passwords</span><span class="p">:</span>
+        <span class="n">min_char</span><span class="p">,</span> <span class="n">max_char</span><span class="p">,</span> <span class="n">char</span><span class="p">,</span> <span class="n">password</span> <span class="o">=</span> <span class="n">dissect_line</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">max_char</span> <span class="o">&gt;=</span> <span class="n">password</span><span class="p">.</span><span class="n">count</span><span class="p">(</span><span class="n">char</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="n">min_char</span><span class="p">:</span>
+            <span class="n">nr_of_valid_passwords</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="k">return</span> <span class="n">nr_of_valid_passwords</span>
+</code></pre></div></div>
+<p><br /></p>
+<h4 id="part-two">Part Two</h4>
+<p>The second part is similar but instead the numbers given in the policy are positions. The given character might only appear in one of these two positions in the password. I solved this by checking the XOR of the two positions equal to the character given in the policy.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">toboggan_corp_pswd_policy_checker</span><span class="p">(</span><span class="n">lines</span><span class="p">):</span>
+    <span class="n">nr_of_valid_passwords</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">passwords</span><span class="p">:</span>
+        <span class="n">first_chr</span><span class="p">,</span> <span class="n">second_chr</span><span class="p">,</span> <span class="n">char</span><span class="p">,</span> <span class="n">password</span> <span class="o">=</span> <span class="n">dissect_line</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">password</span><span class="p">[</span><span class="n">first_chr</span><span class="p">]</span> <span class="o">==</span> <span class="n">char</span><span class="p">)</span> <span class="ow">is</span> <span class="ow">not</span> <span class="p">(</span><span class="n">password</span><span class="p">[</span><span class="n">second_chr</span><span class="p">]</span> <span class="o">==</span> <span class="n">char</span><span class="p">):</span>
+            <span class="n">nr_of_valid_passwords</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="k">return</span> <span class="n">nr_of_valid_passwords</span>
+</code></pre></div></div>
+
+                Check out this day's solution on <a target="_blank" href="https://github.com/Jessseee/AdventOfCode2020/blob/master/day_2.py">GitHub <i class="fab fa-github"></i></a> or read the puzzle on the
+                <a href="https://adventofcode.com/2020/day/2">AoC website <i class="fas fa-gift"></i></a>
+            </p>
+
+        </div>
+    
+        <div class="col-xl-6 my-2">
+            <h3>Day 1 - Report Repair</h3>
+            <p>
+                <p>The day 1 input consisted of a simple list of numbers.</p>
+
+<h4 id="part-one--two">Part One &amp; Two</h4>
+<p>For the first part of the puzzle it was our task to find the product of <strong>two</strong> numbers that added together summed to <em>2020</em>. For the second part we needed to find the product of <strong>three</strong> numbers that summed up to <em>2020</em>. So, I wrote a method to loop over the input and sum every item with a certain number of other items and print the product of any numbers that summed to a given result. To make it a little more concise I chose to use <a href="https://docs.python.org/3/library/itertools.html">itertools</a> and <a href="https://numpy.org/doc/stable/contents.html">numpy</a> to easily make these combinations of numbers and get the product of the numbers that added up to the given result.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">itertools</span> <span class="k">as</span> <span class="n">itr</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="n">np</span>
+
+<span class="k">def</span> <span class="nf">find_sum_with_result</span><span class="p">(</span><span class="n">nr</span><span class="p">,</span> <span class="n">result</span><span class="p">):</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">file_name</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="n">lines</span> <span class="o">=</span> <span class="n">f</span><span class="p">.</span><span class="n">readlines</span><span class="p">()</span>
+        <span class="n">integers</span> <span class="o">=</span> <span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">lines</span><span class="p">]</span>
+        <span class="k">for</span> <span class="n">items</span> <span class="ow">in</span> <span class="n">itr</span><span class="p">.</span><span class="n">combinations</span><span class="p">(</span><span class="n">integers</span><span class="p">,</span> <span class="n">nr</span><span class="p">):</span>
+            <span class="k">if</span> <span class="nb">sum</span><span class="p">(</span><span class="n">items</span><span class="p">)</span> <span class="o">==</span> <span class="n">result</span><span class="p">:</span>
+                <span class="k">return</span> <span class="sa">f</span><span class="s">'</span><span class="si">{</span><span class="n">items</span><span class="si">}</span><span class="se">\n</span><span class="s">'</span> \
+                       <span class="sa">f</span><span class="s">'sum = </span><span class="si">{</span><span class="n">result</span><span class="si">}</span><span class="se">\n</span><span class="s">'</span> \
+                       <span class="sa">f</span><span class="s">'product = </span><span class="si">{</span><span class="n">np</span><span class="p">.</span><span class="n">prod</span><span class="p">(</span><span class="n">np</span><span class="p">.</span><span class="n">array</span><span class="p">(</span><span class="n">items</span><span class="p">))</span><span class="si">}</span><span class="se">\n</span><span class="s">'</span>
+</code></pre></div></div>
+
+                Check out this day's solution on <a target="_blank" href="https://github.com/Jessseee/AdventOfCode2020/blob/master/day_1.py">GitHub <i class="fab fa-github"></i></a> or read the puzzle on the
+                <a href="https://adventofcode.com/2020/day/1">AoC website <i class="fas fa-gift"></i></a>
+            </p>
+
+        </div>
+    
+</div>
+        </div>
+    </body>
+
+    <!--  JS  -->
+<script src="https://kit.fontawesome.com/93a420105f.js" crossorigin="anonymous"></script>
+<script src="/assets/js/main.js"></script>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-126840544-1"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-126840544-1');
+</script>
+</html>

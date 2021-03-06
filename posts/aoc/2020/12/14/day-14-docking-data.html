@@ -1,0 +1,43 @@
+<p>The day 14 input was an interesting one, it consists of a series of memory addresses with values to assign to these addresses like <code class="language-plaintext highlighter-rouge">mem[10] = 42</code> and <a href="https://en.wikipedia.org/wiki/Mask_(computing)">bitmasks</a> like <code class="language-plaintext highlighter-rouge">mask = 11000000011011010X01011011XX100011XX</code> Each bitmask is 36 bits long with the most significant bit on the left <code class="language-plaintext highlighter-rouge">2^35</code> and the least significant bit on the right<code class="language-plaintext highlighter-rouge">2^0</code>.</p>
+
+<h4 id="part-1">Part <code class="language-plaintext highlighter-rouge">1</code></h4>
+<p>For part one of the puzzle it was our task to properly allocate the values to their corresponding memory addresses after applying the given bitmask to the value.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">apply_bitmask</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">bitmask</span><span class="p">):</span>
+    <span class="n">bin_value</span> <span class="o">=</span> <span class="nb">format</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="sa">f</span><span class="s">'036b'</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">36</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">bitmask</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="s">'X'</span><span class="p">:</span>
+            <span class="k">continue</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">replace_chr</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">bitmask</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">bin_value</span><span class="p">)</span>
+    <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="n">bin_value</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>First we will have to convert our integer values to a bit string with a length of 36 bits, just like the bitmask. Luckily this is easy in Python using the format method. <code class="language-plaintext highlighter-rouge">format(value, f'036b')</code> will produce a string representation of our value in 36 bits.</p>
+
+<p>Now we can apply our mask to the value by comparing each bit of the mask to the corresponding bit in the value and replacing it if necessary. After we have applied the mask we can simply store the new value at the given memory address.</p>
+
+<h4 id="part-10">Part <code class="language-plaintext highlighter-rouge">10</code></h4>
+<p>For part two instead of applying the bitmask to the value we have to apply it to the given memory address. The meaning of <code class="language-plaintext highlighter-rouge">X</code> in the bitmask has also changed. Instead of simply skipping over these bits they are now <strong>floating</strong> bits. A floating bit can represent both <code class="language-plaintext highlighter-rouge">0</code> or <code class="language-plaintext highlighter-rouge">1</code> which means we will have to find every possible combination of these bits.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">apply_bitmask</span><span class="p">(</span><span class="n">address</span><span class="p">,</span> <span class="n">bitmask</span><span class="p">):</span>
+    <span class="n">bin_adr</span> <span class="o">=</span> <span class="nb">format</span><span class="p">(</span><span class="n">address</span><span class="p">,</span> <span class="sa">f</span><span class="s">'0</span><span class="si">{</span><span class="n">MASK_LEN</span><span class="si">}</span><span class="s">b'</span><span class="p">)</span>
+    <span class="n">floating</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">addresses</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">MASK_LEN</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">bitmask</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="s">'0'</span><span class="p">:</span>
+            <span class="k">continue</span>
+        <span class="k">if</span> <span class="n">bitmask</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="s">'1'</span><span class="p">:</span>
+            <span class="n">bin_adr</span> <span class="o">=</span> <span class="n">replace_chr</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="s">'1'</span><span class="p">,</span> <span class="n">bin_adr</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">bitmask</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="s">'X'</span><span class="p">:</span>
+            <span class="n">floating</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="o">**</span><span class="nb">len</span><span class="p">(</span><span class="n">floating</span><span class="p">)):</span>
+        <span class="n">address</span> <span class="o">=</span> <span class="n">bin_adr</span>
+        <span class="k">for</span> <span class="n">index</span> <span class="ow">in</span> <span class="n">floating</span><span class="p">:</span>
+            <span class="n">address</span> <span class="o">=</span> <span class="n">replace_chr</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">i</span> <span class="o">%</span> <span class="mi">2</span><span class="p">),</span> <span class="n">address</span><span class="p">)</span>
+            <span class="n">i</span> <span class="o">=</span> <span class="n">i</span><span class="o">//</span><span class="mi">2</span>
+        <span class="n">addresses</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">address</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">addresses</span>
+</code></pre></div></div>
+
+<p>For this we can use recursion to find all possible combinations of the floating bits and return a list of addresses to which the given value has to be written.</p>

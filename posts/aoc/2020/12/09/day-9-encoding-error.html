@@ -1,0 +1,33 @@
+<p>The day 9 input is a series of numbers with a preamble of 25 numbers. Each number after the preamble should be <em>the sum of any two numbers from the 25 immediately previous numbers</em>.</p>
+
+<h4 id="part-one">Part One</h4>
+<p>For the first part of the puzzle it our job to find a number that does not adhere to this rule. This is quite straightforward, we just loop through every entry after the preamble and compare it to the sum of every combination of the previous 25 numbers.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">itertools</span> <span class="k">as</span> <span class="n">itr</span>
+<span class="n">preamble_len</span> <span class="o">=</span> <span class="mi">25</span>
+
+<span class="k">def</span> <span class="nf">compare_to_preamble</span><span class="p">(</span><span class="n">index</span><span class="p">):</span>
+    <span class="n">preamble</span> <span class="o">=</span> <span class="n">sequence</span><span class="p">[</span><span class="n">index</span><span class="o">-</span><span class="n">preamble_len</span><span class="p">:</span><span class="n">index</span><span class="p">]</span>
+    <span class="k">for</span> <span class="n">number</span><span class="p">,</span> <span class="n">other</span> <span class="ow">in</span> <span class="n">itr</span><span class="p">.</span><span class="n">combinations</span><span class="p">(</span><span class="n">preamble</span><span class="p">,</span> <span class="mi">2</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">number</span><span class="o">+</span><span class="n">other</span> <span class="o">==</span> <span class="n">sequence</span><span class="p">[</span><span class="n">index</span><span class="p">]:</span>
+            <span class="k">return</span> <span class="n">compare_to_preamble</span><span class="p">(</span><span class="n">index</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">sequence</span><span class="p">[</span><span class="n">index</span><span class="p">]</span>
+</code></pre></div></div>
+
+<h4 id="part-two">Part Two</h4>
+<p>For the second half of the puzzle we need to use the invalid number found in the first half to find a series of numbers (more than 2) that together add up to the invalid number from the first half.</p>
+
+<p>To solve this part we compare every number in the list with every number after that as long as the sum of this sequence is smaller than the invalid_number we are looking for.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">find_weakness</span><span class="p">(</span><span class="n">invalid_number</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">number</span> <span class="ow">in</span> <span class="n">sequence</span><span class="p">:</span>
+        <span class="n">contiguous_set</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">other</span> <span class="ow">in</span> <span class="n">sequence</span><span class="p">[</span><span class="n">number</span><span class="p">:]:</span>
+            <span class="n">contiguous_set</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">other</span><span class="p">)</span>
+            <span class="n">sum_set</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">contiguous_set</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">sum_set</span> <span class="o">&gt;</span> <span class="n">invalid_number</span><span class="p">:</span>
+                <span class="k">break</span>
+            <span class="k">elif</span> <span class="n">sum_set</span> <span class="o">==</span> <span class="n">invalid_number</span><span class="p">:</span>
+                <span class="k">return</span> <span class="nb">min</span><span class="p">(</span><span class="n">contiguous_set</span><span class="p">)</span> <span class="o">+</span> <span class="nb">max</span><span class="p">(</span><span class="n">contiguous_set</span><span class="p">)</span>
+</code></pre></div></div>
+

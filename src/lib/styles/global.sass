@@ -1,0 +1,25 @@
+@import "breakpoints"
+
+*
+  font-family: sans-serif
+
+main, header, footer
+  width: 90%
+  margin-left: auto
+  margin-right: auto
+  @include break("sm")
+    width: 60%
+  @include break("md")
+    width: 40%
+
+a
+  color: steelblue
+  text-decoration: none
+  &:hover
+    text-decoration: underline
+
+h3:before
+  content: "> "
+
+h1:before
+  content: "$ "

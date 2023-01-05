@@ -16,6 +16,8 @@ $gap: 30px
 @mixin create-selectors($breakpoint: null)
   $infix: if($breakpoint == null, "", "-#{$breakpoint}")
   @for $i from 1 through $cols
+    .order#{$infix}-#{$i}
+      order: $i
     .col#{$infix}-#{$i}
       grid-column-start: auto
       grid-column-end: span $i

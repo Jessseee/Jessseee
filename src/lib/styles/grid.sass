@@ -1,0 +1,36 @@
+@use "sass:math"
+@import "variables"
+
+$cols: 12
+$gap: 30px
+
+.grid
+  display: grid
+  justify-items: center
+  align-items: center
+  grid-template-columns: repeat($cols, 1fr)
+  grid-gap: $gap
+  gap: $gap
+  max-width: 100%
+
+@mixin create-selectors($breakpoint: null)
+  $infix: if($breakpoint == null, "", "-#{$breakpoint}")
+  @for $i from 1 through $cols
+    .col#{$infix}-#{$i}
+      grid-column-start: auto
+      grid-column-end: span $i
+    .col-offset#{$infix}-#{$i}
+      grid-column-start: $i + 1
+    .col-center#{$infix}-#{$i}
+      grid-column-start: math.round(math.div($cols, 2) - math.div($i, 2)) + 1
+      grid-column-end: span $i
+    .row#{$infix}-#{$i}
+      grid-row-end: span $i
+    .row-offset#{$infix}-#{$i}
+      grid-row-start: $i + 1
+
+@include create-selectors()
+
+@each $breakpoint, $width in $breakpoints
+  @media (min-width: $width)
+    @include create-selectors($breakpoint)

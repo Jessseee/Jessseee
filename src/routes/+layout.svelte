@@ -1,10 +1,24 @@
 <script>
-  import Header from "$lib/components/Header.svelte";
-  import "$lib/styles/global.sass"
+	import Navbar from '$lib/components/Navbar.svelte';
+	import '$lib/styles/global.sass';
 </script>
 
-<Header />
+<Navbar />
 
 <main>
-  <slot />
+	<slot />
 </main>
+
+<style lang="sass">
+  @import "$lib/styles/variables.sass"
+
+  main
+    width: 90%
+    margin-left: auto
+    margin-right: auto
+    transition: width 500ms
+    @include break("sm")
+      width: 60%
+    @include break("md")
+      width: 50%
+</style>

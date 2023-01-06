@@ -13,6 +13,9 @@ $gap: 30px
   gap: $gap
   max-width: 100%
 
+  div > p
+    margin: 0
+
 @mixin create-selectors($breakpoint: null)
   $infix: if($breakpoint == null, "", "-#{$breakpoint}")
   @for $i from 1 through $cols

@@ -53,6 +53,7 @@
     #text
       text-align: justify
       max-width: 500px
+      margin-bottom: 1em
     margin-bottom: 1em
 
   #social-links

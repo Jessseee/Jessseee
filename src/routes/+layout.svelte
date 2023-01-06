@@ -1,12 +1,12 @@
 <script>
-	import Navbar from '$lib/components/Navbar.svelte';
-	import '$lib/styles/global.sass';
+  import Navbar from '$lib/components/Navbar.svelte';
+  import '$lib/styles/global.sass';
 </script>
 
 <Navbar />
 
 <main>
-	<slot />
+  <slot />
 </main>
 
 <style lang="sass">
@@ -20,5 +20,5 @@
     @include break("sm")
       width: 60%
     @include break("md")
-      width: 50%
+      width: 70%
 </style>

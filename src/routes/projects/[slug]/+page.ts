@@ -2,7 +2,7 @@ import type { PageLoad } from './$types';
 
 interface Metadata {
   title: string;
-  repo: string | null;
+  url: string | null;
 }
 
 interface Markdown {
@@ -13,7 +13,10 @@ interface Markdown {
 export const load = (async ({ params }) => {
   const slug = `projects/${params.slug}`;
   const project: Markdown = await import(`../${params.slug}.md`);
-  const meta = project.metadata;
+  const meta = {
+    title: project.metadata.title,
+    url: project.metadata.url ? new URL(project.metadata.url) : null,
+  };
   const content = project.default;
 
   return {

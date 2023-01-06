@@ -1,6 +1,6 @@
 ---
 title: Fish Out of Water
-repo: Jessseee/Fish-Out-of-Water
+url: https://github.com/Jessseee/Fish-Out-of-Water
 ---
 
 ## Introduction

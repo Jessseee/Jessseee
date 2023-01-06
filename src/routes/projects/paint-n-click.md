@@ -1,6 +1,6 @@
 ---
 title: Paint 'n Click
-repo: JonaMata/Paint-n-Click
+repo: https://github.com/JonaMata/Paint-n-Click
 ---
 
 ## Introduction

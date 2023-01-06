@@ -3,6 +3,7 @@
   import { fly } from 'svelte/transition';
   import slugify from '$lib/scripts/slugify';
   import { faGithub } from '@fortawesome/free-brands-svg-icons';
+  import { faGlobe } from '@fortawesome/free-solid-svg-icons';
   import IconLink from '$lib/components/IconLink.svelte';
 
   export let data;
@@ -29,16 +30,18 @@
 <article>
   <img class="header" src="/images/{data.slug}/cover.png" alt={data.meta.title} />
 
-  {#if data.meta.repo}
+  {#if data.meta.url}
     <div class="repo-link">
       Check out <u>{data.meta.title}</u> on
-      <IconLink
-        icon={faGithub}
-        bgColor="#fcc300"
-        color="#ffffff"
-        href="https://github.com/{data.meta.repo}">
-        Github
-      </IconLink>
+      {#if data.meta.url.hostname === 'github.com'}
+        <IconLink icon={faGithub} bgColor="#fcc300" color="#ffffff" href={data.meta.url.href}>
+          Github
+        </IconLink>
+      {:else}
+        <IconLink icon={faGlobe} bgColor="#4682b4ff" color="#ffffff" href={data.meta.url.href}>
+          {data.meta.url.hostname}
+        </IconLink>
+      {/if}
     </div>
   {/if}
 

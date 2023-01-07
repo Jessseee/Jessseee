@@ -5,6 +5,10 @@
   export let data;
 </script>
 
+<svelte:head>
+  <title>Jesse Visser</title>
+</svelte:head>
+
 <div id="intro" class="grid">
   <div class="col-12 col-md-4">
     <img id="profile" src="/images/profile.jpg" alt="That's me!" />

@@ -14,10 +14,7 @@ function processUrl(url, node) {
 /** @type {import('@sveltejs/kit').Config} */
 export default {
   kit: {
-    adapter: adapter({
-      pages: 'docs',
-      assets: 'docs',
-    }),
+    adapter: adapter(),
   },
 
   extensions: ['.svelte', '.md'],

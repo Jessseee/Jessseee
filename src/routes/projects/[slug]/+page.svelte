@@ -27,36 +27,34 @@
   <title>Jesse Visser | {data.meta.title}</title>
 </svelte:head>
 
-<article>
-  <img class="header" src="/images/{data.slug}/cover.png" alt={data.meta.title} height="300" />
+<img class="header" src="/images/{data.slug}/cover.png" alt={data.meta.title} height="300" />
 
-  {#if data.meta.url}
-    <div class="repo-link">
-      Check out <u>{data.meta.title}</u> on
-      {#if data.meta.url.hostname === 'github.com'}
-        <IconLink icon={faGithub} bgColor="#fcc300" color="#ffffff" href={data.meta.url.href}>
-          Github
-        </IconLink>
-      {:else}
-        <IconLink icon={faGlobe} bgColor="#4682b4ff" color="#ffffff" href={data.meta.url.href}>
-          {data.meta.url.hostname}
-        </IconLink>
-      {/if}
-    </div>
-  {/if}
-
-  {#if headings.length > 0}
-    <ul class="index" in:fly={{ y: headings.length * 10, duration: 500 }}>
-      {#each headings as heading}
-        <li class="indent-{heading.depth}"><a href="#{heading.id}">{heading.text}</a></li>
-      {/each}
-    </ul>
-  {/if}
-
-  <div class="content">
-    <svelte:component this={data.content} />
+{#if data.meta.url}
+  <div class="repo-link">
+    Check out <u>{data.meta.title}</u> on
+    {#if data.meta.url.hostname === 'github.com'}
+      <IconLink icon={faGithub} bgColor="#fcc300" color="#ffffff" href={data.meta.url.href}>
+        Github
+      </IconLink>
+    {:else}
+      <IconLink icon={faGlobe} bgColor="#4682b4ff" color="#ffffff" href={data.meta.url.href}>
+        {data.meta.url.hostname}
+      </IconLink>
+    {/if}
   </div>
-</article>
+{/if}
+
+{#if headings.length > 0}
+  <ul class="index" in:fly={{ y: headings.length * 10, duration: 500 }}>
+    {#each headings as heading}
+      <li class="indent-{heading.depth}"><a href="#{heading.id}">{heading.text}</a></li>
+    {/each}
+  </ul>
+{/if}
+
+<div class="content">
+  <svelte:component this={data.content} />
+</div>
 
 <style lang="sass">
   @import "$lib/styles/variables.sass"

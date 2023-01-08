@@ -28,7 +28,7 @@
 </svelte:head>
 
 <article>
-  <img class="header" src="/images/{data.slug}/cover.png" alt={data.meta.title} />
+  <img class="header" src="/images/{data.slug}/cover.png" alt={data.meta.title} height="300" />
 
   {#if data.meta.url}
     <div class="repo-link">

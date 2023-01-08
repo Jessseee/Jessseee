@@ -1,4 +1,5 @@
 <script>
+  import { fade } from 'svelte/transition';
   import IconLink from '$lib/components/IconLink.svelte';
   import { faGithub, faLinkedin } from '@fortawesome/free-brands-svg-icons';
 
@@ -42,7 +43,12 @@
 <div id="projects" class="grid">
   {#each data.projects as project}
     <a href="/{project.slug}" class="col-12 col-md-6 col-xl-4">
-      <img src="/images/{project.slug}/cover.png" alt={project.title} />
+      <img
+        src="/images/{project.slug}/cover.png"
+        alt={project.title}
+        width="1920"
+        height="1080"
+        in:fade />
     </a>
   {/each}
 </div>

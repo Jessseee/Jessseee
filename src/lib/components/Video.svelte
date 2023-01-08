@@ -3,10 +3,11 @@
   import Fa from 'svelte-fa/src/fa.svelte';
   import { faPlayCircle, faVideoSlash } from '@fortawesome/free-solid-svg-icons';
 
-  function playButton() {
-    const video = this.nextElementSibling;
-    const button = this.childNodes[0];
+  let video;
+  let button;
 
+  function toggleVideoPlaying() {
+    if (videoError) return;
     if (video.paused) {
       video.play();
       button.style.display = 'none';
@@ -16,9 +17,9 @@
     }
   }
 
-  let failedLoading = false;
+  let videoError = false;
   function disableVideo() {
-    failedLoading = true;
+    videoError = true;
   }
 
   export let src;
@@ -26,14 +27,17 @@
 </script>
 
 <div class="video-container" in:fade>
-  <button on:click={playButton} class="video-overlay" disabled={failedLoading}>
-    <div>
-      <Fa class="play-button" icon={failedLoading ? faVideoSlash : faPlayCircle} size="4x" />
-      {#if failedLoading} <p>{alt ?? 'Sorry, this video seems to be unavailable'}</p> {/if}
-    </div>
+  <button
+    aria-label={alt}
+    on:click={toggleVideoPlaying}
+    class="video-overlay {videoError ? 'disabled' : ''}">
+    <span bind:this={button} aria-hidden="true" class="text-center">
+      <Fa class="play-button" icon={videoError ? faVideoSlash : faPlayCircle} size="4x" />
+      {#if videoError} <p>{'Sorry, this video seems to be unavailable'}</p> {/if}
+    </span>
   </button>
   <!-- svelte-ignore a11y-media-has-caption -->
-  <video loop>
+  <video loop bind:this={video}>
     <source {src} type="video/mp4" on:error={disableVideo} />
   </video>
 </div>
@@ -56,7 +60,7 @@
       background-color: transparent
       border: none
       transition: transform 200ms
-      &:not(:disabled):hover
+      &:not(.disabled):hover
         cursor: pointer
         transform: scale(1.1)
       p

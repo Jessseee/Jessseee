@@ -3,8 +3,12 @@ title: Into The Forest
 ---
 
 ## Introduction
-One of the project in the Creative Technology course consists of making a 3D game in Unity in teams of two people. We started of our development with a couple of brainstorming sessions in which we quickly decided we wanted to make a more story based game.
-Our idea for a game was more an experience rather than a puzzle, strategy or fighting games. We wanted to deliver an immersive experience to the player. We tried to achieve this by having environmental storytelling and an interesting art style.
+One of the projects in the Creative Technology course consists of making a 3D game in Unity in teams of two people. We
+started of our development with a couple of brainstorming sessions in which we quickly decided we wanted to make a more
+story based game.
+Our idea for a game was more an experience rather than a puzzle, strategy or fighting games. We wanted to deliver an
+immersive experience to the player. We tried to achieve this by having environmental storytelling and an interesting art
+style.
 
 ![An in game camera panning towards the title card of into the forest hovering in front of some trees.](/images/projects/into-the-forest/intro.gif)
 

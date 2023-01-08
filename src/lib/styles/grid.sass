@@ -13,8 +13,11 @@ $gap: 30px
   gap: $gap
   max-width: 100%
 
-  div > p
-    margin: 0
+  div
+    *:last-child
+      margin-bottom: 0
+    *:first-child
+      margin-top: 0
 
 @mixin create-selectors($breakpoint: null)
   $infix: if($breakpoint == null, "", "-#{$breakpoint}")

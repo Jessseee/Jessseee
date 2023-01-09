@@ -48,12 +48,12 @@
   nav
     top: 0
     position: sticky
-    background: #ffffff
+    background-color: #ffffff
     transition: margin-bottom 200ms
     height: 50px
     @include break("sm")
       margin-bottom: -20px
-      background: unset
+      background-color: transparent
 
   #logo
     margin-left: 1em
@@ -73,6 +73,11 @@
       cursor: pointer
       transform: scale(1.1)
 
-  :global(body.dark) #theme-toggle
-    color: #ffffff
+  :global(body.dark)
+    #theme-toggle
+      color: #ffffff
+    nav
+      background-color: #121212
+      @include break("sm")
+        background-color: transparent
 </style>

@@ -1,13 +1,19 @@
 <script>
   import Navbar from '$lib/components/Navbar.svelte';
   import '$lib/styles/global.sass';
+  import { onMount } from 'svelte';
+
+  let loaded;
+  onMount(() => (loaded = true));
 </script>
 
-<Navbar />
+{#if loaded}
+  <Navbar />
 
-<main>
-  <slot />
-</main>
+  <main>
+    <slot />
+  </main>
+{/if}
 
 <style lang="sass">
   @import "$lib/styles/variables.sass"

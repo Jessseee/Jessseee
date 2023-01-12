@@ -31,7 +31,7 @@
 
 {#if data.meta.url}
   <div class="repo-link">
-    Check out <u>{data.meta.title}</u> on
+    Check out <b>{data.meta.title}</b> on
     {#if data.meta.url.hostname === 'github.com'}
       <IconLink icon={faGithub} bgColor="#fcc300" color="#ffffff" href={data.meta.url.href}>
         Github

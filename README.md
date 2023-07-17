@@ -1,12 +1,8 @@
 ### Hey there, I'm Jesse 👋
 
-I'm a developer and [Creative Technology](https://www.utwente.nl/en/education/bachelor/programmes/creative-technology/#impression-of-creative-technology) student.  
-I like to create interactive experiences and web applications!
+I'm a software developer and [Interaction Technology]([https://www.utwente.nl/en/education/bachelor/programmes/creative-technology/#impression-of-creative-technology](https://www.utwente.nl/en/education/master/programmes/interaction-technology/)) student.  
+I like to create interactive experiences, web applications and AI solutions!  
 
 📁 Browse [my repositories](https://github.com/Jessseee?tab=repositories).  
 🎨 Check out [my portfolio](https://jesse-visser.nl).  
-💬 Don't hesitate to [contact me](https://jesse-visser.nl/#contact)!
-
-#### GitHub Stats
-
-![Jesse's GitHub Stats](https://github-readme-stats.vercel.app/api?username=Jessseee&show_icons=true&hide_title=true&hide=["stars"])
+💬 Don't hesitate to contact me!

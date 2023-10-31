@@ -46,19 +46,20 @@
   @import "$lib/styles/variables.sass"
 
   nav
+    z-index: 1
     top: 0
     position: sticky
     background-color: #ffffff
     transition: margin-bottom 200ms
-    height: 50px
+    height: 3.5em
     @include break("sm")
-      margin-bottom: -20px
+      margin-bottom: -1em
       background-color: transparent
 
   #logo
     margin-left: 1em
     display: inline-block
-    width: 55px
+    width: 4em
     transition: transform 200ms
     &:hover
       transform: scale(1.1)
@@ -66,7 +67,7 @@
   #theme-toggle
     background-color: transparent
     border: none
-    margin: 1em
+    margin: 1.5em
     float: right
     transition: transform 200ms
     &:hover

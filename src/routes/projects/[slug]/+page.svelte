@@ -60,7 +60,6 @@
   @import "$lib/styles/variables.sass"
 
   .header
-    width: 100%
     height: 20vh
     min-height: 300px
     object-fit: cover
@@ -83,8 +82,8 @@
     list-style: none
     line-height: 1.5em
     @include break("lg")
-      margin-bottom: 3em
-      margin-left: -1em
+      margin-bottom: 2em
+      margin-left: -3.5em
       position: fixed
       left: 0
       bottom: 0

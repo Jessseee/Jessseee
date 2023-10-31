@@ -1,6 +1,7 @@
 <script>
-  import { fade } from 'svelte/transition';
-  import IconLink from '$lib/components/IconLink.svelte';
+  import { fade, scale } from 'svelte/transition';
+  import Hey from "$lib/components/Hey.svelte";
+  import Button from "$lib/components/Button.svelte";
   import { faGithub, faLinkedin } from '@fortawesome/free-brands-svg-icons';
 
   export let data;
@@ -11,31 +12,29 @@
 </svelte:head>
 
 <div id="intro" class="grid">
-  <div class="col-12 col-md-4">
+  <div class="col-12 col-lg-5">
     <img id="profile" src="/images/profile.jpg" alt="That's me!" />
   </div>
-  <div class="col-12 col-md-8">
-    <h1>Hey, I'm Jesse</h1>
-    <p id="text">
-      I am a <em>Creative Technologist</em> from The Netherlands. I make interactive experiences, websites
-      and artificial intelligence applications. On this website you will find projects I've worked on
-      personally and professionally in the past couple of years.
+  <div class="col-12 col-lg-7">
+    <h1>I'm Jesse, <Hey/></h1>
+    <p>
+      I am a <b>Creative Technologist</b> from The Netherlands. I create interactive experiences, Machine Learning solutions and more...
     </p>
     <div id="social-links">
-      <IconLink
+      <Button
         icon={faGithub}
         href="https://github.com/Jessseee"
         bgColor="#fcc300"
         color="#ffffff">
         Github
-      </IconLink>
-      <IconLink
+      </Button>
+      <Button
         icon={faLinkedin}
         href="https://linkedin.com/in/jesse-visser-17a006171/"
         bgColor="#0e76a8"
         color="#ffffff">
         Linkedin
-      </IconLink>
+      </Button>
     </div>
   </div>
 </div>
@@ -54,17 +53,23 @@
 </div>
 
 <style lang="sass">
+  #profile
+    width: 250px
+    height: 250px
+    object-fit: cover
+    border-radius: 60% 90% 80% 70% / 70% 90% 60% 90%
   #intro
-    #profile
-      width: 200px
-      height: 200px
-      object-fit: cover
-      border-radius: 50%
-    #text
-      text-align: justify
-      max-width: 500px
-      margin-bottom: 1em
-    margin-bottom: 1em
+    padding-left: 1em
+    padding-right: 1em
+    margin-bottom: 2em
+    h1
+      font-size: 3em
+      margin-bottom: 0.25em
+    p
+      font-size: 1.2em
+      margin-top: 0.25em
+      margin-bottom: 1.5em
+      max-width: 550px
 
   #social-links
     margin-bottom: 1em

@@ -26,7 +26,7 @@
     width: 100%
     justify-content: center
     align-items: center
-    height: calc(100vh - 50px - 1em)
+    height: calc(100vh - 3.5em - 1em)
   h1
     margin-bottom: 0
   h2

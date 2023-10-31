@@ -17,8 +17,9 @@
 <style lang="sass">
 	span
 		background-color: var(--bg-color)
-		padding: 3px 8px
-		border-radius: 8px
+		padding: 0.2em 0.75em
+		border-radius: 0.5em
 		a
+			white-space: nowrap
 			color: var(--color)
 </style>

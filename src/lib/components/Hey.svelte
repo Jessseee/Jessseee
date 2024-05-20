@@ -11,13 +11,11 @@
     "it-IT": "Ciao",          // Italian (Italy)
     "fr-FR": "Salut",         // French (France)
     "nl-NL": "Hoi",           // Dutch (The Netherlands)
-    "de-DE": "Hallo",         // German (Germany)
     "zh-CN": "你好",           // Chinese Simplified (China)
     "ja-JP": "こんにちは",      // Japanese (Japan)
     "hi-IN": "नमस्ते",          // Hindi (India)
     "uk-UA": "Привіт",        // Ukrainian (Ukraine)
     "sv-SE": "Hej",           // Swedish (Sweden)
-    "el-GR": "Γειά σας",      // Greek (Greece)
     "hu-HU": "Szia",          // Hungarian (Hungary)
     "fa-IR": "سلام",           // Farsi (Iran)
   };
@@ -28,7 +26,7 @@
   const greetings = [...Object.values(greetingsDict), greetingsDict[locale]]
 
   const easing = cubicOut
-  const duration = 3000 / greetings.length
+  const duration = 1500 / greetings.length
   let index = 0;
   let carrousel;
   onMount(() => {

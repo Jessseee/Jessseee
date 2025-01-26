@@ -1,13 +1,13 @@
-import adapter from '@sveltejs/adapter-static';
-import { vitePreprocess } from '@sveltejs/vite-plugin-svelte';
-import { mdsvex } from 'mdsvex';
-import remarkContainers from 'remark-containers';
-import rehypeUrls from 'rehype-urls';
+import adapter from "@sveltejs/adapter-static";
+import { vitePreprocess } from "@sveltejs/vite-plugin-svelte";
+import { mdsvex } from "mdsvex";
+import remarkContainers from "remark-containers";
+import rehypeUrls from "rehype-urls";
 
 function processUrl(url, node) {
-  if (!url.href.startsWith('/')) {
-    node.properties.target = '_blank';
-    node.properties.rel = 'noreferrer';
+  if (!url.href.startsWith("/")) {
+    node.properties.target = "_blank";
+    node.properties.rel = "noreferrer";
   }
 }
 
@@ -15,20 +15,20 @@ function processUrl(url, node) {
 export default {
   kit: {
     adapter: adapter({
-      pages: 'build',
-      assets: 'build',
-      fallback: '404.html',
+      pages: "build",
+      assets: "build",
+      fallback: "404.html",
     }),
   },
 
-  extensions: ['.svelte', '.md'],
+  extensions: [".svelte", ".md"],
 
   preprocess: [
     vitePreprocess(),
     mdsvex({
-      extension: '.md',
+      extension: ".md",
       layout: {
-        projects: './src/routes/projects/__layout.svelte',
+        projects: "./src/routes/projects/__layout.svelte",
       },
       remarkPlugins: [remarkContainers],
       rehypePlugins: [[rehypeUrls, processUrl]],

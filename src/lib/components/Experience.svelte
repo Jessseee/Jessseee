@@ -1,30 +1,43 @@
-<script>
-  const tagColors = {
-    "PHP": "#4d588e",
-    "Javascript": "hsl(54, 83%, 53%)",
-    "Java": "#f0931c",
-    "Python": "#366c9c",
-    "AWS": "#ff9800",
-    "AI": "#213f6c",
+<script lang="ts">
+  const tagColors: { [key: string]: string } = {
+    PHP: '#4d588e',
+    Javascript: 'hsl(54, 83%, 53%)',
+    Java: '#f0931c',
+    Python: '#366c9c',
+    AWS: '#ff9800',
+    AI: '#213f6c',
+  };
+
+  interface ExperienceProps {
+    logo: string;
+    title: string;
+    company: string;
+    duration: string;
+    description: string;
+    link?: string;
+    tags?: string[];
   }
 
-  export let logo
-  export let link
-  export let title
-  export let company
-  export let duration
-  export let description
-  export let tags = []
+  let {
+    logo,
+    title,
+    company,
+    duration,
+    description,
+    link,
+    tags = [],
+    ...restProps
+  }: ExperienceProps & { [key: string]: any } = $props();  // eslint-disable-line @typescript-eslint/no-explicit-any
 </script>
 
-<div class="experience grid {$$restProps.class}">
+<div class="experience grid {restProps.class}">
   <div class="col-1 col-md-3">
-    <a href="{link}" target="_blank">
-      <img src="{logo}" alt="">
+    <a href={link} target="_blank">
+      <img src={logo} alt="" />
     </a>
   </div>
   <div class="col-10 col-md-8">
-    <h3>{title} <span style:color="#aaa">@</span> <a href="{link}" target="_blank">{company}</a></h3>
+    <h3>{title} <span style:color="#aaa">@</span> <a href={link} target="_blank">{company}</a></h3>
     <p class="duration">{duration}</p>
     <p>{description}</p>
     <div class="tags">

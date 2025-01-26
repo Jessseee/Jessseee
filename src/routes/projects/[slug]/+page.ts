@@ -1,4 +1,4 @@
-import type { PageLoad } from './$types';
+import type { PageLoad } from "./$types";
 
 interface Metadata {
   title: string;
@@ -19,7 +19,7 @@ export const load = (async ({ params }) => {
     title: project.metadata.title,
     url: project.metadata.url ? new URL(project.metadata.url) : null,
     hidden: project.metadata.hidden == "true",
-    square: project.metadata.square == "true "
+    square: project.metadata.square == "true ",
   };
   const content = project.default;
 

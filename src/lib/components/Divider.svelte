@@ -1,13 +1,13 @@
 <script>
   export let text;
 
-  const textLength = text.length + 1
+  const textLength = text.length + 1;
 </script>
 
 <div class="divider">
-  <div style:width="calc(50% - {textLength/2}rem)"></div>
+  <div style:width="calc(50% - {textLength / 2}rem)"></div>
   <h2>{text}</h2>
-  <div style:width="calc(50% - {textLength/2}rem)"></div>
+  <div style:width="calc(50% - {textLength / 2}rem)"></div>
 </div>
 
 <style lang="sass">

@@ -1,9 +1,9 @@
 <script>
   import { fade } from 'svelte/transition';
-  import Typewriter from 'svelte-typewriter'
-  import Button from "$lib/components/Button.svelte";
+  import Typewriter from 'svelte-typewriter';
+  import Button from '$lib/components/Button.svelte';
   import { faGithub, faLinkedin } from '@fortawesome/free-brands-svg-icons';
-  import { faFilePen } from "@fortawesome/free-solid-svg-icons";
+  import { faFilePen } from '@fortawesome/free-solid-svg-icons';
 
   export let data;
 </script>
@@ -19,7 +19,7 @@
   <div class="col-12 col-lg-7">
     <h1>Hey, I'm Jesse</h1>
     <p>
-      <Typewriter mode="loop" wordInterval=2000>
+      <Typewriter mode="loop" wordInterval={2000}>
         <span data-static>I am a</span>
         <b>Creative Technologist</b>
         <b>Software Developer</b>
@@ -38,20 +38,10 @@
         color="#ffffff">
         Linkedin
       </Button>
-      <Button
-        icon={faGithub}
-        href="https://github.com/Jessseee"
-        bgColor="#fcc300"
-        color="#ffffff">
+      <Button icon={faGithub} href="https://github.com/Jessseee" bgColor="#fcc300" color="#ffffff">
         Github
       </Button>
-      <Button
-        icon={faFilePen}
-        bgColor="#916eff"
-        color="#ffffff"
-        href="/resume">
-        Resume
-      </Button>
+      <Button icon={faFilePen} bgColor="#916eff" color="#ffffff" href="/resume">Resume</Button>
     </div>
   </div>
 </div>
@@ -63,7 +53,7 @@
         <img
           src="/images/{project.slug}/cover.png"
           alt={project.title}
-          width="{project.meta.square ? 1080 : 1920}"
+          width={project.meta.square ? 1080 : 1920}
           height="1080"
           in:fade />
       </a>

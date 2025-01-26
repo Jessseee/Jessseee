@@ -11,7 +11,7 @@
     {#if $page.status === 404}
       <h2>Oops, that page does not exist.</h2>
     {:else}
-      <h2>{$page.error.message}</h2>
+      <h2>{$page.error?.message ?? 'Something went wrong'}</h2>
     {/if}
     <p>
       Please return to the

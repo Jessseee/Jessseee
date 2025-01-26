@@ -8,8 +8,8 @@
 </script>
 
 <a {href} class="icon-link" style="color:{color}; background-color:{bgColor}">
-    <Fa {icon} fw />
-    <slot />
+  <Fa {icon} fw />
+  <slot />
 </a>
 
 <style lang="sass">

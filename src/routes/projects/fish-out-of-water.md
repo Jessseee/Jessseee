@@ -24,10 +24,10 @@ The project is playable on Oculus Go and Gear VR. The player can interact with t
 The project is developed using Unity with the [Oculus Integration](https://assetstore.unity.com/packages/tools/integration/oculus-integration-82022) plugin to work for the Oculus Go and Gear VR. Using OVRInput, multiple possible interactions were created with the VR environment. Interactions such as locomotion, rotating, interacting and grabbing. Next to that [FMOD](https://assetstore.unity.com/packages/tools/audio/fmod-for-unity-161631) is used for sound design to create a more immersive VR experience.
 
 ::: div grid
- ::: div col-center-10 col-lg-6
-  ![Showcasing basic VR pointer interactions in a prototyping environment](/images/projects/fish-out-of-water/all-interactions.gif)
- :::
- ::: div col-center-10 col-lg-6
-  ![Showcasing filtering data by interacting with the campsite information board](/images/projects/fish-out-of-water/filter-data.gif)
- :::
+::: div col-center-10 col-lg-6
+![Showcasing basic VR pointer interactions in a prototyping environment](/images/projects/fish-out-of-water/all-interactions.gif)
+:::
+::: div col-center-10 col-lg-6
+![Showcasing filtering data by interacting with the campsite information board](/images/projects/fish-out-of-water/filter-data.gif)
+:::
 :::

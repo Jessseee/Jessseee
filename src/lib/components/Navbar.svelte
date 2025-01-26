@@ -1,11 +1,11 @@
-<script>
+<script lang="ts">
   import Fa from 'svelte-fa';
   import { getCookie, setCookie } from '$lib/scripts/cookies';
   import { fade } from 'svelte/transition';
   import { faCloudMoon, faCloudSun } from '@fortawesome/free-solid-svg-icons';
   import { onMount } from 'svelte';
 
-  let theme;
+  let theme: string;
 
   onMount(() => {
     theme = getCookie('theme');

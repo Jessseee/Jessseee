@@ -1,5 +1,40 @@
-/.idea
-/node_modules
-/.svelte-kit
-/tmp
-/build
+# Temporary files
+tmp/
+
+# Build directory
+build/
+
+# IntelliJ project files
+.idea
+*.iml
+out
+gen
+
+# Logs
+logs
+*.log
+.pnpm-debug.log*
+
+# Dependency directories
+node_modules/
+
+# TypeScript cache
+*.tsbuildinfo
+
+# Optional npm cache directory
+.npm
+
+# Optional eslint cache
+.eslintcache
+
+# dotenv environment variable files
+.env
+.env.development.local
+.env.test.local
+.env.production.local
+.env.local
+
+# SvelteKit
+.svelte-kit/
+package
+

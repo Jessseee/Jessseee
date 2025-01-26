@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
   import { onMount } from 'svelte';
   import { fly } from 'svelte/transition';
   import slugify from '$lib/scripts/slugify';
@@ -8,18 +8,15 @@
 
   export let data;
 
-  let headings = [];
+  let headings: { text: string; depth: number; id: string }[] = [];
   onMount(async () => {
     const elements = Array.from(document.querySelectorAll('h1, h2, h3, h4, h5'));
     elements.forEach((el) => (el.id = slugify(el.innerHTML)));
-    headings = elements.reduce((acc, cur) => {
-      acc.push({
-        text: cur.innerHTML,
-        depth: parseInt(cur.tagName.substring(1)),
-        id: cur.id,
-      });
-      return acc;
-    }, []);
+    headings = elements.map((el) => ({
+      text: el.innerHTML,
+      depth: parseInt(el.tagName.substring(1)),
+      id: el.id,
+    }));
   });
 </script>
 

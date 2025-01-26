@@ -1,10 +1,10 @@
-<script>
+<script lang="ts">
   import { fade } from 'svelte/transition';
   import Fa from 'svelte-fa';
   import { faPlayCircle, faVideoSlash } from '@fortawesome/free-solid-svg-icons';
 
-  let video;
-  let button;
+  let video: HTMLVideoElement;
+  let button: HTMLSpanElement;
 
   function toggleVideoPlaying() {
     if (videoError) return;
@@ -33,7 +33,9 @@
     class="video-overlay {videoError ? 'disabled' : ''}">
     <span bind:this={button} aria-hidden="true" class="text-center">
       <Fa class="play-button" icon={videoError ? faVideoSlash : faPlayCircle} size="4x" />
-      {#if videoError} <p>{'Sorry, this video seems to be unavailable'}</p> {/if}
+      {#if videoError}
+        <p>{'Sorry, this video seems to be unavailable'}</p>
+      {/if}
     </span>
   </button>
   <!-- svelte-ignore a11y-media-has-caption -->

@@ -1,5 +1,6 @@
 ---
 title: Garden of 3D3N
+hidden: true
 ---
 
 ## Introduction

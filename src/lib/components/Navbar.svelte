@@ -1,5 +1,5 @@
 <script>
-  import Fa from 'svelte-fa/src/fa.svelte';
+  import Fa from 'svelte-fa';
   import { getCookie, setCookie } from '$lib/scripts/cookies';
   import { fade } from 'svelte/transition';
   import { faCloudMoon, faCloudSun } from '@fortawesome/free-solid-svg-icons';
@@ -43,13 +43,13 @@
 </nav>
 
 <style lang="sass">
-  @import "$lib/styles/variables.sass"
+  @use "$lib/styles/variables.sass" as *
 
   nav
     z-index: 1
     top: 0
     position: sticky
-    background-color: #ffffff
+    background-color: $bg-light
     transition: margin-bottom 200ms
     height: 3.5em
     @include break("sm")
@@ -78,7 +78,7 @@
     #theme-toggle
       color: #ffffff
     nav
-      background-color: #121212
+      background-color: $bg-dark
       @include break("sm")
         background-color: transparent
 </style>

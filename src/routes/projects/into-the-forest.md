@@ -1,5 +1,6 @@
 ---
 title: Into The Forest
+square: true
 ---
 
 ## Introduction

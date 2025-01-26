@@ -1,6 +1,6 @@
 <script>
   import { fade } from 'svelte/transition';
-  import Fa from 'svelte-fa/src/fa.svelte';
+  import Fa from 'svelte-fa';
   import { faPlayCircle, faVideoSlash } from '@fortawesome/free-solid-svg-icons';
 
   let video;

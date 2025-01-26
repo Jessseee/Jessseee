@@ -1,0 +1,11 @@
+@use "variables" as *
+
+.display-none
+  display: none
+
+@each $breakpoint, $width in $breakpoints
+  @media (min-width: $width)
+    $infix: if($breakpoint == null, "", "-#{$breakpoint}")
+    .display#{infix}-none
+      display: none
+

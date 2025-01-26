@@ -3,6 +3,8 @@ import type { PageLoad } from './$types';
 interface Metadata {
   title: string;
   url: string | null;
+  hidden: string | null;
+  square: string | null;
 }
 
 interface Markdown {
@@ -16,6 +18,8 @@ export const load = (async ({ params }) => {
   const meta = {
     title: project.metadata.title,
     url: project.metadata.url ? new URL(project.metadata.url) : null,
+    hidden: project.metadata.hidden == "true",
+    square: project.metadata.square == "true "
   };
   const content = project.default;
 

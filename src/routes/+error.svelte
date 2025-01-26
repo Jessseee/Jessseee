@@ -1,5 +1,5 @@
 <script>
-  import Fa from 'svelte-fa/src/fa.svelte';
+  import Fa from 'svelte-fa';
   import { page } from '$app/stores';
   import { faTriangleExclamation } from '@fortawesome/free-solid-svg-icons';
 </script>

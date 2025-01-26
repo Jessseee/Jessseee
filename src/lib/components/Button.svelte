@@ -1,5 +1,5 @@
 <script>
-  import Fa from 'svelte-fa/src/fa.svelte';
+  import Fa from 'svelte-fa';
 
   export let icon;
   export let href;
@@ -18,6 +18,7 @@
     padding: 0.5em 1em
     border-radius: 0.5em
     margin-right: 0.5em
+    margin-bottom: 0.25em
     transition: transform 200ms
     &:hover
       transform: scale(1.1)

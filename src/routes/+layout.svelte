@@ -10,7 +10,7 @@
 </main>
 
 <style lang="sass">
-  @import "$lib/styles/variables.sass"
+  @use "$lib/styles/variables.sass" as *
 
   main
     width: 90%

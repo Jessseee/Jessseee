@@ -1,6 +1,7 @@
 ---
 title: Paint 'n Click
 url: https://github.com/JonaMata/Paint-n-Click
+hidden: true
 ---
 
 ## Introduction

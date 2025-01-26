@@ -57,7 +57,7 @@
 </div>
 
 <style lang="sass">
-  @import "$lib/styles/variables.sass"
+  @use "$lib/styles/variables.sass" as *
 
   .header
     height: 20vh

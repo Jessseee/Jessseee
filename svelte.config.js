@@ -1,5 +1,5 @@
 import adapter from '@sveltejs/adapter-static';
-import { vitePreprocess } from '@sveltejs/kit/vite';
+import { vitePreprocess } from '@sveltejs/vite-plugin-svelte';
 import { mdsvex } from 'mdsvex';
 import remarkContainers from 'remark-containers';
 import rehypeUrls from 'rehype-urls';
@@ -26,12 +26,13 @@ export default {
   preprocess: [
     vitePreprocess(),
     mdsvex({
-      extensions: ['.md'],
+      extension: '.md',
       layout: {
         projects: './src/routes/projects/__layout.svelte',
       },
       remarkPlugins: [remarkContainers],
       rehypePlugins: [[rehypeUrls, processUrl]],
+      smartypants: true,
     }),
   ],
 };

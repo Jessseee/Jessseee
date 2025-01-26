@@ -1,6 +1,7 @@
-@import "variables"
-@import "grid"
-@import "typography"
+@use "variables" as *
+@use "grid" as *
+@use "typography" as *
+@use "utility" as *
 
 a
   color: #4682b4ff
@@ -27,6 +28,7 @@ blockquote
 body
   margin: 0 0 1em
   transition: background-color 500ms
+  background-color: $bg-light
   &.dark
-    background-color: #121212
+    background-color: $bg-dark
     color: #ffffff

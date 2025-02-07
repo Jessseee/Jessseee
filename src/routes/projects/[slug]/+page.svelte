@@ -24,7 +24,7 @@
   <title>Jesse Visser | {data.meta.title}</title>
 </svelte:head>
 
-<img class="header" src="/images/{data.slug}/cover.png" alt={data.meta.title} height="300" />
+<img class="header" src="/media/images/{data.slug}/cover.png" alt={data.meta.title} height="300" />
 
 {#if data.meta.url}
   <div class="repo-link">

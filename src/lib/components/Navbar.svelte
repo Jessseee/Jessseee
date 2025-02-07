@@ -26,7 +26,7 @@
 
 <nav>
   <a href="/" id="logo">
-    <img src="/images/logo.png" alt="website logo" aria-hidden="true" />
+    <img src="/media/images/logo.png" alt="website logo" aria-hidden="true" />
   </a>
 
   <button id="theme-toggle" on:click={toggleTheme}>

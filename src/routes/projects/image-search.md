@@ -17,10 +17,10 @@ To be able to determine the similarity of two pictured objects the features pres
 
 ::: div grid
 ::: div col-center-8 col-md-6 text-center
-![Rows of images of a bottle with different parts highlighted](/images/projects/image-search/features-1.png)
+![Rows of images of a bottle with different parts highlighted](/media/images/projects/image-search/features-1.png)
 :::
 ::: div col-center-8 col-md-6 text-center
-![Rows of images of a bottle with different parts highlighted](/images/projects/image-search/features-2.png)
+![Rows of images of a bottle with different parts highlighted](/media/images/projects/image-search/features-2.png)
 :::
 :::
 ::: div text-center
@@ -32,7 +32,7 @@ A representation of the extracted features highlighted in an image.
 To reduce the number of images that need to be compared the database is split into broad categories. We used another CNN model trained on the images in the dataset to classify the query image into one of these categories. By first predicting the category of the query image we now only need to compare it to images from that category reducing the computational power and time needed for each query.
 
 ::: div text-center
-![Two rows of images of various cosmetics packaging](/images/projects/image-search/categories.png)
+![Two rows of images of various cosmetics packaging](/media/images/projects/image-search/categories.png)
 Sample images from each of the categories of the cosmetics packaging dataset used during our research.
 :::
 
@@ -41,7 +41,7 @@ Sample images from each of the categories of the cosmetics packaging dataset use
 However, we were trying to find the similarity between objects in images. So, when extracting the features of an image the backgrounds would skew the "feature vector" and make images of objects taken with the same background seem more similar than they were in reality. To combat this issue we used another machine learning model to automatically detect the object of interest and remove the background from the images.
 
 ::: div text-center
-![Four rows of images of cosmetics containers with boxes drawn where the algorithms think objects are located.](/images/projects/image-search/segmentation.png)
+![Four rows of images of cosmetics containers with boxes drawn where the algorithms think objects are located.](/media/images/projects/image-search/segmentation.png)
 Examples of image segmentation and background removal.
 :::
 
@@ -50,6 +50,6 @@ Examples of image segmentation and background removal.
 By combining the above techniques and fine-tuning the used models we were able to achieve fairly good search results, as can be seen in the example queries below.
 
 ::: div text-center
-![Rows of images of cosmetics packaging where each first row represents a query image followed by the top 5 search results.](/images/projects/image-search/results.png)
+![Rows of images of cosmetics packaging where each first row represents a query image followed by the top 5 search results.](/media/images/projects/image-search/results.png)
 Examples of Top 5 search results for various queries.
 :::

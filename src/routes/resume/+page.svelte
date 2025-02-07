@@ -13,7 +13,7 @@
     </p>
   </div>
   <div class="col-4 col-offset-md-7 col-md-3 display-none">
-    <img id="profile" src="/images/profile.jpg" alt="That's me!" />
+    <img id="profile" src="/media/images/profile.jpg" alt="That's me!" />
   </div>
 </div>
 
@@ -21,7 +21,7 @@
 <div id="experiences" class="grid">
   <Experience
     class="col-10 col-md-6"
-    logo="/images/logos/ecomoni.svg"
+    logo="/media/images/logos/ecomoni.svg"
     title="Software Engineer"
     company="Ecomoni"
     link="https://ecomoni.nl"
@@ -30,7 +30,7 @@
     tags={['Python', 'AWS', 'AI']} />
   <Experience
     class="col-10 col-md-6"
-    logo="/images/logos/nationaal_archief.png"
+    logo="/media/images/logos/nationaal_archief.png"
     title="AI Engineer (Intern)"
     company="Nationaal Archief"
     link="https://nationaalarchief.nl"
@@ -38,7 +38,7 @@
     description="Working on detecting semantic layout information in historical documents and exploring the use of Retrieval Augmented Generation for various archives." />
   <Experience
     class="col-10 col-md-6"
-    logo="/images/logos/aithenutrigene.svg"
+    logo="/media/images/logos/aithenutrigene.svg"
     title="AI Engineer (Intern)"
     company="에이아이더뉴트리진"
     link="http://en.aithenutrigene.com/"
@@ -47,7 +47,7 @@
     tags={['AI', 'Python']} />
   <Experience
     class="col-10 col-md-6"
-    logo="/images/logos/proto{Math.random() < 0.5 ? 0 : 1}.svg"
+    logo="/media/images/logos/proto{Math.random() < 0.5 ? 0 : 1}.svg"
     title="Secretary & Officer of Educational Affairs"
     company="S.A. Proto"
     link="https://proto.utwente.nl"
@@ -56,7 +56,7 @@
     tags={['Management']} />
   <Experience
     class="col-10 col-md-6"
-    logo="/images/logos/utwente.jpg"
+    logo="/media/images/logos/utwente.jpg"
     title="Teaching Assistant"
     company="University of Twente"
     link="https://www.utwente.nl"
@@ -65,7 +65,7 @@
     tags={['Java', 'Python']} />
   <Experience
     class="col-10 col-md-6"
-    logo="/images/logos/fledge.svg"
+    logo="/media/images/logos/fledge.svg"
     title="Full-stack Developer"
     company="Fledge Solutions"
     link="https://fledge.nl"
@@ -77,13 +77,13 @@
 <Divider text="Education" />
 <div id="education">
   <Experience
-    logo="/images/logos/utwente.jpg"
+    logo="/media/images/logos/utwente.jpg"
     title="MSc. Interaction Technology"
     company="University of Twente"
     duration="Feb 2023 - Jul 2025"
     description="Learn how to design intelligent, interactive and socially aware systems that are aligned with end-user needs and can enhance user experience." />
   <Experience
-    logo="/images/logos/utwente.jpg"
+    logo="/media/images/logos/utwente.jpg"
     title="BSc. Creative Technology"
     company="University of Twente"
     duration="Sep 2020 - Feb 2023"

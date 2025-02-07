@@ -13,7 +13,7 @@ Garden of 3D3N is an interactive installation I made as a group project for the 
 
 Different limbs or other body parts are added to the users creature as they collect more DNA-fragments. Once the creature is complete, which the user has to decide for themselves, other people will vote whether the creature lives or dies. If it dies, the creature shall cease to exist, but if it lives, it will be placed in the Garden of 3D3N. The Garden is our new world, a lush, green, beautiful place, where our new creatures roam freely and happily.
 
-![A user in VR collecting DNA-fragments floating around them](/images/projects/garden-of-3d3n/interaction.gif)
+![A user in VR collecting DNA-fragments floating around them](/media/images/projects/garden-of-3d3n/interaction.gif)
 
 ### Physical
 
@@ -23,4 +23,4 @@ To allow people passing by the interactive installation to not feel locked out f
 
 Before creating Garden of 3D3N we thought out the complete experience we want people to have when interacting with our installation. We made a concise flow-map that describes what we expect people to experience when interacting with the different parts of our installation.
 
-![The experience flow-map for Garden of 3D3N](/images/projects/garden-of-3d3n/flowmap.jpg)
+![The experience flow-map for Garden of 3D3N](/media/images/projects/garden-of-3d3n/flowmap.jpg)

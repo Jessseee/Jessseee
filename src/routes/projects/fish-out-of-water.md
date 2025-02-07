@@ -9,7 +9,7 @@ Fish Out of Water is an interactive Virtual Reality (VR) experience visualising 
 
 The goal of the project was to make data _"tangible"_ in a virtual reality environment. The project was done with a team of 10 people, where I lead the VR development team. I created all pointer interactions, made sure that the visual design was consistent, everything ran smooth on the target devices and created some assets and shaders.
 
-![Showcase of basic VR pointer interactions in the final lake side camp environment](/images/projects/fish-out-of-water/reveal.gif)
+![Showcase of basic VR pointer interactions in the final lake side camp environment](/media/images/projects/fish-out-of-water/reveal.gif)
 
 ## Development
 
@@ -17,7 +17,7 @@ The goal of the project was to make data _"tangible"_ in a virtual reality envir
 
 The project is playable on Oculus Go and Gear VR. The player can interact with the environment using the pointer to teleport around the campsite. To filter the data the player can interact with the information board near the edge of the water. When the player changes the year using the calendar, the radio will play a news snippet about environmental disasters which happened that year.
 
-![The campsite environment](/images/projects/fish-out-of-water/campsite.gif)
+![The campsite environment](/media/images/projects/fish-out-of-water/campsite.gif)
 
 ### Tooling and SDKs
 
@@ -25,9 +25,9 @@ The project is developed using Unity with the [Oculus Integration](https://asset
 
 ::: div grid
 ::: div col-center-10 col-lg-6
-![Showcasing basic VR pointer interactions in a prototyping environment](/images/projects/fish-out-of-water/all-interactions.gif)
+![Showcasing basic VR pointer interactions in a prototyping environment](/media/images/projects/fish-out-of-water/all-interactions.gif)
 :::
 ::: div col-center-10 col-lg-6
-![Showcasing filtering data by interacting with the campsite information board](/images/projects/fish-out-of-water/filter-data.gif)
+![Showcasing filtering data by interacting with the campsite information board](/media/images/projects/fish-out-of-water/filter-data.gif)
 :::
 :::

@@ -14,7 +14,7 @@
 
 <div id="intro" class="grid">
   <div class="col-12 col-lg-5">
-    <img id="profile" src="/images/profile.jpg" alt="That's me!" />
+    <img id="profile" src="/media/images/profile.jpg" alt="That's me!" />
   </div>
   <div class="col-12 col-lg-7">
     <h1>Hey, I'm Jesse</h1>
@@ -51,7 +51,7 @@
     {#if !project.meta.hidden}
       <a href="/{project.slug}" class="col-12 col-md-6 col-xl-4">
         <img
-          src="/images/{project.slug}/cover.png"
+          src="/media/images/{project.slug}/cover.png"
           alt={project.title}
           width={project.meta.square ? 1080 : 1920}
           height="1080"

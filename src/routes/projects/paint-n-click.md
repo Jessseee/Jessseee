@@ -20,7 +20,7 @@ To recognize doodles drawn by the player we trained a simple classification mode
 :::
 
 ::: div col-12 col-md-6
-![](/images/projects/paint-n-click/overview.gif)
+![](/media/images/projects/paint-n-click/overview.gif)
 :::
 
 :::
@@ -28,7 +28,7 @@ To recognize doodles drawn by the player we trained a simple classification mode
 ::: div grid
 
 ::: div col-12 col-md-6 order-2 order-md-1
-![](/images/projects/paint-n-click/cat.gif)
+![](/media/images/projects/paint-n-click/cat.gif)
 :::
 
 ::: div col-12 col-md-6 order-1 order-md-2

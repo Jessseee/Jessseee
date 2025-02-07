@@ -12,7 +12,7 @@ Since my Bachelor graduation I have been working with [Jacob Kamminga](https://w
 At Ecomoni I (in collaboration with [Max Lievense](https://www.linkedin.com/in/maxlievense/)) have mainly been working on the development of our first hardware product, the Nestmoni, and the overarching IoT infrastructure. The Nestmoni is a cloud-connected edge computing platform for monitoring nestboxes. The Nestmoni can capture short videos whenever a bird enters the nestbox to provision its young during nesting season. The platform inferences and reports the prey brought in by the parent birds. This provides valuable information on the interspecies interactions and creates an indication of the biodiversity of the local environment.
 
 ::: div text-center
-![A Great Tit checking out a Nestmoni](/images/projects/ecomoni/nestmoni.gif)
+![A Great Tit checking out a Nestmoni](/media/images/projects/ecomoni/nestmoni.gif)
 A Great Tit checking out a Nestmoni.
 :::
 
@@ -21,6 +21,6 @@ A Great Tit checking out a Nestmoni.
 Next to the development of the Nestmoni client software I have also contributed to the development of the IoT cloud infrastructure, CI/CD pipelines, a web application for tracking the status of our devices, and the machine learning and reporting pipeline. In the process I have worked with various technology stacks (Python, React, PyTorch, Raspberry Pi, etc.) and cloud providers (AWS and Google Cloud).
 
 ::: div text-center
-![A preview of the Ecomoni dashboard](/images/projects/ecomoni/dashboard.png)
+![A preview of the Ecomoni dashboard](/media/images/projects/ecomoni/dashboard.png)
 A preview of the Ecomoni dashboard.
 :::

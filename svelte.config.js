@@ -1,4 +1,4 @@
-import adapter from "@sveltejs/adapter-static";
+import adapter from "@sveltejs/adapter-cloudflare";
 import { vitePreprocess } from "@sveltejs/vite-plugin-svelte";
 import { mdsvex } from "mdsvex";
 import remarkContainers from "remark-containers";
@@ -14,11 +14,7 @@ function processUrl(url, node) {
 /** @type {import('@sveltejs/kit').Config} */
 export default {
   kit: {
-    adapter: adapter({
-      pages: "build",
-      assets: "build",
-      fallback: "404.html",
-    }),
+    adapter: adapter(),
   },
 
   extensions: [".svelte", ".md"],

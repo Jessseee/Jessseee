@@ -15,11 +15,11 @@ To speed up the process of annotating these videos I used computer vision techni
 
 ::: div grid text-center
 ::: div col-12 col-md-6
-![](/images/projects/smart-nestbox/provisioning.jpg)
+![](/media/images/projects/smart-nestbox/provisioning.jpg)
 Frame labeled as **provisioning**
 :::
 ::: div col-12 col-md-6
-![](/images/projects/smart-nestbox/not-provisioning.jpg)
+![](/media/images/projects/smart-nestbox/not-provisioning.jpg)
 Frame labeled as **not-provisioning**
 :::
 :::
@@ -32,19 +32,19 @@ Next to the filtering of video data I also trained an object detection model to 
 
 ::: div grid text-center
 ::: div col-12 col-md-6
-![](/images/projects/smart-nestbox/prey-moth.jpg)
+![](/media/images/projects/smart-nestbox/prey-moth.jpg)
 Prey detected as **Moth**
 :::
 ::: div col-12 col-md-6
-![](/images/projects/smart-nestbox/prey-caterpillar.jpg)
+![](/media/images/projects/smart-nestbox/prey-caterpillar.jpg)
 Prey detected as **Caterpillar**
 :::
 ::: div col-12 col-md-6
-![](/images/projects/smart-nestbox/prey-spider.jpg)
+![](/media/images/projects/smart-nestbox/prey-spider.jpg)
 Prey detected as **Spider**
 :::
 ::: div col-12 col-md-6
-![](/images/projects/smart-nestbox/prey-other.jpg)
+![](/media/images/projects/smart-nestbox/prey-other.jpg)
 Prey detected as **Other**
 :::
 :::

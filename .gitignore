@@ -36,3 +36,7 @@ package
 
 # Cloudflare Wrangler
 .wrangler/
+
+static/
+!static/CNAME
+!static/favicon.ico

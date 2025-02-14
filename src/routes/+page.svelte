@@ -75,8 +75,6 @@
     border-radius: 60% 90% 80% 70% / 70% 90% 60% 90%
 
   #intro
-    padding-left: 1em
-    padding-right: 1em
     margin-bottom: 2em
     h1
       font-size: 3em
@@ -89,6 +87,8 @@
 
   #social-links
     margin-bottom: 1em
+    @media (max-width: map-get($breakpoints, "lg"))
+      text-align: center
 
   #projects a
     img

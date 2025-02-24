@@ -41,7 +41,7 @@
     logo="/media/images/logos/aithenutrigene.svg"
     title="AI Engineer (Intern)"
     company="에이아이더뉴트리진"
-    link="http://en.aithenutrigene.com/"
+    link="http://aithenutrigene.com/"
     duration="Sep 2021 - Jun 2022"
     description="Developing an image based search application for one of the companies clients. Started as an intern and continued working remotely for another six months."
     tags={['AI', 'Python']} />
@@ -80,12 +80,14 @@
     logo="/media/images/logos/utwente.jpg"
     title="MSc. Interaction Technology"
     company="University of Twente"
+    link="https://www.utwente.nl/en/itech/"
     duration="Feb 2023 - Jul 2025"
     description="Learn how to design intelligent, interactive and socially aware systems that are aligned with end-user needs and can enhance user experience." />
   <Experience
     logo="/media/images/logos/utwente.jpg"
     title="BSc. Creative Technology"
     company="University of Twente"
+    link="https://www.utwente.nl/en/education/bachelor/programmes/creative-technology/"
     duration="Sep 2020 - Feb 2023"
     description="Combining computer science, electrical engineering and industrial design; with emphasis on human computer interaction, prototyping and creative problem solving." />
 </div>

@@ -40,3 +40,4 @@ package
 static/
 !static/CNAME
 !static/favicon.ico
+!static/email-signature

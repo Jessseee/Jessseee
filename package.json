@@ -27,7 +27,7 @@
     "rehype-urls": "^1.2.0",
     "remark-containers": "^1.2.0",
     "sass": "^1.83.4",
-    "svelte": "^5.19.3",
+    "svelte": "^5.55.7",
     "svelte-check": "^4.1.4",
     "svelte-fa": "^4.0.3",
     "svelte-typewriter": "^3.2.3",
